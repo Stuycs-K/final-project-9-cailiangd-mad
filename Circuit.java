@@ -7,4 +7,24 @@ public class Circuit{
   private double VEQ;
   private double PEQ;
   ArrayList<Component> compList;
+
+  public static Component getfirstComp() {
+    return getfirstComp;
+  }
+
+  public static double getREQ() {
+    return REQ;
+  }
+
+  public static double getIEQ() {
+    return IEQ;
+  }
+
+  public static double getVEQ() {
+    return VEQ;
+  }
+
+  public static double getPEQ() {
+    return PEQ;
+  }
 }
