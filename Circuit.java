@@ -8,6 +8,9 @@ public class Circuit{
   private double PEQ;
   ArrayList<Component> compList;
 
+  public Circuit() {
+    Curcuit(12);
+  }
   public Circuit(double voltage) {
     Component battery = new Component(voltage);
     firstComp = battery;
