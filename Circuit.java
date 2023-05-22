@@ -9,15 +9,18 @@ public class Circuit{
   ArrayList<Component> compList;
 
   public Circuit() {
-    Curcuit(12);
-  }
-  public Circuit(double voltage) {
-    Component battery = new Component(voltage);
-    firstComp = battery;
-    VEQ = voltage;
+    this(12);
   }
 
-  public Component getfirstComp() {
+  public Circuit(double voltage) {
+    Component battery = new Component(voltage, 0, 0, 0);
+    firstComp = battery;
+    VEQ = voltage;
+    compList = new ArrayList<Component>();
+    add(battery);
+  }
+
+  public Component getFirstComp() {
     return firstComp;
   }
 
@@ -41,15 +44,29 @@ public class Circuit{
     return "REQ: "+REQ+" IEQ: "+IEQ+" VEQ: "+VEQ+" PEQ: "+PEQ;
   }
 
-  public void setVEQ(double newVEQ) {
+  private void setVEQ(double newVEQ) {
     VEQ = newVEQ;
   }
 
-  public void Add(Component newComp) {
+  public void add(Component newComp) {
     compList.add(newComp);
   }
 
   public String getCompList() {
     return compList.toString();
   }
+
+  public int getCompNum() {
+    return compList.size();
+  }
+
+  public String debugToString() {
+    String res = "";
+    for (int i = 0; i < compList.size(); i++) {
+      res+=compList.get(i)+"\n";
+    }
+    return res.substring(0,res.length()-1);
+  }
+
+
 }
