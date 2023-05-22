@@ -36,7 +36,20 @@ public class Circuit{
   public double getPEQ() {
     return PEQ;
   }
+
   public String toString() {
     return "REQ: "+REQ+" IEQ: "+IEQ+" VEQ: "+VEQ+" PEQ: "+PEQ;
+  }
+
+  public void setVEQ(double newVEQ) {
+    VEQ = newVEQ;
+  }
+
+  public void Add(Component newComp) {
+    compList.add(newComp);
+  }
+
+  public String getCompList() {
+    return compList.toString();
   }
 }

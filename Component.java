@@ -34,7 +34,12 @@ public class Component{
   public int getY() {
     return y;
   }
+
   public String toString() {
     return "R: "+resistance+"  I: "+current+"  V: "+voltage+"  P: "+power;
+  }
+
+  public void setRes(double newRes) {
+    resistance = newRes;
   }
 }
