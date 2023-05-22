@@ -8,23 +8,32 @@ public class Circuit{
   private double PEQ;
   ArrayList<Component> compList;
 
-  public static Component getfirstComp() {
-    return getfirstComp;
+  public Circuit(double voltage) {
+    Component battery = new Component(voltage);
+    firstComp = battery;
+    VEQ = voltage;
   }
 
-  public static double getREQ() {
+  public Component getfirstComp() {
+    return firstComp;
+  }
+
+  public double getREQ() {
     return REQ;
   }
 
-  public static double getIEQ() {
+  public double getIEQ() {
     return IEQ;
   }
 
-  public static double getVEQ() {
+  public double getVEQ() {
     return VEQ;
   }
 
-  public static double getPEQ() {
+  public double getPEQ() {
     return PEQ;
+  }
+  public String toString() {
+    return "REQ: "+REQ+" IEQ: "+IEQ+" VEQ: "+VEQ+" PEQ: "+PEQ;
   }
 }

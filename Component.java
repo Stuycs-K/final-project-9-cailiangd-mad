@@ -1,3 +1,5 @@
+import java.util.*;
+import java.io.*;
 public class Component{
   private double resistance;
   private double current;
@@ -7,23 +9,32 @@ public class Component{
   private ArrayList<Component> following;
   private int x;
   private int y;
-
-  public static double getResistance() {
+  public Component(double Voltage, double Resistance) {
+    voltage = Voltage;
+    resistance = Resistance;
+  }
+  public Component(double Resistance) {
+    resistance = Resistance;
+  }
+  public double getResistance() {
     return resistance;
   }
-  public static double getCurrent() {
+  public double getCurrent() {
     return current;
   }
-  public static double getVoltage() {
+  public double getVoltage() {
     return voltage;
   }
-  public static double getPower() {
+  public double getPower() {
     return power;
   }
-  public static int getX() {
+  public int getX() {
     return x;
   }
-  public static int getY() {
+  public int getY() {
     return y;
+  }
+  public String toString() {
+    return "R: "+resistance+"  I: "+current+"  V: "+voltage+"  P: "+power;
   }
 }
