@@ -62,4 +62,12 @@ public class Component{
   public void addFollowing(Component newFol) {
     following.add(newFol);
   }
+
+  public String getFollowing() {
+    return following.toString();
+  }
+
+  public String getPrevious() {
+    return previous.toString();
+  }
 }
