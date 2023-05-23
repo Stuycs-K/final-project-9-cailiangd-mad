@@ -9,6 +9,7 @@ public class Component{
   private ArrayList<Component> following;
   private int x;
   private int y;
+  private boolean solved;
   public Component(double Voltage, double Resistance, int x_, int y_) {
     voltage = Voltage;
     resistance = Resistance;
@@ -55,6 +56,7 @@ public class Component{
     voltage = newVolt;
   }
 
+
   public void addPrevious(Component newPre) {
     previous.add(newPre);
   }
@@ -70,4 +72,36 @@ public class Component{
   public String getPrevious() {
     return previous.toString();
   }
+
+  public double calculateReqSub() {
+		double result = 0;
+		if (following.size() > 1) {
+			double result = 0;
+			for (int i=0; i < following.size(); i++) {
+				result += 1 / (following.get(i).getResistance());
+			}
+		}
+		else {
+			result += following.get(0).resistance;
+			return result; 	
+		}
+	}
+  public boolean resetSolved() {
+	if (solved) {
+		solved = !solved;
+	}
+	else {
+		for (int i=0; i < following.size(); i++) {
+			following.get(i).resetSolved();
+		}
+	}
+	}
+  public void calculateStat() {
+	if (solved) {
+		
+	}
+	else {
+		if (following.size() == 0) current = 	
+	}
+	}
 }
