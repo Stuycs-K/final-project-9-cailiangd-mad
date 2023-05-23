@@ -22,8 +22,16 @@ void draw() {
   rect(740,400,10,40);
   rect(755,416,40,10);
   rect(50,400,10,40);
+  
+  /*
+  Add resistors.
+  I haven't figure out how I want the connecting components UI should work.
+  */
   for (int[] vals: temp) {
-    rect(vals[0],vals[1],20,10,5);
+    rect(vals[0],vals[1],25,30,15,0,0,15);
+    fill(205,85,124);
+    rect(vals[0]+25,vals[1],25,30,0,15,15,0);
+    fill(0);
   }
 }
 
