@@ -5,6 +5,7 @@ public class Component{
   private double current;
   private double voltage;
   private double power;
+  private double REQsub;
   private ArrayList<Component> previous;
   private ArrayList<Component> following;
   private int x;
@@ -72,6 +73,18 @@ public class Component{
   public String getPrevious() {
     return previous.toString();
   }
+  public ArrayList<Component> getFollowing() {
+    return this.following;
+  }
+  public ArrayList<Component> getPrevious() {
+    return this.previous;
+  }
+  public String previousToString() {
+    return previous.toString();
+  }
+  public String followingToString() {
+    return following.toString();
+  }
 
 
 /*
@@ -87,34 +100,51 @@ We could also implament solved in calculateStat for effeciency reasons.
 */
   public double calculateReqSub() {
 		double result = 0;
-		if (following.size() > 1) {
-			double result = 0;
-			for (int i=0; i < following.size(); i++) {
-				result += 1 / (following.get(i).getResistance());
-			}
+    if (solved) {
+      if (following.size() > 1) {
+        double result = 0.0;
+        for (int i=0; i < following.size(); i++) {
+          result += 1 / (following.get(i).calculateReqSub());
+          }
+          REQsub = 1.0/result;
+          return REQsub;
+        }
+        else {
+          result += following.get(0).calculateReqSub();
+          return result;
 		}
-		else {
-			result += following.get(0).resistance;
-			return result;
-		}
+  }
 	}
   public boolean resetSolved() {
 	if (solved) {
-		solved = !solved;
-	}
+      solved = !solved;
+    }
 	else {
 		for (int i=0; i < following.size(); i++) {
 			following.get(i).resetSolved();
+      }
 		}
 	}
-	}
+
 
   public void calculateStat() {
-	if (solved) {
-
-	}
-	else {
-		if (following.size() == 0) current =
-	}
-	}
-}
+    if (!solved) {
+        solved = true;
+        if (previous.size() == 0) {
+          current = voltage / REQsub;
+          }
+        else if (previous.size() == 1) {
+          current = getPrevious(0).getCurrent();
+          voltage = current * resistance;
+          power = voltage * current;
+        }
+        else {
+          voltage = 0.0;
+          for (int i=0; i < previous.size(); i++) {
+            voltage += previous.get(i).getVoltage();
+          }
+          power = voltage * current;
+        }
+        }
+        }
+          }
