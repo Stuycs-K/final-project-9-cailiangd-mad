@@ -1,6 +1,16 @@
+/*
+Below is a TEMPORARY arraylist for debugging
+*/
+ArrayList<int[]> temp;
+
+
 void setup() {
   size(800,800);
-  background(255);
+  temp = new ArrayList<int[]>();
+}
+
+void draw() {
+    background(255);
   noStroke();
   fill(35,80,200);
   rect(0,0,800,80);
@@ -12,4 +22,11 @@ void setup() {
   rect(740,400,10,40);
   rect(755,416,40,10);
   rect(50,400,10,40);
+  for (int[] vals: temp) {
+    rect(vals[0],vals[1],20,10,5);
+  }
+}
+
+void mousePressed() {
+  temp.add(new int[] {mouseX,mouseY});
 }
