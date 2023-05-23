@@ -73,6 +73,18 @@ public class Component{
     return previous.toString();
   }
 
+
+/*
+I kind of want calculateReqSub to recursively call itself up the chain so that the calculateReqSub
+for the main battery will be able to send the actual REQ for the entire circuit to the
+calculateREQ method in the Circuit class.
+
+Also I was hoping to include solved in the calculateReqSub method so that we don't call the same
+component multiple time and screwing with our numbers since multiple components can tie back to
+one component.
+
+We could also implament solved in calculateStat for effeciency reasons.
+*/
   public double calculateReqSub() {
 		double result = 0;
 		if (following.size() > 1) {
@@ -83,7 +95,7 @@ public class Component{
 		}
 		else {
 			result += following.get(0).resistance;
-			return result; 	
+			return result;
 		}
 	}
   public boolean resetSolved() {
@@ -96,12 +108,13 @@ public class Component{
 		}
 	}
 	}
+
   public void calculateStat() {
 	if (solved) {
-		
+
 	}
 	else {
-		if (following.size() == 0) current = 	
+		if (following.size() == 0) current =
 	}
 	}
 }
