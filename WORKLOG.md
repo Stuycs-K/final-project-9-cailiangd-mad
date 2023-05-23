@@ -1,6 +1,6 @@
 # Work Log
 
-## GROUP MEMBER 1
+## David Cai Liang
 
 ### date 5/22/2023
 
@@ -11,7 +11,7 @@ I created the two classes. I added all the initial variables and constructors th
 info
 
 
-## GROUP MEMBER 2
+## Dylan Ma
 
 ### date x
 
