@@ -1,6 +1,7 @@
 import java.util.*;
 import java.io.*;
 public class Component{
+  private double REQsub;
   private double resistance;
   private double current;
   private double voltage;
@@ -65,14 +66,21 @@ public class Component{
     following.add(newFol);
   }
 
-  public String getFollowing() {
+  public ArrayList getFollowing() {
+    return following;
+  }
+
+  public ArrayList getPrevious() {
+    return previous;
+  }
+
+  public String getFollowingString() {
     return following.toString();
   }
 
-  public String getPrevious() {
+  public String getPreviousString() {
     return previous.toString();
   }
-
 
 /*
 I kind of want calculateReqSub to recursively call itself up the chain so that the calculateReqSub
@@ -86,35 +94,52 @@ one component.
 We could also implament solved in calculateStat for effeciency reasons.
 */
   public double calculateReqSub() {
-		double result = 0;
+    if (solved) {
+      solved = true;
+		double result = resistance;
 		if (following.size() > 1) {
-			double result = 0;
+			double result = 0.0;
 			for (int i=0; i < following.size(); i++) {
-				result += 1 / (following.get(i).getResistance());
+				result += 1.0 / (following.get(i).calculateReqSub());
 			}
+      REQsub = 1.0/result;
+      return 1.0/result;
 		}
 		else {
-			result += following.get(0).resistance;
-			return result;
+			result += following.get(0).calculateReqSub();
+      REQsub = result;
+      return result;
 		}
+  }
 	}
+
   public boolean resetSolved() {
 	if (solved) {
 		solved = !solved;
 	}
-	else {
 		for (int i=0; i < following.size(); i++) {
 			following.get(i).resetSolved();
 		}
 	}
-	}
 
   public void calculateStat() {
-	if (solved) {
+	if (!solved) {
+    solved = true;
+    if (previous.size() == 0) {
+      current = voltage/REQsub;
+    }
+    else if (previous.size() == 1) {
+      current = getPrevious().get(0).getCurrent();
+      voltage = current*resistance;
+      power = current*voltage;
+    }
+    else {
+      voltage = getPrevious().get(0).getVoltage();
+      current = voltage/resistance;
+      power = current*voltage;
+    }
+	}
+	}
 
-	}
-	else {
-		if (following.size() == 0) current =
-	}
-	}
+
 }
