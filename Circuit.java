@@ -44,8 +44,8 @@ public class Circuit{
     return "REQ: "+REQ+" IEQ: "+IEQ+" VEQ: "+VEQ+" PEQ: "+PEQ;
   }
 
-  private void setVEQ(double newVEQ) {
-    VEQ = newVEQ;
+  public void setVEQ(double newVEQ) {
+    VEQ = firstComp.getVoltage();
   }
 
   public void add(Component newComp) {
@@ -72,5 +72,25 @@ public class Circuit{
     return res.substring(0,res.length()-1);
   }
 
+ public void calculateREQ() {
+    REQ = getFirstComp().getREQsub();
+ }
+
+ public void calculateIVPeq() {
+   IEQ = VEQ/REQ;
+   PEQ = VEQ * IEQ;
+ }
+
+public void calculateIVP() {
+  getFirstComp().calculateStat();
+}
+
+public void calculate() {
+  calculateREQ();
+  getFirstComp().resetSolved();
+  calculateIVPeq();
+  calculateIVP();
+  getFirstComp().resetSolved();
+}
 
 }
