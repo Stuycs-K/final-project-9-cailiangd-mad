@@ -1,10 +1,15 @@
 Circuit mainC;
+Component start;
+int Cx, Cy;
 void setup() {
   size(800,800);
   mainC = new Circuit();
 }
 
 void draw() {
+  tick++;
+  Ender();
+  Connector();
   /*
   The top blue bar and side bars.
   */
@@ -35,7 +40,7 @@ void draw() {
   }
 }
 
-void mousePressed() {
+void mouseClicked() {
   boolean temp = true;
     for (int i = 1; i < mainC.getCompNum(); i++) {
     if (abs(mouseX-mainC.getComp(i).getX()) + abs(mouseY-mainC.getComp(i).getY()) < 70) {
@@ -48,4 +53,32 @@ void mousePressed() {
   if (temp) {
   mainC.add(new Component(10,mouseX, mouseY));
   }
+}
+
+void mouseDragged() {
+    Cx = mouseX;
+    Cy = mouseY;
+}
+
+void mousePressed() {
+  start = mainC.whichCompIsClicked(mouseX,mouseY);
+}
+
+void Ender() {
+  Component end = mainC.whichCompIsClicked(Cx,Cy);
+  if (start != null && end != null) {
+  start.addFollowing(end);
+  end.addPrevious(start);
+      println(start);
+  println(end);
+  println(start.getFollowing());
+}
+}
+
+void Connector() {
+  for (int i = 1; i < mainC.getCompNum(); i++) {
+    for (int k = 0; k < mainC.getComp(i).getFollowing().size();k++) {
+    line(mainC.getComp(i).getX(),mainC.getComp(i).getY(),mainC.getComp(i).getFollowing().get(k).getX(),mainC.getComp(i).getFollowing().get(k).getY());
+    }
+}
 }
