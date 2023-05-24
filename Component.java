@@ -6,6 +6,7 @@ public class Component{
   private double current;
   private double voltage;
   private double power;
+  private double REQsub;
   private ArrayList<Component> previous;
   private ArrayList<Component> following;
   private int x;
@@ -81,6 +82,18 @@ public class Component{
   public String getPreviousString() {
     return previous.toString();
   }
+  public ArrayList<Component> getFollowing() {
+    return this.following;
+  }
+  public ArrayList<Component> getPrevious() {
+    return this.previous;
+  }
+  public String previousToString() {
+    return previous.toString();
+  }
+  public String followingToString() {
+    return following.toString();
+  }
 
 /*
 I kind of want calculateReqSub to recursively call itself up the chain so that the calculateReqSub
@@ -109,18 +122,49 @@ We could also implament solved in calculateStat for effeciency reasons.
 			result += following.get(0).calculateReqSub();
       REQsub = result;
       return result;
+
 		}
   }
 	}
 
   public boolean resetSolved() {
 	if (solved) {
+	     solved = !solved;
+    	}
+	else {
 		solved = !solved;
 	}
+
 		for (int i=0; i < following.size(); i++) {
 			following.get(i).resetSolved();
+      }
 		}
 	}
+
+
+
+  public void calculateStat() {
+    if (!solved) {
+        solved = true;
+        if (previous.size() == 0) {
+          current = voltage / REQsub;
+          }
+        else if (previous.size() == 1) {
+          current = getPrevious(0).getCurrent();
+          voltage = current * resistance;
+          power = voltage * current;
+        }
+        else {
+          voltage = 0.0;
+          for (int i=0; i < previous.size(); i++) {
+            voltage += previous.get(i).getVoltage();
+          }
+          power = voltage * current;
+        }
+        }
+        }
+          }
+
 
   public void calculateStat() {
 	if (!solved) {
@@ -146,3 +190,4 @@ We could also implament solved in calculateStat for effeciency reasons.
 
 
 }
+

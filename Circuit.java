@@ -49,7 +49,11 @@ public class Circuit{
   }
 
   public void add(Component newComp) {
+    if (compList.size() == 1) {
+      newComp.setVoltage(0);
+    }
     compList.add(newComp);
+
   }
 
   public String getCompList() {
