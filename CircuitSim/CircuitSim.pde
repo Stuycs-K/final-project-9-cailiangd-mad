@@ -1,6 +1,8 @@
 Circuit mainC;
-Component start;
+Component prev;
+boolean isPrevMode;
 int Cx, Cy;
+boolean isEditMode = true;
 void setup() {
   size(800,800);
   mainC = new Circuit();
@@ -36,8 +38,6 @@ void draw() {
     fill(0);
   }
   
-    //Ender();
-  //Connector();
     dataExtract();
 }
 
@@ -56,35 +56,21 @@ void mouseClicked() {
   }
 }
 
-//void mouseDragged() {
-//    Cx = mouseX;
-//    Cy = mouseY;
-//}
-
-//void mousePressed() {
-//  start = mainC.chooseComp(mouseX,mouseY);
-//}
-
-//void Ender() {
-//  Component end = mainC.chooseComp(Cx,Cy);
-//  if (start != null && end != null) {
-//  start.addFollowing(end);
-//  end.addPrevious(start);
-//      println(start);
-//  println(end);
-//  println(start.getFollowing());
-//}
-//}
-
-//void Connector() {
-//  for (int i = 1; i < mainC.getCompNum(); i++) {
-//    for (int k = 0; k < mainC.getComp(i).getFollowing().size();k++) {
-//    line(mainC.getComp(i).getX(),mainC.getComp(i).getY(),mainC.getComp(i).getFollowing().get(k).getX(),mainC.getComp(i).getFollowing().get(k).getY());
-//    }
-//}
-//}
+void mousePressed() {
+  start = mainC.chooseComp(mouseX,mouseY);
+}
 
 void dataExtract() {
   textSize(30);
-  text(mainC.chooseComp(mouseX,mouseY).toString(),50,50);  
+  text(mainC.chooseComp(mouseX,mouseY).toString(),50,25);
+  if (start != null) {
+  text(start.toString(), 50, 55);
+  }
+}
+
+
+void choosePrev(int x, int y) {
+  prev = mainC.chooseComp(x,y);
+  isPrevMode = !isPrevMode;
+}
 }
