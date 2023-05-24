@@ -20,7 +20,7 @@ public class Driver {
     System.out.println(cirt1.debugToString());
     System.out.println("-------------------");
     cirt1.getFirstComp().setRes(500);
-    cirt1.getFirstComp().setVolt(50);
+    cirt1.getFirstComp().setVoltage(50);
     System.out.println(cirt1.getFirstComp());
 //----------------------------------------------------
     System.out.println("-------------------");
