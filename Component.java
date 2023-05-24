@@ -139,6 +139,9 @@ We could also implament solved in calculateStat for effeciency reasons.
       power = current*voltage;
     }
 	}
+  for (int i = 0; i < following.size(); i++) {
+    following.get(i).calculateStat();
+  }
 	}
 
 
