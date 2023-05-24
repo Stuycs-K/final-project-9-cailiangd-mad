@@ -141,31 +141,6 @@ We could also implament solved in calculateStat for effeciency reasons.
 		}
 	}
 
-
-
-  public void calculateStat() {
-    if (!solved) {
-        solved = true;
-        if (previous.size() == 0) {
-          current = voltage / REQsub;
-          }
-        else if (previous.size() == 1) {
-          current = getPrevious(0).getCurrent();
-          voltage = current * resistance;
-          power = voltage * current;
-        }
-        else {
-          voltage = 0.0;
-          for (int i=0; i < previous.size(); i++) {
-            voltage += previous.get(i).getVoltage();
-          }
-          power = voltage * current;
-        }
-        }
-        }
-          }
-
-
   public void calculateStat() {
 	if (!solved) {
     solved = true;
