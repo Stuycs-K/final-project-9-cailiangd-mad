@@ -7,9 +7,6 @@ void setup() {
 }
 
 void draw() {
-  tick++;
-  Ender();
-  Connector();
   /*
   The top blue bar and side bars.
   */
@@ -38,6 +35,10 @@ void draw() {
     rect(mainC.getComp(i).getX()+25,mainC.getComp(i).getY(),25,30,0,15,15,0);
     fill(0);
   }
+  
+    //Ender();
+  //Connector();
+    dataExtract();
 }
 
 void mouseClicked() {
@@ -55,30 +56,35 @@ void mouseClicked() {
   }
 }
 
-void mouseDragged() {
-    Cx = mouseX;
-    Cy = mouseY;
-}
+//void mouseDragged() {
+//    Cx = mouseX;
+//    Cy = mouseY;
+//}
 
-void mousePressed() {
-  start = mainC.whichCompIsClicked(mouseX,mouseY);
-}
+//void mousePressed() {
+//  start = mainC.chooseComp(mouseX,mouseY);
+//}
 
-void Ender() {
-  Component end = mainC.whichCompIsClicked(Cx,Cy);
-  if (start != null && end != null) {
-  start.addFollowing(end);
-  end.addPrevious(start);
-      println(start);
-  println(end);
-  println(start.getFollowing());
-}
-}
+//void Ender() {
+//  Component end = mainC.chooseComp(Cx,Cy);
+//  if (start != null && end != null) {
+//  start.addFollowing(end);
+//  end.addPrevious(start);
+//      println(start);
+//  println(end);
+//  println(start.getFollowing());
+//}
+//}
 
-void Connector() {
-  for (int i = 1; i < mainC.getCompNum(); i++) {
-    for (int k = 0; k < mainC.getComp(i).getFollowing().size();k++) {
-    line(mainC.getComp(i).getX(),mainC.getComp(i).getY(),mainC.getComp(i).getFollowing().get(k).getX(),mainC.getComp(i).getFollowing().get(k).getY());
-    }
-}
+//void Connector() {
+//  for (int i = 1; i < mainC.getCompNum(); i++) {
+//    for (int k = 0; k < mainC.getComp(i).getFollowing().size();k++) {
+//    line(mainC.getComp(i).getX(),mainC.getComp(i).getY(),mainC.getComp(i).getFollowing().get(k).getX(),mainC.getComp(i).getFollowing().get(k).getY());
+//    }
+//}
+//}
+
+void dataExtract() {
+  textSize(30);
+  text(mainC.chooseComp(mouseX,mouseY).toString(),50,50);  
 }

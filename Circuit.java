@@ -49,10 +49,6 @@ public class Circuit{
   }
 
   public void add(Component newComp) {
-    if (compList.size() == 1) {
-      newComp.setVoltage(0);
-    }
-    else newComp.setVoltage(VEQ);
     compList.add(newComp);
   }
 
@@ -93,7 +89,7 @@ public void calculate() {
   getFirstComp().resetSolved();
 }
 
-public Component whichCompIsClicked(int x,int y) {
+public Component chooseComp(int x,int y) {
   int pos = 0;
   for (int i = 1; i < compList.size(); i++) {
     if (

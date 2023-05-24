@@ -45,6 +45,12 @@ public class Driver {
   Circuit full1 = new Circuit();
       System.out.println(full1);
       System.out.println(full1.getCompList());
-      full1.getComp(0).setPrevious(new C)
+      System.out.println(full1.debugToString());
+     for (int i = 0; i < 10; i++) {
+       full1.add(new Component(0,i,2*i));
+     }
+     System.out.println(full1.getCompList());
+     System.out.println(full1.debugToString());
+     System.out.println(full1.chooseComp(10,10));
   }
 }
