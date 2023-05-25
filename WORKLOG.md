@@ -13,9 +13,9 @@ info
 
 ## Dylan Ma
 
-### date x
+### 5/23/2023
 
-info
+I completed the calculate methods which are used to provide critical information about the individual components as well as the overall stats for the circuit, such as the total current (IEQ), the total resistance (REQ) and the total voltage (VEQ). I also added the resetSolved() method, which resets the solved status of all components, as well as the calculateStat method, which calculates the statistics for individual resistors (components).
 
 ### date y
 
