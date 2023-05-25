@@ -29,6 +29,7 @@ public class Component{
     following = new ArrayList<Component>();
     type = resistor;
   }
+  
   public double getResistance() {
     return resistance;
   }
@@ -122,7 +123,9 @@ We could also implament solved in calculateStat for effeciency reasons.
       following.get(i).resetSolved();
       }
     }
-
+    /** CalculateStat helps calculate all of the instance variables (such as resistance, voltage) of the component.*/
+    
+/
   public void calculateStat() {
     if (!solved) {
         solved = true;
