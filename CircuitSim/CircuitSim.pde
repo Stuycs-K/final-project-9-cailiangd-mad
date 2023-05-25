@@ -2,17 +2,17 @@
   private final int resistor = 15;
 Circuit mainC;
 Component prev;
-boolean isPrevMode, undo, debug;
+boolean undo, debug;
 int Cx, Cy;
 boolean isEditMode = true;
 void setup() {
   size(800,800);
   mainC = new Circuit();
-  prev = mainC.getFirstComp();
+  prev = mainC.get(0);
 }
 
 void draw() {
-  if (isPrevMode) {
+  if (!isEditMode) {
     mainC.calculate();
   }
   /*
@@ -48,23 +48,22 @@ void draw() {
   generateConnections();
     rectMode(CENTER);
   for (int i = 1; i < mainC.getCompNum(); i++) {
+        fill(0);
     rect(mainC.get(i).getX()-12.5,mainC.get(i).getY(),25,30,15,0,0,15);
     fill(205,85,124);
     rect(mainC.get(i).getX()+12.5,mainC.get(i).getY(),25,30,0,15,15,0);
-    fill(0);
   }
-
     dataExtract();
         circlePrev();
     rectMode(CORNER);
 }
 
 void mouseClicked() {
-  if (isPrevMode) {
+  if (isEditMode) {
   if (mouseButton == LEFT && prev != null) {
     boolean temp = true;
     for (int i = 1; i < mainC.getCompNum(); i++) {
-    if (abs(mouseX-mainC.get(i).getX()) + abs(mouseY-mainC.get(i).getY()) < 65) {
+    if (Math.sqrt(Math.pow(mouseX-mainC.get(i).getX(),2) + Math.pow(mouseY-mainC.get(i).getY(),2)) < 60) {
       prev.addFollowing(mainC.get(i));
       mainC.get(i).addPrevious(prev);
       temp = false;
@@ -99,7 +98,6 @@ void dataExtract() {
 
 void choosePrev(int x, int y) {
   prev = mainC.chooseComp(x,y);
-  isPrevMode = !isPrevMode;
 }
 
 void generateConnections() {
@@ -107,6 +105,9 @@ void generateConnections() {
     for (int k = 0; k < mainC.get(i).getFollowing().size(); k++) {
       stroke(0);
       line(mainC.get(i).getX()+mainC.get(i).getType(),mainC.get(i).getY(),mainC.get(i).getFollowing().get(k).getX()-mainC.get(i).getFollowing().get(k).getType(),mainC.get(i).getFollowing().get(k).getY());
+    }
+    if (!isEditMode && mainC.get(i).getFollowing().size() == 0) {
+      line(mainC.get(i).getX()+mainC.get(i).getType(),mainC.get(i).getY(),mainC.get(0).getX()-mainC.get(0).getType(),mainC.get(0).getY());
     }
   }
 }
@@ -120,5 +121,8 @@ void circlePrev() {
 void keyPressed() {
   if (key == 'd') {
     debug = !debug;
+  }
+  if (key == 'e') {
+    isEditMode = !isEditMode;
   }
 }

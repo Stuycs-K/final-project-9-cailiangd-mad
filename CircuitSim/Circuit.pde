@@ -20,9 +20,6 @@ public class Circuit{
     add(battery1);
   }
 
-  public Component getFirstComp() {
-    return firstComp;
-  }
 
   public double getREQ() {
     return REQ;
@@ -69,7 +66,7 @@ public class Circuit{
   }
 
  public void calculateREQ() {
-    REQ = getFirstComp().calculateReqSub();
+    REQ = get(0).calculateReqSub();
  }
 
  public void calculateIVPeq() {
@@ -78,15 +75,15 @@ public class Circuit{
  }
 
 public void calculateIVP() {
-  getFirstComp().calculateStat();
+  get(0).calculateStat();
 }
 
 public void calculate() {
   calculateREQ();
-  getFirstComp().resetSolved();
+  get(0).resetSolved();
   calculateIVPeq();
   calculateIVP();
-  getFirstComp().resetSolved();
+  get(0).resetSolved();
 }
 
 public Component chooseComp(int x,int y) {
