@@ -34,7 +34,13 @@ void draw() {
   //display area
   fill(100);
   rect(0,650,800,150);
-
+  textSize(30);
+  if (isEditMode) {
+    text("Edit Mode", 48, 40, 40);
+  }
+  else {
+    text("Run Mode", 48, 50);
+  }
   /*
   Add resistors.
   I haven't figure out how I want the connecting components UI should work.
