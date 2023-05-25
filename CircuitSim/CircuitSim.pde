@@ -12,9 +12,6 @@ void setup() {
 }
 
 void draw() {
-  if (!isEditMode) {
-    mainC.calculate();
-  }
   /*
   Build the background graphics.
   */
@@ -39,7 +36,7 @@ void draw() {
     text("Edit Mode", 48, 40, 40);
   }
   else {
-    text("Run Mode", 48, 50);
+    text("Run Mode", 48, 40);
   }
   /*
   Add resistors.
@@ -56,6 +53,24 @@ void draw() {
     dataExtract();
         circlePrev();
     rectMode(CORNER);
+    
+  if (!isEditMode) {
+        mainC.calculate();
+    textSize(40);
+    if (prev == mainC.get(0)) {
+    text("REQ: "+round((float)mainC.getREQ()*100.0)/100.0,10,700);
+    text("PEQ: "+round((float)mainC.getPEQ()*100.0)/100.0,10,750);
+    text("IEQ: "+round((float)mainC.getIEQ()*100.0)/100.0,350,700);
+    text("VEQ: "+round((float)mainC.getVEQ()*100.0)/100.0,350,750);
+    stroke(0);
+    }
+    else {
+      text("resistance: "+round((float)prev.getResistance()*100.0)/100.0,10,700);
+      text("        power: "+round((float)prev.getPower()*100.0)/100.0,10,750);
+      text("   current: "+round((float)prev.getCurrent()*100.0)/100.0,350,700);
+      text("   voltage: "+round((float)prev.getVoltage()*100.0)/100.0,350,750);
+    }
+}
 }
 
 void mouseClicked() {
@@ -81,8 +96,17 @@ void mouseClicked() {
   }
   }
   else {
-
+        if (prev != mainC.get(0) && Math.sqrt(Math.pow(mouseX-prev.getX(),2) + Math.pow(mouseY-prev.getY(),2)) < 60) {
+        prev = mainC.get(0);
+        }
+       else {
+         for (int i = 1; i < mainC.getCompNum(); i++) {
+             if (Math.sqrt(Math.pow(mouseX-mainC.get(i).getX(),2) + Math.pow(mouseY-mainC.get(i).getY(),2)) < 60) {
+               prev = mainC.get(i);
+         }
+        }
   }
+}
 }
 
 void dataExtract() {

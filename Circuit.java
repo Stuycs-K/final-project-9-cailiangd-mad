@@ -51,7 +51,9 @@ public class Circuit{
   public void add(Component newComp) {
     compList.add(newComp);
   }
-
+  public Component get(int i) {
+    return compList.get(i);
+  }
   public String getCompList() {
     return compList.toString();
   }
