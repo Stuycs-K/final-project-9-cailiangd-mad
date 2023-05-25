@@ -29,7 +29,13 @@ void draw() {
   //hit boxes for connections
   rect(755,416,40,10);
   rect(50,400,10,40);
-  
+  textSize(30);
+  if (isEditMode) {
+    text("Edit Mode", 48, 40, 40);
+  }
+  else {
+    text("Run Mode", 48, 50);
+  }
   /*
   Add resistors.
   I haven't figure out how I want the connecting components UI should work.
