@@ -13,11 +13,11 @@ public class Circuit{
   }
 
   public Circuit(double voltage) {
-    Component battery = new Component(voltage, 0, 0, 0);
-    firstComp = battery;
+    Component battery1 = new Component(voltage, 0, width/2, 420);
+    firstComp = battery1;
     VEQ = voltage;
     compList = new ArrayList<Component>();
-    add(battery);
+    add(battery1);
   }
 
   public Component getFirstComp() {
@@ -110,7 +110,8 @@ public Component chooseComp(int x,int y) {
   return compList.get(pos);
 }
 
-public Component getComp(int i) {
+
+public Component get(int i) {
   return compList.get(i);
 }
 
