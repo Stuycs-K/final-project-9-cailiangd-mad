@@ -110,6 +110,7 @@ public Component chooseComp(int x,int y) {
   return compList.get(pos);
 }
 
+
 public Component getComp(int i) {
   return compList.get(i);
 }
