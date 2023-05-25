@@ -1,6 +1,7 @@
 import java.util.*;
 import java.io.*;
 public class Component{
+  private int type;
   private double REQsub;
   private double resistance;
   private double current;
@@ -18,6 +19,7 @@ public class Component{
     y=y_;
     previous = new ArrayList<Component>();
     following = new ArrayList<Component>();
+    type = battery;
   }
   public Component(double Resistance, int x_, int y_) {
     resistance = Resistance;
@@ -25,6 +27,7 @@ public class Component{
     y=y_;
     previous = new ArrayList<Component>();
     following = new ArrayList<Component>();
+    type = resistor;
   }
   public double getResistance() {
     return resistance;
@@ -138,5 +141,9 @@ We could also implament solved in calculateStat for effeciency reasons.
         }
         }
         }
+   
+   public int getType() {
+     return type;
+   }
 
 }

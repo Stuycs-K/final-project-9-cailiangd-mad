@@ -111,14 +111,6 @@
     //Might be a problem we will have to see.
   	}
 
-    public void resetSolved() {
-  	if (solved) {
-  	     solved = !solved;
-      	}
-  		for (int i=0; i < following.size(); i++) {
-  			following.get(i).resetSolved();
-        }
-  		}
 
     public void calculateStat() {
       if (!solved) {
