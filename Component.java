@@ -130,4 +130,8 @@
           }
           }
           }
+
+          public double getREQsub() {
+            return REQsub;
+          }
   }
