@@ -107,7 +107,7 @@
         return result;
   		}
     }
-    return 0;
+    return REQsub;
     //Might be a problem we will have to see.
   	}
 
@@ -138,5 +138,4 @@
           }
           }
           }
-
   }
