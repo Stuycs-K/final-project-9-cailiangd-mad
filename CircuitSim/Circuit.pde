@@ -41,7 +41,7 @@ public class Circuit{
     return "REQ: "+REQ+" IEQ: "+IEQ+" VEQ: "+VEQ+" PEQ: "+PEQ;
   }
 
-  public void setVEQ(double newVEQ) {
+  public void setVEQ() {
     VEQ = firstComp.getVoltage();
   }
 
@@ -75,15 +75,16 @@ public class Circuit{
  }
 
 public void calculateIVP() {
-  get(0).calculateStat();
+  for (int i = 0; i < getCompNum(); i++) {
+    get(i).calculateStat();
+  }
 }
 
 public void calculate() {
   calculateREQ();
-  get(0).resetSolved();
+  reset();
   calculateIVPeq();
   calculateIVP();
-  get(0).resetSolved();
 }
 
 public Component chooseComp(int x,int y) {
@@ -110,6 +111,12 @@ public Component chooseComp(int x,int y) {
 
 public Component get(int i) {
   return compList.get(i);
+}
+
+public void reset() {
+  for (int i = 0; i < getCompNum(); i++) {
+    get(i).setSolved(false);
+  }
 }
 
 }

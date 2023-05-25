@@ -50,7 +50,7 @@ public class Component{
   }
 
   public String toString() {
-    return "R: "+resistance+"  I: "+current+"  V: "+voltage+"  P: "+power+ "  X: "+x+"  Y: "+y;
+    return "R: "+resistance+"  I: "+current+"  V: "+voltage+"  P: "+power+ "  X: "+x+"  Y: "+y+ "  REQsub: "+REQsub;
   }
 
   public void setRes(double newRes) {
@@ -95,25 +95,22 @@ one component.
 We could also implament solved in calculateStat for effeciency reasons.
 */
   public double calculateReqSub() {
-    if (solved) {
+    if (!solved) {
       solved = true;
-    double result = resistance;
+      REQsub = resistance;
     if (following.size() > 1) {
       for (int i=0; i < following.size(); i++) {
-        result += 1.0 / (following.get(i).calculateReqSub());
+        REQsub += 1.0 / (following.get(i).calculateReqSub());
       }
-      REQsub = 1.0/result;
-      return 1.0/result;
+      REQsub = 1.0/REQsub;
     }
-    else {
-      result += following.get(0).calculateReqSub();
-      REQsub = result;
-      return result;
+    else if (following.size() == 1) {
+      REQsub += following.get(0).calculateReqSub();
     }
-  }
+    }
   return REQsub;
-  //Might be a problem we will have to see.
   }
+
 
   public void resetSolved() {
   if (solved) {
@@ -126,24 +123,29 @@ We could also implament solved in calculateStat for effeciency reasons.
     /** CalculateStat helps calculate all of the instance variables (such as resistance, voltage) of the component.*/
     
 /
+
+  
+  public void setSolved(boolean bool) {
+    solved = bool;
+  }
+  
+
   public void calculateStat() {
-    if (!solved) {
-        solved = true;
         if (previous.size() == 0) {
           current = voltage / REQsub;
           }
-        else if (previous.size() == 1) {
-          current = previous.get(0).getCurrent();
-          voltage = current * resistance;
-          power = voltage * current;
-        }
-        else {
-          voltage = previous.get(0).getVoltage();
-          current = voltage/resistance;
-          power = current*voltage;
-        }
-        }
-        }
+          //Need to rebuild
+          else if (previous.size() == 1) {
+            current = previous.get(0).getCurrent();
+            voltage = current * resistance;
+            power = voltage * current;
+          }
+          else {
+            voltage = previous.get(0).getVoltage();
+            current = voltage / resistance;
+            power = current * voltage;
+          }
+  }
    
    public int getType() {
      return type;
