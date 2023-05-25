@@ -12,8 +12,11 @@ void setup() {
 }
 
 void draw() {
+  if (isPrevMode) {
+    mainC.calculate();
+  }
   /*
-  The top blue bar and side bars.
+  Build the background graphics.
   */
     background(255);
   noStroke();
@@ -25,11 +28,13 @@ void draw() {
   rect(18,400,10,40);
   rect(4,416,40,10);
   rect(740,400,10,40);
-  
   //hit boxes for connections
   rect(755,416,40,10);
   rect(50,400,10,40);
-  
+  //display area
+  fill(100);
+  rect(0,650,800,150);
+
   /*
   Add resistors.
   I haven't figure out how I want the connecting components UI should work.
@@ -42,24 +47,24 @@ void draw() {
     rect(mainC.get(i).getX()+12.5,mainC.get(i).getY(),25,30,0,15,15,0);
     fill(0);
   }
-    
+
     dataExtract();
         circlePrev();
-    rectMode(CORNER);  
+    rectMode(CORNER);
 }
 
 void mouseClicked() {
+  if (isPrevMode) {
   if (mouseButton == LEFT && prev != null) {
-  boolean temp = true;
+    boolean temp = true;
     for (int i = 1; i < mainC.getCompNum(); i++) {
-    if (abs(mouseX-mainC.get(i).getX()) + abs(mouseY-mainC.get(i).getY()) < 70) {
+    if (abs(mouseX-mainC.get(i).getX()) + abs(mouseY-mainC.get(i).getY()) < 65) {
+      prev.addFollowing(mainC.get(i));
+      mainC.get(i).addPrevious(prev);
       temp = false;
     }
   }
-  if(mouseY < 70 || (mouseY < 450 && (mouseX < 50 || mouseX > 700))) {
-    temp = false;
-  }
-  if (temp) {
+  if (temp && mouseY < 650 && mouseY > 70 && (mouseY > 450 || (mouseX > 50 && mouseX < 700))) {
     Component target = new Component(10,mouseX,mouseY);
   mainC.add(target);
   prev.addFollowing(target);
@@ -68,6 +73,10 @@ void mouseClicked() {
   }
   else if (mouseButton == RIGHT) {
       choosePrev(mouseX,mouseY);
+  }
+  }
+  else {
+
   }
 }
 
