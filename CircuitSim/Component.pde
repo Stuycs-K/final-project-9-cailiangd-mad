@@ -118,7 +118,16 @@ We could also implament solved in calculateStat for effeciency reasons.
         if (previous.size() == 0) {
           current = voltage / REQsub;
           }
-          //Need to rebuild
+       else if (previous.size() == 1) {
+         current = previous.get(0).getCurrent();
+         voltage = current * resistance;
+         power = voltage * current;
+       }
+       else {
+         voltage = previous.get(0).getVoltage();
+         current = voltage/resistance;
+         power = current*voltage;
+  }
   }
    
    public int getType() {
