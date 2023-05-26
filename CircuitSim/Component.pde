@@ -120,7 +120,9 @@ We could also implament solved in calculateStat for effeciency reasons.
       following.get(i).resetSolved();
       }
     }
-    /** CalculateStat helps calculate all of the instance variables (such as resistance, voltage) of the component.*/
+    /** 
+    CalculateStat helps calculate all of the instance variables (such as resistance, voltage) of the component.
+    */
     
 /
 

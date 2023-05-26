@@ -1,5 +1,5 @@
-  private final int battery = -350;
-  private final int resistor = 15;
+private final int battery = -350;
+private final int resistor = 15;
 Circuit mainC;
 Component prev;
 boolean undo, debug;

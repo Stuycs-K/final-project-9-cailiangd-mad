@@ -23,4 +23,6 @@ I completed the calculate methods which are used to provide critical information
 ### 5/24/2023
 Continued to work on a bug in the Processing window, which may have led to infinite recursion initially. 
 
-info
+### 5/25/2023
+
+We continued to work on our reqSub() method - made headway on the make connections method
