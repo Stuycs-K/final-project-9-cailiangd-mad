@@ -44,7 +44,7 @@ void draw() {
     */
   generateConnections();
     rectMode(CENTER);
-  for (int i = 1; i < mainC.getCompNum(); i++) {
+  for (int i = 1; i < mainC.size(); i++) {
         fill(0);
     rect(mainC.get(i).getX()-12.5,mainC.get(i).getY(),25,30,15,0,0,15);
     fill(205,85,124);
@@ -55,7 +55,6 @@ void draw() {
     rectMode(CORNER);
     
   if (!isEditMode) {
-        mainC.calculate();
     textSize(40);
     if (prev == mainC.get(0)) {
     text("REQ: "+round((float)mainC.getREQ()*100.0)/100.0,10,700);
@@ -77,7 +76,7 @@ void mouseClicked() {
   if (isEditMode) {
   if (mouseButton == LEFT && prev != null) {
     boolean temp = true;
-    for (int i = 1; i < mainC.getCompNum(); i++) {
+    for (int i = 1; i < mainC.size(); i++) {
     if (Math.sqrt(Math.pow(mouseX-mainC.get(i).getX(),2) + Math.pow(mouseY-mainC.get(i).getY(),2)) < 60) {
       prev.addFollowing(mainC.get(i));
       mainC.get(i).addPrevious(prev);
@@ -100,7 +99,7 @@ void mouseClicked() {
         prev = mainC.get(0);
         }
        else {
-         for (int i = 1; i < mainC.getCompNum(); i++) {
+         for (int i = 1; i < mainC.size(); i++) {
              if (Math.sqrt(Math.pow(mouseX-mainC.get(i).getX(),2) + Math.pow(mouseY-mainC.get(i).getY(),2)) < 60) {
                prev = mainC.get(i);
          }
@@ -125,7 +124,7 @@ void choosePrev(int x, int y) {
 }
 
 void generateConnections() {
-  for (int i = 0; i < mainC.getCompNum(); i++) {
+  for (int i = 0; i < mainC.size(); i++) {
     for (int k = 0; k < mainC.get(i).getFollowing().size(); k++) {
       stroke(0);
       line(mainC.get(i).getX()+mainC.get(i).getType(),mainC.get(i).getY(),mainC.get(i).getFollowing().get(k).getX()-mainC.get(i).getFollowing().get(k).getType(),mainC.get(i).getFollowing().get(k).getY());
@@ -148,5 +147,10 @@ void keyPressed() {
   }
   if (key == 'e') {
     isEditMode = !isEditMode;
+    prev=mainC.get(0);
+    if(!isEditMode) {
+       mainC.reset();
+       mainC.calculate();
+    }
   }
 }

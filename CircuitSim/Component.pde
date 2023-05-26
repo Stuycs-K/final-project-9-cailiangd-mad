@@ -94,9 +94,6 @@ one component.
 We could also implament solved in calculateStat for effeciency reasons.
 */
   public double calculateReqSub() {
-    if (!solved) {
-      solved = true;
-      REQsub = resistance;
     if (following.size() > 1) {
       for (int i=0; i < following.size(); i++) {
         REQsub += 1.0 / (following.get(i).calculateReqSub());
@@ -106,13 +103,9 @@ We could also implament solved in calculateStat for effeciency reasons.
     else if (following.size() == 1) {
       REQsub += following.get(0).calculateReqSub();
     }
+    REQsub+=resistance;
+      return REQsub;
     }
-  return REQsub;
-  }
-  
-  public void setSolved(boolean bool) {
-    solved = bool;
-  }
   
   public void calculateStat() {
         if (previous.size() == 0) {
@@ -133,5 +126,9 @@ We could also implament solved in calculateStat for effeciency reasons.
    public int getType() {
      return type;
    }
+
+public void reset() {
+  REQsub = 0.0;
+}
 
 }
