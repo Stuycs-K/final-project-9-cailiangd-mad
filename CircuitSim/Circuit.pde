@@ -67,6 +67,9 @@ public class Circuit{
 
  public void calculateREQ() {
     REQ = get(0).calculateReqSub();
+    for (int i = 1; i < size(); i++) {
+      get(i).Unsolve();
+    }
  }
 
  public void calculateIVPeq() {
@@ -82,7 +85,6 @@ public void calculateIVP() {
 
 public void calculate() {
   calculateREQ();
-  reset();
   calculateIVPeq();
   calculateIVP();
 }
@@ -117,4 +119,6 @@ public void reset() {
   for (int i = 0; i < size(); i++) {
     get(i).reset();
   }
+}
+
 }

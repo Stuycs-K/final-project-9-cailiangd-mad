@@ -68,6 +68,7 @@ void draw() {
       text("        power: "+round((float)prev.getPower()*100.0)/100.0,10,750);
       text("   current: "+round((float)prev.getCurrent()*100.0)/100.0,350,700);
       text("   voltage: "+round((float)prev.getVoltage()*100.0)/100.0,350,750);
+      text("REQsub: "+prev.getREQsub(),20,20);
     }
 }
 }
