@@ -53,7 +53,7 @@ public class Circuit{
     return compList.toString();
   }
 
-  public int getCompNum() {
+  public int size() {
     return compList.size();
   }
 
@@ -67,6 +67,9 @@ public class Circuit{
 
  public void calculateREQ() {
     REQ = get(0).calculateReqSub();
+    for (int i = 1; i < size(); i++) {
+      get(i).Unsolve();
+    }
  }
 
  public void calculateIVPeq() {
@@ -75,14 +78,13 @@ public class Circuit{
  }
 
 public void calculateIVP() {
-  for (int i = 0; i < getCompNum(); i++) {
+  for (int i = 0; i < size(); i++) {
     get(i).calculateStat();
   }
 }
 
 public void calculate() {
   calculateREQ();
-  reset();
   calculateIVPeq();
   calculateIVP();
 }
@@ -114,8 +116,8 @@ public Component get(int i) {
 }
 
 public void reset() {
-  for (int i = 0; i < getCompNum(); i++) {
-    get(i).setSolved(false);
+  for (int i = 0; i < size(); i++) {
+    get(i).reset();
   }
 }
 

@@ -96,7 +96,6 @@ We could also implament solved in calculateStat for effeciency reasons.
   public double calculateReqSub() {
     if (!solved) {
       solved = true;
-      REQsub = resistance;
     if (following.size() > 1) {
       for (int i=0; i < following.size(); i++) {
         REQsub += 1.0 / (following.get(i).calculateReqSub());
@@ -104,25 +103,45 @@ We could also implament solved in calculateStat for effeciency reasons.
       REQsub = 1.0/REQsub;
     }
     else if (following.size() == 1) {
-      REQsub += following.get(0).calculateReqSub();
+       if (following.get(0).getPrevious().size() > 1) {
+         double n = following.get(0).calculateReqSub();
+         REQsub += (-4*Math.pow(n,3))/(2*Math.pow(n,2)+1);  //Problem
+       }
+      else REQsub += following.get(0).calculateReqSub();
     }
+    REQsub+=resistance;
     }
-  return REQsub;
+          return REQsub;
   }
   
-  public void setSolved(boolean bool) {
-    solved = bool;
+  public void Unsolve() {
+    solved = false;
   }
   
   public void calculateStat() {
         if (previous.size() == 0) {
           current = voltage / REQsub;
           }
-          //Need to rebuild
+       else if (previous.size() == 1) {
+         current = previous.get(0).getCurrent();
+         voltage = current * resistance;
+         power = voltage * current;
+       }
+       else {
+         voltage = previous.get(0).getVoltage();
+         current = voltage/resistance;
+         power = current*voltage;
+  }
   }
    
    public int getType() {
      return type;
    }
 
+public void reset() {
+  REQsub = 0.0;
+}
+public double getREQsub() {
+  return REQsub;
+}
 }
