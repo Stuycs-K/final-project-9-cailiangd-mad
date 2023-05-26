@@ -1,5 +1,5 @@
-  private final int battery = -350;
-  private final int resistor = 15;
+private final int battery = -350;
+private final int resistor = 15;
 Circuit mainC;
 Component prev;
 boolean undo, debug;
@@ -123,6 +123,10 @@ void dataExtract() {
 void choosePrev(int x, int y) {
   prev = mainC.chooseComp(x,y);
 }
+/** 
+  the generateConnections() method helps connect a newly connected component to the rest of the circuit.
+  It does so by first detecting where it was clicked; then, it inserts it into the arraylist of Components and recalculates the instance variables.
+*/
 
 void generateConnections() {
   for (int i = 0; i < mainC.getCompNum(); i++) {

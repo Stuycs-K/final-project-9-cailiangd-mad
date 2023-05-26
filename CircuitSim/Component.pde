@@ -29,6 +29,7 @@ public class Component{
     following = new ArrayList<Component>();
     type = resistor;
   }
+  
   public double getResistance() {
     return resistance;
   }
@@ -109,16 +110,43 @@ We could also implament solved in calculateStat for effeciency reasons.
     }
   return REQsub;
   }
+
+
+  public void resetSolved() {
+  if (solved) {
+       solved = !solved;
+      }
+    for (int i=0; i < following.size(); i++) {
+      following.get(i).resetSolved();
+      }
+    }
+    /** 
+    CalculateStat helps calculate all of the instance variables (such as resistance, voltage) of the component.
+    */
+    
+/
+
   
   public void setSolved(boolean bool) {
     solved = bool;
   }
   
+
   public void calculateStat() {
         if (previous.size() == 0) {
           current = voltage / REQsub;
           }
           //Need to rebuild
+          else if (previous.size() == 1) {
+            current = previous.get(0).getCurrent();
+            voltage = current * resistance;
+            power = voltage * current;
+          }
+          else {
+            voltage = previous.get(0).getVoltage();
+            current = voltage / resistance;
+            power = current * voltage;
+          }
   }
    
    public int getType() {
