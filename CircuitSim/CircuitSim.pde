@@ -67,92 +67,92 @@ void draw() {
     stroke(0);
     }
     else {
-      text("resistance: "+round((float)prev.getResistance()*100.0)/100.0,10,700);
-      text("        power: "+round((float)prev.getPower()*100.0)/100.0,10,750);
-      text("   current: "+round((float)prev.getCurrent()*100.0)/100.0,350,700);
-      text("   voltage: "+round((float)prev.getVoltage()*100.0)/100.0,350,750);
+      text("resistance: "+round((float)prev.resistance()*100.0)/100.0,10,700);
+      text("        power: "+round((float)prev.power()*100.0)/100.0,10,750);
+      text("   current: "+round((float)prev.current()*100.0)/100.0,350,700);
+      text("   voltage: "+round((float)prev.voltage()*100.0)/100.0,350,750);
     }
 }
 }
 
-//void mouseClicked() {
-//  if (isEditMode) {
-//  if (mouseButton == LEFT && prev != null) {
-//    boolean temp = true;
-//    for (int i = 1; i < mainC.size(); i++) {
-//    if (Math.sqrt(Math.pow(mouseX-mainC.get(i).getX(),2) + Math.pow(mouseY-mainC.get(i).getY(),2)) < 60) {
-//      prev.addFollowing(mainC.get(i));
-//      mainC.get(i).addPrevious(prev);
-//      temp = false;
-//    }
-//  }
-//  if (temp && mouseY < 650 && mouseY > 70 && (mouseY > 450 || (mouseX > 50 && mouseX < 700))) {
-//    Component target = new Component(10,mouseX,mouseY);
-//  mainC.add(target);
-//  prev.addFollowing(target);
-//  target.addPrevious(prev);
-//  }
-//  }
-//  else if (mouseButton == RIGHT) {
-//      choosePrev(mouseX,mouseY);
-//  }
-//  }
-//  else {
-//        if (prev != mainC.get(0) && Math.sqrt(Math.pow(mouseX-prev.getX(),2) + Math.pow(mouseY-prev.getY(),2)) < 60) {
-//        prev = mainC.get(0);
-//        }
-//       else {
-//         for (int i = 1; i < mainC.size(); i++) {
-//             if (Math.sqrt(Math.pow(mouseX-mainC.get(i).getX(),2) + Math.pow(mouseY-mainC.get(i).getY(),2)) < 60) {
-//               prev = mainC.get(i);
-//         }
-//        }
-//  }
-//}
-//}
+void mouseClicked() {
+  if (isEditMode) {
+  if (mouseButton == LEFT && prev != null) {
+    boolean temp = true;
+    for (int i = 1; i < mainC.size(); i++) {
+    if (Math.sqrt(Math.pow(mouseX-mainC.get(i).getX(),2) + Math.pow(mouseY-mainC.get(i).getY(),2)) < 60) {
+      prev.addFollowing(mainC.get(i));
+      mainC.get(i).addPrevious(prev);
+      temp = false;
+    }
+  }
+  if (temp && mouseY < 650 && mouseY > 70 && (mouseY > 450 || (mouseX > 50 && mouseX < 700))) {
+    Component target = new Component(10,mouseX,mouseY);
+  mainC.add(target);
+  prev.addFollowing(target);
+  target.addPrevious(prev);
+  }
+  }
+  else if (mouseButton == RIGHT) {
+      choosePrev(mouseX,mouseY);
+  }
+  }
+  else {
+        if (prev != mainC.get(0) && Math.sqrt(Math.pow(mouseX-prev.getX(),2) + Math.pow(mouseY-prev.getY(),2)) < 60) {
+        prev = mainC.get(0);
+        }
+       else {
+         for (int i = 1; i < mainC.size(); i++) {
+             if (Math.sqrt(Math.pow(mouseX-mainC.get(i).getX(),2) + Math.pow(mouseY-mainC.get(i).getY(),2)) < 60) {
+               prev = mainC.get(i);
+         }
+        }
+  }
+}
+}
 
-//void dataExtract() {
-//  if (debug) {
-//  textSize(30);
-//  text(mainC.chooseComp(mouseX,mouseY).toString(),50,25);
-//  if (prev != null) {
-//  text(prev.toString(), 50, 55);
-//  }
-//  }
-//}
+void dataExtract() {
+  if (debug) {
+  textSize(30);
+  text(mainC.chooseComp(mouseX,mouseY).toString(),50,25);
+  if (prev != null) {
+  text(prev.toString(), 50, 55);
+  }
+  }
+}
 
 
-//void choosePrev(int x, int y) {
-//  prev = mainC.chooseComp(x,y);
-//}
-///** 
-//  the generateConnections() method helps connect a newly connected component to the rest of the circuit.
-//  It does so by first detecting where it was clicked; then, it inserts it into the arraylist of Components and recalculates the instance variables.
-//*/
+void choosePrev(int x, int y) {
+  prev = mainC.chooseComp(x,y);
+}
+/** 
+  the generateConnections() method helps connect a newly connected component to the rest of the circuit.
+  It does so by first detecting where it was clicked; then, it inserts it into the arraylist of Components and recalculates the instance variables.
+*/
 
-//void generateConnections() {
-//  for (int i = 0; i < mainC.size(); i++) {
-//    for (int k = 0; k < mainC.get(i).getFollowing().size(); k++) {
-//      stroke(0);
-//      line(mainC.get(i).getX()+mainC.get(i).getType(),mainC.get(i).getY(),mainC.get(i).getFollowing().get(k).getX()-mainC.get(i).getFollowing().get(k).getType(),mainC.get(i).getFollowing().get(k).getY());
-//    }
-//    if (!isEditMode && mainC.get(i).getFollowing().size() == 0) {
-//      line(mainC.get(i).getX()+mainC.get(i).getType(),mainC.get(i).getY(),mainC.get(0).getX()-mainC.get(0).getType(),mainC.get(0).getY());
-//    }
-//  }
-//}
+void generateConnections() {
+  for (int i = 0; i < mainC.size(); i++) {
+    for (int k = 0; k < mainC.get(i).getFollowing().size(); k++) {
+      stroke(0);
+      line(mainC.get(i).getX()+mainC.get(i).getType(),mainC.get(i).getY(),mainC.get(i).getFollowing().get(k).getX()-mainC.get(i).getFollowing().get(k).getType(),mainC.get(i).getFollowing().get(k).getY());
+    }
+    if (!isEditMode && mainC.get(i).getFollowing().size() == 0) {
+      line(mainC.get(i).getX()+mainC.get(i).getType(),mainC.get(i).getY(),mainC.get(0).getX()-mainC.get(0).getType(),mainC.get(0).getY());
+    }
+  }
+}
 
-//void circlePrev() {
-//    noFill();
-//  stroke(255,0,0,100);
-//  circle(prev.getX(),prev.getY(),50);
-//}
+void circlePrev() {
+    noFill();
+  stroke(255,0,0,100);
+  circle(prev.getX(),prev.getY(),50);
+}
 
-//void keyPressed() {
-//  if (key == 'd') {
-//    debug = !debug;
-//  }
-//  if (key == 'e') {
-//    isEditMode = !isEditMode;
-//  }
-//}
+void keyPressed() {
+  if (key == 'd') {
+    debug = !debug;
+  }
+  if (key == 'e') {
+    isEditMode = !isEditMode;
+  }
+}
