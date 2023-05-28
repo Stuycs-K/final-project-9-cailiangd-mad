@@ -8,59 +8,64 @@ boolean undo, debug;
 int Cx, Cy;
 boolean isEditMode = true;
 void setup() {
+  //fullScreen();
   size(800,800);
   mainC = new Circuit();
   prev = mainC.get(0);
 }
 
 void draw() {
-  screen();
+  scene();
   generateConnections();
     rectMode(CENTER);
   for (int i = 1; i < mainC.size(); i++) {
-    resistor(mainC.get(i).getX(),mainC.get(i).getY());
+   resistor(mainC.get(i).getX(),mainC.get(i).getY());
   }
     dataExtract();
         circlePrev();
     rectMode(CORNER);
-    dataDisplay();
+ dataDisplay();
 }
 
-void screen() {
-      background(255);
+void scene() {
+    background(255);
   noStroke();
   fill(35,80,200);
-  rect(0,0,800,80);
-  rect(0,50,50,400);
-  rect(750,50,50,400);
+  rect(0,0,width,80);
+  rect(0,50,50,height/2);
+  rect(width-50,50,50,400);
   fill(0);
-  rect(18,400,10,40);
-  rect(4,416,40,10);
-  rect(740,400,10,40);
-  //hit boxes for connections
-  rect(755,416,40,10);
-  rect(50,400,10,40);
+  //plus
+  rect(18,height/2,10,40);
+  rect(4,height/2+16,40,10);
+  //right tab
+  rect(width-60,height/2,10,40);
+  //minus
+  rect(width-45,height/2+16,40,10);
+  //left tab
+  rect(50,height/2,10,40);
   //display area
   fill(100);
-  rect(0,650,800,150);
+  rect(0,height-150,width,150);
   textSize(30);
   if (isEditMode) {
-    text("Edit Mode", 48, 40, 40);
+    text("Edit Mode", width/2, 40);
   }
   else {
-    text("Run Mode", 48, 40);
+    text("Run Mode", width/2, 40);
   }
-}
-
-void resistor(int x, int y) {
-    fill(0);
-    rect(x-12.5,y,25,30,15,0,0,15);
-    fill(205,85,124);
-    rect(x+12.5,y,25,30,0,15,15,0);
+  //resistor button
+  resistor(75,25);
+  stroke(0);
+  line(50,0,50,80);
+  line(120,0,120,80);
+  //resistor
+  rect(145,30,40,20);
+  quad(10,30,30,10,50,30,30,50);
 }
 
 void dataDisplay() {
-    if (!isEditMode) {
+   if (!isEditMode) {
         mainC.calculate();
     textSize(40);
     if (prev == mainC.get(0)) {
@@ -161,4 +166,11 @@ void keyPressed() {
   if (key == 'e') {
     isEditMode = !isEditMode;
   }
+}
+
+void resistor(int x, int y) {
+          fill(0);
+    rect(x-12.5,y,25,30,15,0,0,15);
+    fill(205,85,124);
+    rect(x+12.5,y,25,30,0,15,15,0);
 }
