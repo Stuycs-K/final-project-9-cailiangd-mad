@@ -15,7 +15,6 @@ public class startJunction extends Component{
     return fol1;
   }
  
-  
   public Component fol2() {
     return fol2;
   }
@@ -52,22 +51,36 @@ public class startJunction extends Component{
       setCur(previous.current);
       setVol(current()*resistance());
       setPow(current()*voltage());
-      followR.calculate();
     }
     else if (previous != null) {
       setVol(previous.voltage());
       setCur(voltage()/resistance());
       setPow(current()*voltage());
-      followR.calculate();
+    }
+    if (fol1 != null) {
+      fol1.calculate();
+    }
+    if (fol2 != null) {
+      fol2.calculate();
     }
   }
   
   public double REQsub() {
-       double temp = 0;
-   for (int i = 0; i < followList.size(); i++) {
-     temp += 1/(followList.get(i).REQsub());
-   }
-   return 1/temp+end.REQsub();
+    if (fol1 != null && fol2 != null) {
+             double temp = 0;
+       temp += 1/(fol1.REQsub());
+       temp += 1/(fol2.REQsub()):
+       if (end != null) {
+   return (1/temp)+end.REQsub();
+       }
+       else {
+       return (1/temp);
+       }
+    }
+    else if (fol1 != null) {
+      return fol1.REQsub();
+    }
+    return 0;
   }
   
   public void findPartner() {

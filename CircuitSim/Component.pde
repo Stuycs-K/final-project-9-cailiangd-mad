@@ -101,4 +101,10 @@ public class Component{
   public boolean target() {
     return target;
   }
+  //Connection methods
+  public void connectPre(Component comp) {
+  }
+  public void connectFol(Component comp) {
+    
+  }
 }

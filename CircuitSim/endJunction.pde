@@ -54,7 +54,9 @@ public class endJunction extends Component{
     if (prev2 != null) {
       setCur(current()+prev2.current());
     }
+    if (follow != null) {
     follow.calculate();
+    }
   }
   
       public double REQsub() {
@@ -67,7 +69,9 @@ public class endJunction extends Component{
   
       public void trace() {
       setTarget(true);
+      if (follow != null) {
       follow.trace();
+      }
   }
   
   public void tracker(startJunction starter) {
@@ -75,12 +79,16 @@ public class endJunction extends Component{
       start = starter;
       starter.setEnd(this);
     }
-    else follow.tracker(starter);
+    else if (follow != null) {
+    follow.tracker(starter);
+    }
   }
   
   public void clearTrack() {
     setTarget(false);
+    if (follow != null) {
     follow.clearTrack();
+    }
   }
     
 }

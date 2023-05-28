@@ -87,7 +87,7 @@ void mouseClicked() {
     }
   }
   if (temp && mouseY < 650 && mouseY > 70 && (mouseY > 450 || (mouseX > 50 && mouseX < 700))) {
-    Component target = new Component(10,mouseX,mouseY);
+    Component target = new Resistor(10,mouseX,mouseY);
   mainC.add(target);
   prev.addFollowing(target);
   target.addPrevious(prev);
