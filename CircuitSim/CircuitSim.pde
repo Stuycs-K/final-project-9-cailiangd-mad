@@ -81,16 +81,22 @@ void mouseClicked() {
     boolean temp = true;
     for (int i = 1; i < mainC.size(); i++) {
     if (Math.sqrt(Math.pow(mouseX-mainC.get(i).getX(),2) + Math.pow(mouseY-mainC.get(i).getY(),2)) < 60) {
-      prev.addFollowing(mainC.get(i));
-      mainC.get(i).addPrevious(prev);
+      //prev.addFollowing(mainC.get(i));
+      //mainC.get(i).addPrevious(prev);
+      //------------------------------------------//
+      //ADD CODE HERE
+      //------------------------------------------//
       temp = false;
     }
   }
   if (temp && mouseY < 650 && mouseY > 70 && (mouseY > 450 || (mouseX > 50 && mouseX < 700))) {
     Component target = new Resistor(10,mouseX,mouseY);
   mainC.add(target);
-  prev.addFollowing(target);
-  target.addPrevious(prev);
+  //prev.addFollowing(target);
+  //target.addPrevious(prev);
+  //------------------------------------------//
+  //ADD CODE HERE
+  //------------------------------------------//
   }
   }
   else if (mouseButton == RIGHT) {
@@ -132,14 +138,10 @@ void choosePrev(int x, int y) {
 
 void generateConnections() {
   for (int i = 0; i < mainC.size(); i++) {
-    for (int k = 0; k < mainC.get(i).getFollowing().size(); k++) {
-      stroke(0);
-      line(mainC.get(i).getX()+mainC.get(i).getType(),mainC.get(i).getY(),mainC.get(i).getFollowing().get(k).getX()-mainC.get(i).getFollowing().get(k).getType(),mainC.get(i).getFollowing().get(k).getY());
-    }
-    if (!isEditMode && mainC.get(i).getFollowing().size() == 0) {
-      line(mainC.get(i).getX()+mainC.get(i).getType(),mainC.get(i).getY(),mainC.get(0).getX()-mainC.get(0).getType(),mainC.get(0).getY());
-    }
-  }
+  //------------------------------------------//
+  //ADD CODE HERE
+  //------------------------------------------//
+}
 }
 
 void circlePrev() {
