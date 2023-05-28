@@ -1,21 +1,34 @@
-  private final int battery = -350;
-  private final int resistor = 15;
+private final int battery = -350;
+private final int resistor = 15;
+private final int startJunction = 0;
+private final int endJunction = 0;
 Circuit mainC;
 Component prev;
 boolean undo, debug;
 int Cx, Cy;
 boolean isEditMode = true;
 void setup() {
+  //fullScreen();
   size(800,800);
   mainC = new Circuit();
   prev = mainC.get(0);
 }
 
 void draw() {
-  /*
-  Build the background graphics.
-  */
-    background(255);
+  screen();
+  generateConnections();
+    rectMode(CENTER);
+  for (int i = 1; i < mainC.size(); i++) {
+    resistor(mainC.get(i).getX(),mainC.get(i).getY());
+  }
+    dataExtract();
+        circlePrev();
+    rectMode(CORNER);
+    dataDisplay();
+}
+
+void screen() {
+      background(255);
   noStroke();
   fill(35,80,200);
   rect(0,0,800,80);
@@ -38,23 +51,18 @@ void draw() {
   else {
     text("Run Mode", 48, 40);
   }
-  /*
-  Add resistors.
-  I haven't figure out how I want the connecting components UI should work.
-    */
-  generateConnections();
-    rectMode(CENTER);
-  for (int i = 1; i < mainC.size(); i++) {
-        fill(0);
-    rect(mainC.get(i).getX()-12.5,mainC.get(i).getY(),25,30,15,0,0,15);
+}
+
+void resistor(int x, int y) {
+    fill(0);
+    rect(x-12.5,y,25,30,15,0,0,15);
     fill(205,85,124);
-    rect(mainC.get(i).getX()+12.5,mainC.get(i).getY(),25,30,0,15,15,0);
-  }
-    dataExtract();
-        circlePrev();
-    rectMode(CORNER);
-    
-  if (!isEditMode) {
+    rect(x+12.5,y,25,30,0,15,15,0);
+}
+
+void dataDisplay() {
+    if (!isEditMode) {
+        mainC.calculate();
     textSize(40);
     if (prev == mainC.get(0)) {
     text("REQ: "+round((float)mainC.getREQ()*100.0)/100.0,10,700);
@@ -64,11 +72,10 @@ void draw() {
     stroke(0);
     }
     else {
-      text("resistance: "+round((float)prev.getResistance()*100.0)/100.0,10,700);
-      text("        power: "+round((float)prev.getPower()*100.0)/100.0,10,750);
-      text("   current: "+round((float)prev.getCurrent()*100.0)/100.0,350,700);
-      text("   voltage: "+round((float)prev.getVoltage()*100.0)/100.0,350,750);
-      text("REQsub: "+prev.getREQsub(),20,20);
+      text("resistance: "+round((float)prev.resistance()*100.0)/100.0,10,700);
+      text("        power: "+round((float)prev.power()*100.0)/100.0,10,750);
+      text("   current: "+round((float)prev.current()*100.0)/100.0,350,700);
+      text("   voltage: "+round((float)prev.voltage()*100.0)/100.0,350,750);
     }
 }
 }
@@ -79,16 +86,22 @@ void mouseClicked() {
     boolean temp = true;
     for (int i = 1; i < mainC.size(); i++) {
     if (Math.sqrt(Math.pow(mouseX-mainC.get(i).getX(),2) + Math.pow(mouseY-mainC.get(i).getY(),2)) < 60) {
-      prev.addFollowing(mainC.get(i));
-      mainC.get(i).addPrevious(prev);
+      //prev.addFollowing(mainC.get(i));
+      //mainC.get(i).addPrevious(prev);
+      //------------------------------------------//
+      //ADD CODE HERE
+      //------------------------------------------//
       temp = false;
     }
   }
   if (temp && mouseY < 650 && mouseY > 70 && (mouseY > 450 || (mouseX > 50 && mouseX < 700))) {
-    Component target = new Component(10,mouseX,mouseY);
+    Component target = new Resistor(10,mouseX,mouseY);
   mainC.add(target);
-  prev.addFollowing(target);
-  target.addPrevious(prev);
+  //prev.addFollowing(target);
+  //target.addPrevious(prev);
+  //------------------------------------------//
+  //ADD CODE HERE
+  //------------------------------------------//
   }
   }
   else if (mouseButton == RIGHT) {
@@ -123,17 +136,17 @@ void dataExtract() {
 void choosePrev(int x, int y) {
   prev = mainC.chooseComp(x,y);
 }
+/** 
+  the generateConnections() method helps connect a newly connected component to the rest of the circuit.
+  It does so by first detecting where it was clicked; then, it inserts it into the arraylist of Components and recalculates the instance variables.
+*/
 
 void generateConnections() {
   for (int i = 0; i < mainC.size(); i++) {
-    for (int k = 0; k < mainC.get(i).getFollowing().size(); k++) {
-      stroke(0);
-      line(mainC.get(i).getX()+mainC.get(i).getType(),mainC.get(i).getY(),mainC.get(i).getFollowing().get(k).getX()-mainC.get(i).getFollowing().get(k).getType(),mainC.get(i).getFollowing().get(k).getY());
-    }
-    if (!isEditMode && mainC.get(i).getFollowing().size() == 0) {
-      line(mainC.get(i).getX()+mainC.get(i).getType(),mainC.get(i).getY(),mainC.get(0).getX()-mainC.get(0).getType(),mainC.get(0).getY());
-    }
-  }
+  //------------------------------------------//
+  //ADD CODE HERE
+  //------------------------------------------//
+}
 }
 
 void circlePrev() {
@@ -148,10 +161,5 @@ void keyPressed() {
   }
   if (key == 'e') {
     isEditMode = !isEditMode;
-    prev=mainC.get(0);
-    if(!isEditMode) {
-       mainC.reset();
-       mainC.calculate();
-    }
   }
 }
