@@ -21,31 +21,31 @@ public class Component{
   public double resistance() {
     return resistance;
   }
-  
+
   public double current() {
     return current;
   }
-  
+
   public double voltage() {
     return voltage;
   }
-  
+
   public double power() {
     return power;
   }
-  
+
   public int getX() {
     return x;
   }
-  
+
   public int getY() {
     return y;
   }
-  
+
    public int type() {
      return type;
-   }  
-   
+   }
+
   public String toString() {
     return "R: "+resistance+"  I: "+current+"  V: "+voltage+"  P: "+power+ "  X: "+x+"  Y: "+y+ "  REQsub: "+REQsub;
   }
@@ -58,46 +58,63 @@ public class Component{
   public void setVol(double newVolt) {
     voltage = newVolt;
   }
-  
+
   public void setCur(double newCur) {
     current = newCur;
   }
-  
+
   public void setPow(double newPow) {
     power = newPow;
-  } 
-  
-  
+  }
+
+
   //REQ related methods
   public double getREQsub() {
     return REQsub;
   }
-  
+
   public double REQsub() {
   return REQsub;
   }
-  
+
+
+  public void resetSolved() {
+  if (solved) {
+       solved = !solved;
+      }
+    for (int i=0; i < following.size(); i++) {
+      following.get(i).resetSolved();
+      }
+    }
+    /**
+    CalculateStat helps calculate all of the instance variables (such as resistance, voltage) of the component.
+    */
+
+/
+
+
   public void setREQsub(double in) {
     REQsub = in;
   }
-  
+
+<<<<<<< HEAD
   //calculate for RIVP
   public void calculate() {
   }
   /////Methods need to find loop endings.
   public void trace() {
   }
-  
+
   public void tracker(startJunction start) {
   }
-  
+
   public void clearTrack() {
   }
-  
+
   public void setTarget(boolean val) {
     target = val;
   }
-  
+
   public boolean target() {
     return target;
   }
