@@ -43,10 +43,10 @@ public class endJunction extends Component{
   }
   //connect methodss
   public void connectPre(Component newComp) {
-    if (prev1() == null) {
+    if (pre1() == null) {
       setPre1(newComp);
     }
-    if (prev2() == null) {
+    if (pre2() == null) {
       setPre2(newComp);
     }
   }

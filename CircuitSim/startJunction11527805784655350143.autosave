@@ -23,7 +23,7 @@ public class startJunction extends Component{
     return end;
   }
   
-  public Component setPre(Component newPrev) {
+  public Component setPrev(Component newPrev) {
     Component temp = previous;
     previous = newPrev;
     return temp;
@@ -85,7 +85,7 @@ public class startJunction extends Component{
     if (fol1 != null && fol2 != null) {
              double temp = 0;
        temp += 1/(fol1.REQsub());
-       temp += 1/(fol2.REQsub());
+       temp += 1/(fol2.REQsub()):
        if (end != null) {
    return (1/temp)+end.REQsub();
        }

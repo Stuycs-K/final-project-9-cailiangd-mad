@@ -102,9 +102,8 @@ public class Component{
     return target;
   }
   //Connection methods
-  public void connectPre(Component comp) {
+  public void connectPre(Component newComp) {
   }
-  public void connectFol(Component comp) {
-    
+  public void connectFol(Component newComp) {
   }
 }

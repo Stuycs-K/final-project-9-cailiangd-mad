@@ -26,10 +26,10 @@ public class Resistor extends Component{
     return temp;
   }
   //general connect methods
-  public void connectPre(Component newComp) {
+  public Component connectPre(Component newComp) {
     setPrevious(newComp);
   }
-  public void connectFol(Component newComp) {
+  public Component connectFol(Component newComp) {
     setFollowing(newComp);
   }
   
