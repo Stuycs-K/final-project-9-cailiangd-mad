@@ -10,6 +10,7 @@ boolean isEditMode = true;
 void setup() {
   //fullScreen();
   size(1200,800);
+  surface.setResizable(true);
   mainC = new Circuit();
   prev = mainC.get(0);
 }
@@ -158,10 +159,14 @@ void choosePrev(int x, int y) {
 
 void generateConnections() {
   for (int i = 0; i < mainC.size(); i++) {
-  //------------------------------------------//
-  //ADD CODE HERE
-  //------------------------------------------//
-}
+    for (int k = 0; k < mainC.get(i).followList().size(); k++) {
+      stroke(0);
+      line(mainC.get(i).getX()+mainC.get(i).type(),mainC.get(i).getY(),mainC.get(i).followList().get(k).getX()-mainC.get(i).followList().get(k).type(),mainC.get(i).followList().get(k).getY());
+    }
+    if (!isEditMode && mainC.get(i).followList().size() == 0) {
+      line(mainC.get(i).getX()+mainC.get(i).type(),mainC.get(i).getY(),mainC.get(0).getX()-mainC.get(0).type(),mainC.get(0).getY());
+    }
+  }
 }
 
 void circlePrev() {

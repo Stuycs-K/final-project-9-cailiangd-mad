@@ -6,7 +6,7 @@ public class endJunction extends Component{
     super(0,0,x,y,startJunction);
   }
   
-  //following 6 methods can be replaced with a add and get methods.
+  // general get methods
    public Component fol() {
     return follow;
   }
@@ -21,6 +21,12 @@ public class endJunction extends Component{
   
   public startJunction start() {
     return start;
+  }
+  
+    public ArrayList<Component> followList() {
+    ArrayList<Component> temp = new ArrayList<Component> ();
+    temp.add(follow);
+    return temp;
   }
   
   //general set methods

@@ -13,6 +13,12 @@ public class Resistor extends Component{
     return previousR;
   }
   
+  public ArrayList<Component> followList() {
+    ArrayList<Component> temp = new ArrayList<Component> ();
+    temp.add(followR);
+    return temp;
+  }
+  
   // general set methods
   public Component setFollowing(Component newFol) {
     Component temp = followR;

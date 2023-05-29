@@ -33,6 +33,8 @@ public class Battery extends Component{
    }
  }
  
- 
+ public ArrayList<Component> followList() {
+   return followList;
+ }
 
 }

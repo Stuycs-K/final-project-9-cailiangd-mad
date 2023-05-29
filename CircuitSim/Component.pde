@@ -45,7 +45,11 @@ public class Component{
    public int type() {
      return type;
    }
-
+  
+  public ArrayList<Component> followList() {
+    return new ArrayList<Component>();
+  }
+  
   public String toString() {
     return "R: "+resistance+"  I: "+current+"  V: "+voltage+"  P: "+power+ "  X: "+x+"  Y: "+y+ "  REQsub: "+REQsub;
   }
