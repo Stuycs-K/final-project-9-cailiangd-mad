@@ -16,7 +16,10 @@ public class Battery extends Component{
     for (int i = 0; i < followList.size(); i++) {
     temp += followList.get(i).toString() + "\n";
   }
+  if (temp.length() > 0) {
   return temp.substring(0,temp.length()-1);
+  }
+  return temp;
 }
 
  public double REQsub() {

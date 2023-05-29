@@ -53,13 +53,28 @@ void screen() {
     text("Run Mode", width-400, 40);
   }
   stroke(0);
+  strokeWeight(6);
+  strokeCap(SQUARE);
   line(50,0,50,80);
-  resistor(90,25);
+  run(100,40);
   line(150,0,150,80);
-  startJunction(190,35);
-  line(250,0,250,80);
-  line(350,0,350,80);
-  line(450,0,450,80);
+  
+  line(225,0,225,80);
+  line(325,0,325,80);
+  line(425,0,425,80);
+  line(525,0,525,80);
+  noStroke();
+  resistor(260,25);
+
+  
+  
+
+  //startJunction(190,35);
+  //line(250,0,250,80);
+  //endJunction(270,35);
+  //line(350,0,350,80);
+  
+  //line(450,0,450,80);
 }
 
 void resistor(int x, int y) {
@@ -74,6 +89,23 @@ void startJunction(int x, int y) {
   rect(x,y,40,10);
   quad(x,y+10,x+6,y+2,x-24,y-23,x-30,y-15);
   quad(x,y,x+6,y+8,x-24,y+33,x-30,y+25);
+}
+
+void endJunction(int x, int y) {
+  fill(0);
+  rect(x,y,40,10);
+  quad(x+40,y+10,x+34,y+2,x+54,y-23,x+60,y-15);
+  quad(x+40,y,x+34,y+8,x+54,y+33,x+60,y+25);
+}
+
+void run(int x, int y) {
+  fill(0);
+  arc(x,y,60,60,PI/12,5*PI/12);
+  arc(x,y,60,60,7*PI/12,11*PI/12);
+  arc(x,y,60,60,13*PI/12,17*PI/12);
+  arc(x,y,60,60,19*PI/12,23*PI/12);
+  fill(35,80,200);
+  circle(x,y,40);
 }
 
 void dataDisplay() {
