@@ -20,6 +20,7 @@ void draw() {
   screen();
   generateConnections();
     rectMode(CENTER);
+    noStroke();
   for (int i = 1; i < mainC.size(); i++) {
     resistor(mainC.get(i).getX(),mainC.get(i).getY());
   }
@@ -47,12 +48,12 @@ void screen() {
   fill(100);
   rect(0,height-150,width,150);
   textSize(30);
-  if (isEditMode) {
-    text("Edit Mode", width-400, 40);
-  }
-  else {
-    text("Run Mode", width-400, 40);
-  }
+  //if (isEditMode) {
+  //  text("Edit Mode", width-400, 40);
+  //}
+  //else {
+  //  text("Run Mode", width-400, 40);
+  //}
   noStroke();
     if (isEditMode) {
       fill(185,32,96);
@@ -138,6 +139,9 @@ void dataDisplay() {
 }
 
 void mouseClicked() {
+    if(mouseX > 70 && mouseX < 170 && mouseY > 0 && mouseY < 80) {
+    isEditMode = !isEditMode;
+  }
   if (isEditMode) {
   if (mouseButton == LEFT && prev != null) {
     boolean temp = true;
@@ -151,7 +155,7 @@ void mouseClicked() {
       temp = false;
     }
   }
-  if (temp && mouseY < 650 && mouseY > 70 && (mouseY > 450 || (mouseX > 50 && mouseX < 700))) {
+  if (temp && mouseY < height-150-30 && mouseY > 70+30 && (mouseY > height/2+50+30 || (mouseX > 50+30 && mouseX < width-100-30))) {
     Component target = new Resistor(10,mouseX,mouseY);
   mainC.add(target);
   //prev.addFollowing(target);
@@ -160,9 +164,18 @@ void mouseClicked() {
   //ADD CODE HERE
   //------------------------------------------//
   }
+  else if(mouseX > 295 && mouseX < 395 && mouseY > 0 && mouseY < 80) {
+    compType = 0;
+  }
+  else if(mouseX > 395 && mouseX < 495 && mouseY > 0 && mouseY < 80) {
+    compType = 1;
+  }
+  else if(mouseX > 495 && mouseX < 595 && mouseY > 0 && mouseY < 80) {
+    compType = 2;
   }
   else if (mouseButton == RIGHT) {
       choosePrev(mouseX,mouseY);
+  }
   }
   }
   else {
@@ -199,15 +212,15 @@ void choosePrev(int x, int y) {
 */
 
 void generateConnections() {
-  for (int i = 0; i < mainC.size(); i++) {
-    for (int k = 0; k < mainC.get(i).followList().size(); k++) {
-      stroke(0);
-      line(mainC.get(i).getX()+mainC.get(i).type(),mainC.get(i).getY(),mainC.get(i).followList().get(k).getX()-mainC.get(i).followList().get(k).type(),mainC.get(i).followList().get(k).getY());
-    }
-    if (!isEditMode && mainC.get(i).followList().size() == 0) {
-      line(mainC.get(i).getX()+mainC.get(i).type(),mainC.get(i).getY(),mainC.get(0).getX()-mainC.get(0).type(),mainC.get(0).getY());
-    }
-  }
+  //for (int i = 0; i < mainC.size(); i++) {
+  //  for (int k = 0; k < mainC.get(i).followList().size(); k++) {
+  //    stroke(0);
+  //    line(mainC.get(i).getX()+mainC.get(i).type(),mainC.get(i).getY(),mainC.get(i).followList().get(k).getX()-mainC.get(i).followList().get(k).type(),mainC.get(i).followList().get(k).getY());
+  //  }
+  //  if (!isEditMode && mainC.get(i).followList().size() == 0) {
+  //    line(mainC.get(i).getX()+mainC.get(i).type(),mainC.get(i).getY(),mainC.get(0).getX()-mainC.get(0).type(),mainC.get(0).getY());
+  //  }
+  //}
 }
 
 void circlePrev() {
