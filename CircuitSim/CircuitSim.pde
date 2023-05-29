@@ -2,6 +2,7 @@ private final int battery = -350;
 private final int resistor = 15;
 private final int startJunction = 0;
 private final int endJunction = 0;
+private boolean buttonPressed = false;
 Circuit mainC;
 Component prev;
 boolean undo, debug;
@@ -25,6 +26,11 @@ void draw() {
         circlePrev();
     rectMode(CORNER);
     dataDisplay();
+    fill(102);
+    rect(520, 540, 160, 80);
+    textSize(20);
+    fill(255, 255, 255);
+    text("Add Junction", 545, 580);
 }
 
 void screen() {
@@ -135,6 +141,19 @@ void mouseClicked() {
         }
   }
 }
+}
+void buttonClicked() {
+  if (mousePressed) {
+    if (mouseX >= 520 && mouseX <= 680 && mouseY >= 540 && mouseY <= 620) {
+      buttonPressed = true;
+//      clickJunction();
+    }
+  }
+}
+void clickJunction() {
+  if (mousePressed && buttonPressed) {
+    startJunction(mouseX, mouseY);
+  }
 }
 
 void dataExtract() {
