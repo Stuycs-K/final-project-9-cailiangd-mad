@@ -45,7 +45,11 @@ public class Component{
    public int type() {
      return type;
    }
-
+  
+  public ArrayList<Component> followList() {
+    return new ArrayList<Component>();
+  }
+  
   public String toString() {
     return "R: "+resistance+"  I: "+current+"  V: "+voltage+"  P: "+power+ "  X: "+x+"  Y: "+y+ "  REQsub: "+REQsub;
   }
@@ -102,8 +106,10 @@ public class Component{
     return target;
   }
   //Connection methods
-  public void connectPre(Component newComp) {
+  public boolean connectPre(Component newComp) {
+    return true;
   }
-  public void connectFol(Component newComp) {
+  public boolean connectFol(Component newComp) {
+   return true;
   }
 }

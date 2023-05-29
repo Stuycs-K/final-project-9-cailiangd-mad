@@ -6,7 +6,7 @@ public class startJunction extends Component{
     super(0,0,x,y,startJunction);
   }
   
-  //following 6 mthods can be repalced with get and add methods.
+  // general get methods
    public Component prev() {
     return previous;
   }
@@ -21,6 +21,13 @@ public class startJunction extends Component{
   
   public Component end() {
     return end;
+  }
+  
+   public ArrayList<Component> followList() {
+    ArrayList<Component> temp = new ArrayList<Component> ();
+    temp.add(fol1);
+    temp.add(fol2);
+    return temp;
   }
   
   public Component setPre(Component newPrev) {
@@ -41,17 +48,24 @@ public class startJunction extends Component{
     return temp;
   }
   //connect methodss
-  public void connectFol(Component newComp) {
+  public boolean connectFol(Component newComp) {
     if (fol1() == null) {
       setFol1(newComp);
+      return true;
     }
-    if (fol2() == null) {
+    else if (fol2() == null) {
       setFol2(newComp);
+      return true;
     }
+    else return false;
   }
   
-  public void connectPre(Component newComp) {
-    setPre(newComp);
+  public boolean connectPre(Component newComp) {
+    if (prev() == null) {
+      setPre(newComp);
+      return true;
+    }
+    return false;
   }
   
     public void setStart(Component start_) {

@@ -20,7 +20,7 @@ Wrote the visual connection algorithm. Discovered multiple flaws in our code rel
 
 ### 5/26/2023
 
-I worked on dealing with the flaw discovered yesterday and work on streamlining the code. This process involved replacing a lot of what we have already written to deal with this issue. This issue will likely mean it will take until at least Tuesday if not Wednesday for us to have enough functioning code to do a complete test.
+I worked on dealing with the flaw discovered yesterday and work on streamlining the code. This process involved replacing a lot of what we have already written to deal with this issue. This issue will likely mean it will take until at least Tuesday if not Wednesday for us to have enough functioning code to do a complete test. I also started working on the new generate connections method.
 
 ## Dylan Ma
 
@@ -33,4 +33,8 @@ Continued to work on a bug in the Processing window, which may have led to infin
 
 ### 5/25/2023
 
-We continued to work on our reqSub() method - made headway on the make connections method
+We continued to work on our reqSub() method - made headway on the make connections method.
+
+### 5/26/2023
+
+We deal with the error related to not knowing where loops start and end. I work on the mousePressed method as well as the buttons for the junctions and resistor.

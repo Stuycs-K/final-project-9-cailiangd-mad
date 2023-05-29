@@ -7,8 +7,9 @@ public class Battery extends Component{
   followList = new ArrayList<Component>();
   }
   
-  public void connectFol(Component newComp) {
+  public boolean connectFol(Component newComp) {
     followList.add(newComp);
+    return true;
   }
   
   public String toString() {
@@ -16,7 +17,10 @@ public class Battery extends Component{
     for (int i = 0; i < followList.size(); i++) {
     temp += followList.get(i).toString() + "\n";
   }
+  if (temp.length() > 0) {
   return temp.substring(0,temp.length()-1);
+  }
+  return temp;
 }
 
  public double REQsub() {
@@ -33,6 +37,8 @@ public class Battery extends Component{
    }
  }
  
- 
+ public ArrayList<Component> followList() {
+   return followList;
+ }
 
 }
