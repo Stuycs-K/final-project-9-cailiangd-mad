@@ -3,7 +3,7 @@ private final int resistor = 15;
 private final int startJunction = 1;
 private final int endJunction = 0;
 private boolean buttonPressed = false;
-int compType = 0;
+
 Circuit mainC;
 Component prev;
 boolean undo, debug;
