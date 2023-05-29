@@ -45,7 +45,7 @@ void draw() {
     textSize(20);
     fill(255, 255, 255);
     text("Add Junction", 545, 580);
-    clickJunction();
+   
 }
 
 void screen() {
