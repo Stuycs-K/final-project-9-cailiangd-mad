@@ -1,7 +1,6 @@
 import java.util.*;
 import java.io.*;
 public class Circuit{
-  private Component firstComp;
   private double REQ;
   private double IEQ;
   private double VEQ;
@@ -13,8 +12,7 @@ public class Circuit{
   }
 
   public Circuit(double voltage) {
-    Component battery1 = new Component(voltage, 0, width/2, 420);
-    firstComp = battery1;
+    Component battery1 = new Battery(voltage);
     VEQ = voltage;
     compList = new ArrayList<Component>();
     add(battery1);
@@ -41,8 +39,9 @@ public class Circuit{
     return "REQ: "+REQ+" IEQ: "+IEQ+" VEQ: "+VEQ+" PEQ: "+PEQ;
   }
 
-  public void setVEQ() {
-    VEQ = firstComp.getVoltage();
+  public void setVEQ(double newVEQ) {
+    VEQ = newVEQ;
+    get(0).setVol(VEQ);
   }
 
   public void add(Component newComp) {
@@ -53,7 +52,7 @@ public class Circuit{
     return compList.toString();
   }
 
-  public int getCompNum() {
+  public int size() {
     return compList.size();
   }
 
@@ -66,7 +65,7 @@ public class Circuit{
   }
 
  public void calculateREQ() {
-    REQ = get(0).calculateReqSub();
+    REQ = get(0).REQsub();
  }
 
  public void calculateIVPeq() {
@@ -75,14 +74,13 @@ public class Circuit{
  }
 
 public void calculateIVP() {
-  for (int i = 0; i < getCompNum(); i++) {
-    get(i).calculateStat();
+  for (int i = 0; i < size(); i++) {
+    get(i).calculate();
   }
 }
 
 public void calculate() {
   calculateREQ();
-  reset();
   calculateIVPeq();
   calculateIVP();
 }
@@ -111,12 +109,6 @@ public Component chooseComp(int x,int y) {
 
 public Component get(int i) {
   return compList.get(i);
-}
-
-public void reset() {
-  for (int i = 0; i < getCompNum(); i++) {
-    get(i).setSolved(false);
-  }
 }
 
 }

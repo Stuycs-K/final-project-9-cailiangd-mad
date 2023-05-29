@@ -7,150 +7,109 @@ public class Component{
   private double current;
   private double voltage;
   private double power;
-  private ArrayList<Component> previous;
-  private ArrayList<Component> following;
   private int x;
   private int y;
-  private boolean solved;
-  public Component(double Voltage, double Resistance, int x_, int y_) {
+  private boolean target;
+  public Component(double Resistance, double Voltage, int x_, int y_, int Type) {
     voltage = Voltage;
     resistance = Resistance;
+    type = Type;
     x=x_;
     y=y_;
-    previous = new ArrayList<Component>();
-    following = new ArrayList<Component>();
-    type = battery;
   }
-  public Component(double Resistance, int x_, int y_) {
-    resistance = Resistance;
-    x=x_;
-    y=y_;
-    previous = new ArrayList<Component>();
-    following = new ArrayList<Component>();
-    type = resistor;
-  }
-  
-  public double getResistance() {
+  //general get methods
+  public double resistance() {
     return resistance;
   }
-  public double getCurrent() {
+
+  public double current() {
     return current;
   }
-  public double getVoltage() {
+
+  public double voltage() {
     return voltage;
   }
-  public double getPower() {
+
+  public double power() {
     return power;
   }
+
   public int getX() {
     return x;
   }
+
   public int getY() {
     return y;
   }
 
+   public int type() {
+     return type;
+   }
+  
+  public ArrayList<Component> followList() {
+    return new ArrayList<Component>();
+  }
+  
   public String toString() {
     return "R: "+resistance+"  I: "+current+"  V: "+voltage+"  P: "+power+ "  X: "+x+"  Y: "+y+ "  REQsub: "+REQsub;
   }
 
+  //general set methods
   public void setRes(double newRes) {
     resistance = newRes;
   }
 
-  public void setVoltage(double newVolt) {
+  public void setVol(double newVolt) {
     voltage = newVolt;
   }
 
-
-  public void addPrevious(Component newPre) {
-    previous.add(newPre);
+  public void setCur(double newCur) {
+    current = newCur;
   }
 
-  public void addFollowing(Component newFol) {
-    following.add(newFol);
+  public void setPow(double newPow) {
+    power = newPow;
   }
 
-  public ArrayList<Component> getFollowing() {
-    return following;
-  }
-  public ArrayList<Component> getPrevious() {
-    return previous;
-  }
-  public String previousToString() {
-    return previous.toString();
-  }
-  public String followingToString() {
-    return following.toString();
+
+  //REQ related methods
+  public double getREQsub() {
+    return REQsub;
   }
 
-/*
-I kind of want calculateReqSub to recursively call itself up the chain so that the calculateReqSub
-for the main battery will be able to send the actual REQ for the entire circuit to the
-calculateREQ method in the Circuit class.
-
-Also I was hoping to include solved in the calculateReqSub method so that we don't call the same
-component multiple time and screwing with our numbers since multiple components can tie back to
-one component.
-
-We could also implament solved in calculateStat for effeciency reasons.
-*/
-  public double calculateReqSub() {
-    if (!solved) {
-      solved = true;
-      REQsub = resistance;
-    if (following.size() > 1) {
-      for (int i=0; i < following.size(); i++) {
-        REQsub += 1.0 / (following.get(i).calculateReqSub());
-      }
-      REQsub = 1.0/REQsub;
-    }
-    else if (following.size() == 1) {
-      REQsub += following.get(0).calculateReqSub();
-    }
-    }
+  public double REQsub() {
   return REQsub;
   }
 
-
-  public void resetSolved() {
-  if (solved) {
-       solved = !solved;
-      }
-    for (int i=0; i < following.size(); i++) {
-      following.get(i).resetSolved();
-      }
-    }
-    /** 
-    CalculateStat helps calculate all of the instance variables (such as resistance, voltage) of the component.
-    */
-    
-/
-
-  
-  public void setSolved(boolean bool) {
-    solved = bool;
+  public void setREQsub(double in) {
+    REQsub = in;
   }
-  
 
-  public void calculateStat() {
-        if (previous.size() == 0) {
-          current = voltage / REQsub;
-          }
-          //Need to rebuild
-          else if (previous.size() == 1) {
-            current = previous.get(0).getCurrent();
-            voltage = current * resistance;
-            power = voltage * current;
-          }
-          else {
-            voltage = previous.get(0).getVoltage();
-            current = voltage / resistance;
-            power = current * voltage;
-          }
+  //calculate for RIVP
+  public void calculate() {
   }
-   
-   public int getType() {
-     return type;
-   }
+  /////Methods need to find loop endings.
+  public void trace() {
+  }
 
+  public void tracker(startJunction start) {
+  }
+
+  public void clearTrack() {
+  }
+
+  public void setTarget(boolean val) {
+    target = val;
+  }
+
+  public boolean target() {
+    return target;
+  }
+  //Connection methods
+  public boolean connectPre(Component newComp) {
+    return true;
+  }
+  public boolean connectFol(Component newComp) {
+   return true;
+  }
 }

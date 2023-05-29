@@ -1,60 +1,143 @@
-private final int battery = -350;
+private final int battery = -550;
 private final int resistor = 15;
+private final int startJunction = 1;
+private final int endJunction = 0;
+private boolean buttonPressed = false;
+
 Circuit mainC;
 Component prev;
 boolean undo, debug;
 int Cx, Cy;
+int compType = 0;
 boolean isEditMode = true;
 void setup() {
-  size(800,800);
+  //fullScreen();
+  size(1200,800);
+  surface.setResizable(true);
   mainC = new Circuit();
   prev = mainC.get(0);
 }
 
 void draw() {
-  /*
-  Build the background graphics.
-  */
-    background(255);
-  noStroke();
-  fill(35,80,200);
-  rect(0,0,800,80);
-  rect(0,50,50,400);
-  rect(750,50,50,400);
-  fill(0);
-  rect(18,400,10,40);
-  rect(4,416,40,10);
-  rect(740,400,10,40);
-  //hit boxes for connections
-  rect(755,416,40,10);
-  rect(50,400,10,40);
-  //display area
-  fill(100);
-  rect(0,650,800,150);
-  textSize(30);
-  if (isEditMode) {
-    text("Edit Mode", 48, 40, 40);
-  }
-  else {
-    text("Run Mode", 48, 40);
-  }
-  /*
-  Add resistors.
-  I haven't figure out how I want the connecting components UI should work.
-    */
+  screen();
   generateConnections();
     rectMode(CENTER);
-  for (int i = 1; i < mainC.getCompNum(); i++) {
-        fill(0);
-    rect(mainC.get(i).getX()-12.5,mainC.get(i).getY(),25,30,15,0,0,15);
-    fill(205,85,124);
-    rect(mainC.get(i).getX()+12.5,mainC.get(i).getY(),25,30,0,15,15,0);
+    noStroke();
+  for (int i = 1; i < mainC.size(); i++) {
+    if (mainC.get(i).type() == resistor) {
+    resistor(mainC.get(i).getX(),mainC.get(i).getY());
+    }
+    else if (mainC.get(i).type() == startJunction) {
+      fill(0);
+    circle(mainC.get(i).getX(),mainC.get(i).getY(),20);
+    }
+    else if (mainC.get(i).type() == endJunction) {
+      fill(0);
+      square(mainC.get(i).getX(),mainC.get(i).getY(),20);
+    }
   }
     dataExtract();
         circlePrev();
     rectMode(CORNER);
-    
-  if (!isEditMode) {
+    dataDisplay();
+    fill(102);
+    rect(520, 540, 160, 80);
+    textSize(20);
+    fill(255, 255, 255);
+    text("Add Junction", 545, 580);
+    clickJunction();
+}
+
+void screen() {
+      background(255);
+  noStroke();
+  fill(35,80,200);
+  rect(0,0,width,80);
+  rect(0,50,50,height/2);
+  rect(width-50,50,50,height/2);
+  fill(0);
+  rect(18,height/2,10,40);
+  rect(4,height/2+16,40,10);
+  rect(width-60,height/2,10,40);
+  //hit boxes for connections
+  rect(width-45,height/2+16,40,10);
+  rect(50,height/2,10,40);
+  //display area
+  fill(100);
+  rect(0,height-150,width,150);
+  textSize(30);
+  //if (isEditMode) {
+  //  text("Edit Mode", width-400, 40);
+  //}
+  //else {
+  //  text("Run Mode", width-400, 40);
+  //}
+  noStroke();
+    if (isEditMode) {
+      fill(185,32,96);
+    rect(70,0,100,80);
+  }
+  if (compType == 0) {
+      fill(185,32,96);
+     rect(295,0,100,80);
+  }
+  else if (compType == 1) {
+    fill(185,32,96);
+    rect(395,0,100,80);
+  }
+  else if (compType == 2) {
+    fill(185,32,96);
+    rect(495,0,100,80);
+  }
+  run(120,40);
+  resistor(330,25);
+  startJunction(540,35);
+  endJunction(410,35);
+    stroke(0);
+  strokeWeight(6);
+  strokeCap(SQUARE);
+  line(70,0,70,80);
+  line(170,0,170,80);
+  line(295,0,295,80);
+  line(395,0,395,80);
+  line(495,0,495,80);
+  line(595,0,595,80);
+}
+
+void resistor(int x, int y) {
+    fill(0);
+    rect(x-12.5,y,25,30,15,0,0,15);
+    fill(205,85,124);
+    rect(x+12.5,y,25,30,0,15,15,0);
+}
+
+void startJunction(int x, int y) {
+  fill(0);
+  rect(x,y,40,10);
+  quad(x,y+10,x+6,y+2,x-24,y-23,x-30,y-15);
+  quad(x,y,x+6,y+8,x-24,y+33,x-30,y+25);
+}
+
+void endJunction(int x, int y) {
+  fill(0);
+  rect(x,y,40,10);
+  quad(x+40,y+10,x+34,y+2,x+54,y-23,x+60,y-15);
+  quad(x+40,y,x+34,y+8,x+54,y+33,x+60,y+25);
+}
+
+void run(int x, int y) {
+  color target = get(x,y);
+  fill(0);
+  arc(x,y,60,60,PI/12,5*PI/12);
+  arc(x,y,60,60,7*PI/12,11*PI/12);
+  arc(x,y,60,60,13*PI/12,17*PI/12);
+  arc(x,y,60,60,19*PI/12,23*PI/12);
+  fill(target);
+  circle(x,y,40);
+}
+
+void dataDisplay() {
+    if (!isEditMode) {
         mainC.calculate();
     textSize(40);
     if (prev == mainC.get(0)) {
@@ -65,30 +148,64 @@ void draw() {
     stroke(0);
     }
     else {
-      text("resistance: "+round((float)prev.getResistance()*100.0)/100.0,10,700);
-      text("        power: "+round((float)prev.getPower()*100.0)/100.0,10,750);
-      text("   current: "+round((float)prev.getCurrent()*100.0)/100.0,350,700);
-      text("   voltage: "+round((float)prev.getVoltage()*100.0)/100.0,350,750);
+      text("resistance: "+round((float)prev.resistance()*100.0)/100.0,10,700);
+      text("        power: "+round((float)prev.power()*100.0)/100.0,10,750);
+      text("   current: "+round((float)prev.current()*100.0)/100.0,350,700);
+      text("   voltage: "+round((float)prev.voltage()*100.0)/100.0,350,750);
     }
 }
 }
 
+
 void mouseClicked() {
+    if(mouseX > 70 && mouseX < 170 && mouseY > 0 && mouseY < 80) {
+    isEditMode = !isEditMode;
+  }
   if (isEditMode) {
   if (mouseButton == LEFT && prev != null) {
     boolean temp = true;
-    for (int i = 1; i < mainC.getCompNum(); i++) {
+    for (int i = 1; i < mainC.size(); i++) {
     if (Math.sqrt(Math.pow(mouseX-mainC.get(i).getX(),2) + Math.pow(mouseY-mainC.get(i).getY(),2)) < 60) {
-      prev.addFollowing(mainC.get(i));
-      mainC.get(i).addPrevious(prev);
+         //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+    //-----------------------------
+    //PROBLEMATIC 
+    //-----------------------------
+    //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+      if (prev.connectFol(mainC.get(i))) {
+      mainC.get(i).connectPre(prev);
+      }
       temp = false;
     }
   }
-  if (temp && mouseY < 650 && mouseY > 70 && (mouseY > 450 || (mouseX > 50 && mouseX < 700))) {
-    Component target = new Component(10,mouseX,mouseY);
+  if (temp && mouseY < height-150-30 && mouseY > 70+30 && (mouseY > height/2+50+30 || (mouseX > 50+30 && mouseX < width-100-30))) {
+    Component target = new Component(0,0,0,0,startJunction);
+    if (compType == 0) {
+      target = new Resistor(10,mouseX,mouseY);
+    }
+    else if (compType == 1) {
+      target = new startJunction(mouseX,mouseY);
+    }
+    else if (compType == 2) {
+      target = new endJunction(mouseX,mouseY);
+    }
+    //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+    //-----------------------------
+    //PROBLEMATIC 
+    //-----------------------------
+    //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
   mainC.add(target);
-  prev.addFollowing(target);
-  target.addPrevious(prev);
+  if (prev.connectFol(target)) {
+  target.connectPre(prev);
+  }
+  }
+  else if(mouseX > 295 && mouseX < 395 && mouseY > 0 && mouseY < 80) {
+    compType = 0;
+  }
+  else if(mouseX > 395 && mouseX < 495 && mouseY > 0 && mouseY < 80) {
+    compType = 1;
+  }
+  else if(mouseX > 495 && mouseX < 595 && mouseY > 0 && mouseY < 80) {
+    compType = 2;
   }
   }
   else if (mouseButton == RIGHT) {
@@ -100,13 +217,26 @@ void mouseClicked() {
         prev = mainC.get(0);
         }
        else {
-         for (int i = 1; i < mainC.getCompNum(); i++) {
+         for (int i = 1; i < mainC.size(); i++) {
              if (Math.sqrt(Math.pow(mouseX-mainC.get(i).getX(),2) + Math.pow(mouseY-mainC.get(i).getY(),2)) < 60) {
                prev = mainC.get(i);
          }
         }
   }
 }
+}
+void buttonClicked() {
+  if (mousePressed) {
+    if (mouseX >= 520 && mouseX <= 680 && mouseY >= 540 && mouseY <= 620) {
+      buttonPressed = true;
+      //clickJunction();
+    }
+  }
+}
+void clickJunction() {
+  if (mousePressed && buttonPressed) {
+    startJunction(mouseX, mouseY);
+  }
 }
 
 void dataExtract() {
@@ -123,19 +253,21 @@ void dataExtract() {
 void choosePrev(int x, int y) {
   prev = mainC.chooseComp(x,y);
 }
-/** 
+/**
   the generateConnections() method helps connect a newly connected component to the rest of the circuit.
   It does so by first detecting where it was clicked; then, it inserts it into the arraylist of Components and recalculates the instance variables.
 */
 
 void generateConnections() {
-  for (int i = 0; i < mainC.getCompNum(); i++) {
-    for (int k = 0; k < mainC.get(i).getFollowing().size(); k++) {
+  for (int i = 0; i < mainC.size(); i++) {
+    for (int k = 0; k < mainC.get(i).followList().size(); k++) {
       stroke(0);
-      line(mainC.get(i).getX()+mainC.get(i).getType(),mainC.get(i).getY(),mainC.get(i).getFollowing().get(k).getX()-mainC.get(i).getFollowing().get(k).getType(),mainC.get(i).getFollowing().get(k).getY());
-    }
-    if (!isEditMode && mainC.get(i).getFollowing().size() == 0) {
-      line(mainC.get(i).getX()+mainC.get(i).getType(),mainC.get(i).getY(),mainC.get(0).getX()-mainC.get(0).getType(),mainC.get(0).getY());
+      if (mainC.get(i).followList().get(k) != null) {
+      line(mainC.get(i).getX()+mainC.get(i).type(),mainC.get(i).getY(),mainC.get(i).followList().get(k).getX()-mainC.get(i).followList().get(k).type(),mainC.get(i).followList().get(k).getY());
+      }
+  }
+    if (!isEditMode && mainC.get(i).followList().get(0) == null) {
+      line(mainC.get(i).getX()+mainC.get(i).type(),mainC.get(i).getY(),mainC.get(0).getX()-mainC.get(0).type(),mainC.get(0).getY());
     }
   }
 }
@@ -152,5 +284,8 @@ void keyPressed() {
   }
   if (key == 'e') {
     isEditMode = !isEditMode;
+  }
+  if (key == 'c') {
+      compType = (compType+1)%3;
   }
 }

@@ -8,11 +8,19 @@ I created the two classes. I added all the initial variables and constructors th
 
 ### 5/23/2023
 
-Start working on implamenting the interface we wanted to have in processing in processing. I also started thinking more about the user interface and how the user will interact with our program as well as writing a few additional methods to assist in the display and UI of our program.
+Start working on implementing the interface we wanted to have in processing in processing. I also started thinking more about the user interface and how the user will interact with our program as well as writing a few additional methods to assist in the display and UI of our program.
 
 ### 5/24/2023
 
-Finally figuring out what type of UI we want for the feature of connecting components together and implamenting the visual part of these connections and preparing to start working on the technical side of these connections to make them actually work.
+Finally figuring out what type of UI we want for the feature of connecting components together and implementing the visual part of these connections and preparing to start working on the technical side of these connections to make them actually work.
+
+### 5/25/2023
+
+Wrote the visual connection algorithm. Discovered multiple flaws in our code related to not knowing where loops ended and started exactly. I also did some testing leading to the discovery of these flaws.
+
+### 5/26/2023
+
+I worked on dealing with the flaw discovered yesterday and work on streamlining the code. This process involved replacing a lot of what we have already written to deal with this issue. This issue will likely mean it will take until at least Tuesday if not Wednesday for us to have enough functioning code to do a complete test. I also started working on the new generate connections method.
 
 ## Dylan Ma
 
@@ -21,8 +29,12 @@ Finally figuring out what type of UI we want for the feature of connecting compo
 I completed the calculate methods which are used to provide critical information about the individual components as well as the overall stats for the circuit, such as the total current (IEQ), the total resistance (REQ) and the total voltage (VEQ). I also added the resetSolved() method, which resets the solved status of all components, as well as the calculateStat method, which calculates the statistics for individual resistors (components).
 
 ### 5/24/2023
-Continued to work on a bug in the Processing window, which may have led to infinite recursion initially. 
+Continued to work on a bug in the Processing window, which may have led to infinite recursion initially.
 
 ### 5/25/2023
 
-We continued to work on our reqSub() method - made headway on the make connections method
+We continued to work on our reqSub() method - made headway on the make connections method.
+
+### 5/26/2023
+
+We deal with the error related to not knowing where loops start and end. I work on the mousePressed method as well as the buttons for the junctions and resistor.
