@@ -6,6 +6,7 @@ Circuit mainC;
 Component prev;
 boolean undo, debug;
 int Cx, Cy;
+int compType = resistor;
 boolean isEditMode = true;
 void setup() {
   //fullScreen();
