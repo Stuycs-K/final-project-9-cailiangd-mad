@@ -157,7 +157,11 @@ void mouseClicked() {
     boolean temp = true;
     for (int i = 1; i < mainC.size(); i++) {
     if (Math.sqrt(Math.pow(mouseX-mainC.get(i).getX(),2) + Math.pow(mouseY-mainC.get(i).getY(),2)) < 60) {
-       //still have problems
+         //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+    //-----------------------------
+    //PROBLEMATIC 
+    //-----------------------------
+    //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
       if (prev.connectFol(mainC.get(i))) {
       mainC.get(i).connectPre(prev);
       }
@@ -175,7 +179,11 @@ void mouseClicked() {
     else if (compType == 2) {
       target = new endJunction(mouseX,mouseY);
     }
-    //still have problems
+    //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+    //-----------------------------
+    //PROBLEMATIC 
+    //-----------------------------
+    //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
   mainC.add(target);
   if (prev.connectFol(target)) {
   target.connectPre(prev);
