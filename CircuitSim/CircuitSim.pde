@@ -31,6 +31,7 @@ void draw() {
     textSize(20);
     fill(255, 255, 255);
     text("Add Junction", 545, 580);
+    clickJunction();
 }
 
 void screen() {
@@ -146,7 +147,7 @@ void buttonClicked() {
   if (mousePressed) {
     if (mouseX >= 520 && mouseX <= 680 && mouseY >= 540 && mouseY <= 620) {
       buttonPressed = true;
-//      clickJunction();
+      //clickJunction();
     }
   }
 }
