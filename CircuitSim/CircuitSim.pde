@@ -52,29 +52,24 @@ void screen() {
   else {
     text("Run Mode", width-400, 40);
   }
-  stroke(0);
+  noStroke();
+    if (isEditMode) {
+      fill(185,32,96);
+    rect(70,0,100,80);
+  }
+  run(120,40);
+  resistor(330,25);
+  startJunction(440,35);
+  endJunction(510,35);
+    stroke(0);
   strokeWeight(6);
   strokeCap(SQUARE);
-  line(50,0,50,80);
-  run(100,40);
-  line(150,0,150,80);
-  
-  line(225,0,225,80);
-  line(325,0,325,80);
-  line(425,0,425,80);
-  line(525,0,525,80);
-  noStroke();
-  resistor(260,25);
-
-  
-  
-
-  //startJunction(190,35);
-  //line(250,0,250,80);
-  //endJunction(270,35);
-  //line(350,0,350,80);
-  
-  //line(450,0,450,80);
+  line(70,0,70,80);
+  line(170,0,170,80);
+  line(295,0,295,80);
+  line(395,0,395,80);
+  line(495,0,495,80);
+  line(595,0,595,80);
 }
 
 void resistor(int x, int y) {
@@ -99,12 +94,13 @@ void endJunction(int x, int y) {
 }
 
 void run(int x, int y) {
+  color target = get(x,y);
   fill(0);
   arc(x,y,60,60,PI/12,5*PI/12);
   arc(x,y,60,60,7*PI/12,11*PI/12);
   arc(x,y,60,60,13*PI/12,17*PI/12);
   arc(x,y,60,60,19*PI/12,23*PI/12);
-  fill(35,80,200);
+  fill(target);
   circle(x,y,40);
 }
 
