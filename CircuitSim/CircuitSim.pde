@@ -226,19 +226,19 @@ void mouseClicked() {
   }
 }
 }
-void buttonClicked() {
-  if (mousePressed) {
-    if (mouseX >= 520 && mouseX <= 680 && mouseY >= 540 && mouseY <= 620) {
-      buttonPressed = true;
-      //clickJunction();
-    }
-  }
-}
-void clickJunction() {
-  if (mousePressed && buttonPressed) {
-    startJunction(mouseX, mouseY);
-  }
-}
+//void buttonClicked() {
+//  if (mousePressed) {
+//    if (mouseX >= 520 && mouseX <= 680 && mouseY >= 540 && mouseY <= 620) {
+//      buttonPressed = true;
+//      //clickJunction();
+//    }
+//  }
+//}
+//void clickJunction() {
+//  if (mousePressed && buttonPressed) {
+//    startJunction(mouseX, mouseY);
+//  }
+//}
 
 void dataExtract() {
   if (debug) {
