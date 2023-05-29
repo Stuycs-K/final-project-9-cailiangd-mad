@@ -6,7 +6,7 @@ Circuit mainC;
 Component prev;
 boolean undo, debug;
 int Cx, Cy;
-int compType = resistor;
+int compType = 0;
 boolean isEditMode = true;
 void setup() {
   //fullScreen();
@@ -57,6 +57,18 @@ void screen() {
     if (isEditMode) {
       fill(185,32,96);
     rect(70,0,100,80);
+  }
+  if (compType == 0) {
+      fill(185,32,96);
+     rect(295,0,100,80);
+  }
+  else if (compType == 1) {
+    fill(185,32,96);
+    rect(395,0,100,80);
+  }
+  else if (compType == 2) {
+    fill(185,32,96);
+    rect(495,0,100,80);
   }
   run(120,40);
   resistor(330,25);
@@ -210,5 +222,8 @@ void keyPressed() {
   }
   if (key == 'e') {
     isEditMode = !isEditMode;
+  }
+  if (key == 'c') {
+      compType = (compType+1)%3;   
   }
 }
