@@ -55,6 +55,7 @@ void screen() {
   line(50,0,50,80);
   resistor(90,25);
   line(150,0,150,80);
+  startJunction(190,35);
   line(250,0,250,80);
   line(350,0,350,80);
   line(450,0,450,80);
@@ -65,6 +66,13 @@ void resistor(int x, int y) {
     rect(x-12.5,y,25,30,15,0,0,15);
     fill(205,85,124);
     rect(x+12.5,y,25,30,0,15,15,0);
+}
+
+void startJunction(int x, int y) {
+  fill(0);
+  rect(x,y,40,10);
+  quad(x,y+10,x+6,y+2,x-24,y-23,x-30,y-15);
+  quad(x,y,x+6,y+8,x-24,y+33,x-30,y+25);
 }
 
 void dataDisplay() {
