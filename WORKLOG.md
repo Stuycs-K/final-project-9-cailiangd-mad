@@ -20,7 +20,7 @@ Wrote the visual connection algorithm. Discovered multiple flaws in our code rel
 
 ### 5/26/2023
 
-I worked on dealing with the flaw discovered yesterday and work on streamlining the code. This process involved replacing a lot of what we have already written to deal with this issue. This issue will likely mean it will take until at least Tuesday if not Wednesday for us to have enough functioning code to do a complete test.
+I worked on dealing with the flaw discovered yesterday and work on streamlining the code. This process involved replacing a lot of what we have already written to deal with this issue. This issue will likely mean it will take until at least Tuesday if not Wednesday for us to have enough functioning code to do a complete test. I also started working on the new generate connections method.
 
 ## Dylan Ma
 
