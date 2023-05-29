@@ -3,6 +3,7 @@ private final int resistor = 15;
 private final int startJunction = 0;
 private final int endJunction = 0;
 private boolean buttonPressed = false;
+int compType = 0;
 Circuit mainC;
 Component prev;
 boolean undo, debug;
@@ -102,28 +103,56 @@ void dataDisplay() {
 }
 }
 
+
 void mouseClicked() {
+    if(mouseX > 70 && mouseX < 170 && mouseY > 0 && mouseY < 80) {
+    isEditMode = !isEditMode;
+  }
   if (isEditMode) {
   if (mouseButton == LEFT && prev != null) {
     boolean temp = true;
     for (int i = 1; i < mainC.size(); i++) {
     if (Math.sqrt(Math.pow(mouseX-mainC.get(i).getX(),2) + Math.pow(mouseY-mainC.get(i).getY(),2)) < 60) {
-      //prev.addFollowing(mainC.get(i));
-      //mainC.get(i).addPrevious(prev);
-      //------------------------------------------//
-      //ADD CODE HERE
-      //------------------------------------------//
+         //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+    //-----------------------------
+    //PROBLEMATIC 
+    //-----------------------------
+    //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+      if (prev.connectFol(mainC.get(i))) {
+      mainC.get(i).connectPre(prev);
+      }
       temp = false;
     }
   }
-  if (temp && mouseY < 650 && mouseY > 70 && (mouseY > 450 || (mouseX > 50 && mouseX < 700))) {
-    Component target = new Resistor(10,mouseX,mouseY);
+  if (temp && mouseY < height-150-30 && mouseY > 70+30 && (mouseY > height/2+50+30 || (mouseX > 50+30 && mouseX < width-100-30))) {
+    Component target = new Component(0,0,0,0,startJunction);
+    if (compType == 0) {
+      target = new Resistor(10,mouseX,mouseY);
+    }
+    else if (compType == 1) {
+      target = new startJunction(mouseX,mouseY);
+    }
+    else if (compType == 2) {
+      target = new endJunction(mouseX,mouseY);
+    }
+    //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+    //-----------------------------
+    //PROBLEMATIC 
+    //-----------------------------
+    //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
   mainC.add(target);
-  //prev.addFollowing(target);
-  //target.addPrevious(prev);
-  //------------------------------------------//
-  //ADD CODE HERE
-  //------------------------------------------//
+  if (prev.connectFol(target)) {
+  target.connectPre(prev);
+  }
+  }
+  else if(mouseX > 295 && mouseX < 395 && mouseY > 0 && mouseY < 80) {
+    compType = 0;
+  }
+  else if(mouseX > 395 && mouseX < 495 && mouseY > 0 && mouseY < 80) {
+    compType = 1;
+  }
+  else if(mouseX > 495 && mouseX < 595 && mouseY > 0 && mouseY < 80) {
+    compType = 2;
   }
   }
   else if (mouseButton == RIGHT) {
