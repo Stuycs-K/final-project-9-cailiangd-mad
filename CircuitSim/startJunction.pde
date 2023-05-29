@@ -57,11 +57,11 @@ public class startJunction extends Component{
       setFol2(newComp);
       return true;
     }
-    return false;
+    else return false;
   }
   
   public boolean connectPre(Component newComp) {
-    if (pre() == null) {
+    if (prev() == null) {
       setPre(newComp);
       return true;
     }

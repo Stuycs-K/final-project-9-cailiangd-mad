@@ -35,7 +35,7 @@ public class Resistor extends Component{
   public boolean connectPre(Component newComp) {
     if (previous() == null) {
       setPrevious(newComp);
-      return true
+      return true;
     }
       return false;
   }

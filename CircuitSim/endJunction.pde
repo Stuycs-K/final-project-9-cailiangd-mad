@@ -57,7 +57,7 @@ public class endJunction extends Component{
       setPre2(newComp);
       return true;
     }
-    return false;
+    else return false;
   }
   
   public boolean connectFol(Component newComp) {
