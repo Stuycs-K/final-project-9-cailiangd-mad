@@ -51,9 +51,13 @@ public class Resistor extends Component{
     public double REQsub() {
       if (followR == null || followR.type() == endJunction) {
         setREQsub(resistance());
+        return getREQsub();    
       }
-      else setREQsub(followR.REQsub() + resistance());
-    return getREQsub();
+      else {
+        setREQsub(followR.REQsub() + resistance());
+        return getREQsub();
+      }
+      
   }
   
     public void calculate() {
