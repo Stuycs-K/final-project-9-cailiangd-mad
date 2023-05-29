@@ -77,27 +77,10 @@ public class Component{
   return REQsub;
   }
 
-
-  public void resetSolved() {
-  if (solved) {
-       solved = !solved;
-      }
-    for (int i=0; i < following.size(); i++) {
-      following.get(i).resetSolved();
-      }
-    }
-    /**
-    CalculateStat helps calculate all of the instance variables (such as resistance, voltage) of the component.
-    */
-
-/
-
-
   public void setREQsub(double in) {
     REQsub = in;
   }
 
-<<<<<<< HEAD
   //calculate for RIVP
   public void calculate() {
   }

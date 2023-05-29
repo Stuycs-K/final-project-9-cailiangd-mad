@@ -9,7 +9,7 @@ int Cx, Cy;
 boolean isEditMode = true;
 void setup() {
   //fullScreen();
-  size(800,800);
+  size(1200,800);
   mainC = new Circuit();
   prev = mainC.get(0);
 }
@@ -31,26 +31,33 @@ void screen() {
       background(255);
   noStroke();
   fill(35,80,200);
-  rect(0,0,800,80);
-  rect(0,50,50,400);
-  rect(750,50,50,400);
+  rect(0,0,width,80);
+  rect(0,50,50,height/2);
+  rect(width-50,50,50,height/2);
   fill(0);
-  rect(18,400,10,40);
-  rect(4,416,40,10);
-  rect(740,400,10,40);
+  rect(18,height/2,10,40);
+  rect(4,height/2+16,40,10);
+  rect(width-60,height/2,10,40);
   //hit boxes for connections
-  rect(755,416,40,10);
-  rect(50,400,10,40);
+  rect(width-45,height/2+16,40,10);
+  rect(50,height/2,10,40);
   //display area
   fill(100);
-  rect(0,650,800,150);
+  rect(0,height-150,width,150);
   textSize(30);
   if (isEditMode) {
-    text("Edit Mode", 48, 40, 40);
+    text("Edit Mode", width-400, 40);
   }
   else {
-    text("Run Mode", 48, 40);
+    text("Run Mode", width-400, 40);
   }
+  stroke(0);
+  line(50,0,50,80);
+  resistor(90,25);
+  line(150,0,150,80);
+  line(250,0,250,80);
+  line(350,0,350,80);
+  line(450,0,450,80);
 }
 
 void resistor(int x, int y) {
