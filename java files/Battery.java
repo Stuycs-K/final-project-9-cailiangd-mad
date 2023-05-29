@@ -6,12 +6,12 @@ public class Battery extends Component{
   super(0,newVol,width/2,420,battery);
   followList = new ArrayList<Component>();
   }
-  
+
   public boolean connectFol(Component newComp) {
     followList.add(newComp);
     return true;
   }
-  
+
   public String toString() {
     String temp = "";
     for (int i = 0; i < followList.size(); i++) {
@@ -26,17 +26,17 @@ public class Battery extends Component{
  public double REQsub() {
    double temp = 0;
    for (int i = 0; i < followList.size(); i++) {
-     temp += 1.0/(followList.get(i).REQsub());
+     temp += 1/(followList.get(i).REQsub());
    }
-   return 1.0/temp;
+   return 1/temp;
  }
- 
+
  public void calculate() {
       for (int i = 0; i < followList.size(); i++) {
      followList.get(i).calculate();
    }
  }
- 
+
  public ArrayList<Component> followList() {
    return followList;
  }

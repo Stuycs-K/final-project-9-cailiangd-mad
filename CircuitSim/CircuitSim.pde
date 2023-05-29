@@ -11,7 +11,7 @@ boolean isEditMode = true;
 void setup() {
   //fullScreen();
   size(1200,800);
-  surface.setResizable(true);
+  //surface.setResizable(true);
   mainC = new Circuit();
   prev = mainC.get(0);
 }
@@ -54,6 +54,7 @@ void screen() {
   //hit boxes for connections
   rect(width-45,height/2+16,40,10);
   rect(50,height/2,10,40);
+  
   //display area
   fill(100);
   rect(0,height-150,width,150);
@@ -244,7 +245,7 @@ void generateConnections() {
       line(mainC.get(i).getX()+mainC.get(i).type(),mainC.get(i).getY(),mainC.get(i).followList().get(k).getX()-mainC.get(i).followList().get(k).type(),mainC.get(i).followList().get(k).getY());
       }
   }
-    if (!isEditMode && mainC.get(i).followList().get(0) == null) {
+    if (!isEditMode && mainC.get(i).followList().size() != 0 && mainC.get(i).followList().get(0) == null) {
       line(mainC.get(i).getX()+mainC.get(i).type(),mainC.get(i).getY(),mainC.get(0).getX()-mainC.get(0).type(),mainC.get(0).getY());
     }
   }
