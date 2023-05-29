@@ -3,7 +3,7 @@ Component follow;
 startJunction start;
 public class endJunction extends Component{
   public endJunction(int x, int y) {
-    super(0,0,x,y,startJunction);
+    super(0,0,x,y,endJunction);
   }
   
   // general get methods
@@ -48,17 +48,24 @@ public class endJunction extends Component{
     return temp;
   }
   //connect methodss
-  public void connectPre(Component newComp) {
+  public boolean connectPre(Component newComp) {
     if (prev1() == null) {
       setPre1(newComp);
+      return true;
     }
-    if (prev2() == null) {
+    else if (prev2() == null) {
       setPre2(newComp);
+      return true;
     }
+    else return false;
   }
   
-  public void connectFol(Component newComp) {
-    setFol(newComp);
+  public boolean connectFol(Component newComp) {
+    if (fol() == null) {
+      setFol(newComp);
+      return true;
+    }
+    return false;
   }
   
     public void setStart(Component start_) {
