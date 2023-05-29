@@ -48,17 +48,24 @@ public class endJunction extends Component{
     return temp;
   }
   //connect methodss
-  public void connectPre(Component newComp) {
+  public boolean connectPre(Component newComp) {
     if (prev1() == null) {
       setPre1(newComp);
+      return true;
     }
     else if (prev2() == null) {
       setPre2(newComp);
+      return true;
     }
+    return false;
   }
   
-  public void connectFol(Component newComp) {
-    setFol(newComp);
+  public boolean connectFol(Component newComp) {
+    if (fol() == null) {
+      setFol(newComp);
+      return true;
+    }
+    return false;
   }
   
     public void setStart(Component start_) {

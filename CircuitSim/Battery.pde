@@ -7,8 +7,9 @@ public class Battery extends Component{
   followList = new ArrayList<Component>();
   }
   
-  public void connectFol(Component newComp) {
+  public boolean connectFol(Component newComp) {
     followList.add(newComp);
+    return true;
   }
   
   public String toString() {

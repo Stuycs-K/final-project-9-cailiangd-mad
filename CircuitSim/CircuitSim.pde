@@ -158,8 +158,9 @@ void mouseClicked() {
     for (int i = 1; i < mainC.size(); i++) {
     if (Math.sqrt(Math.pow(mouseX-mainC.get(i).getX(),2) + Math.pow(mouseY-mainC.get(i).getY(),2)) < 60) {
        //still have problems
-      prev.connectFol(mainC.get(i));
+      if (prev.connectFol(mainC.get(i))) {
       mainC.get(i).connectPre(prev);
+      }
       temp = false;
     }
   }
@@ -176,8 +177,9 @@ void mouseClicked() {
     }
     //still have problems
   mainC.add(target);
-  prev.connectFol(target);
+  if (prev.connectFol(target)) {
   target.connectPre(prev);
+  }
   }
   else if(mouseX > 295 && mouseX < 395 && mouseY > 0 && mouseY < 80) {
     compType = 0;

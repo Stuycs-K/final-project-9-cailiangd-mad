@@ -32,11 +32,19 @@ public class Resistor extends Component{
     return temp;
   }
   //general connect methods
-  public void connectPre(Component newComp) {
-    if (previous() == null) setPrevious(newComp);
+  public boolean connectPre(Component newComp) {
+    if (previous() == null) {
+      setPrevious(newComp);
+      return true
+    }
+      return false;
   }
-  public void connectFol(Component newComp) {
-    if (following() == null) setFollowing(newComp);
+  public boolean connectFol(Component newComp) {
+    if (following() == null)  {
+      setFollowing(newComp);
+      return true;
+    }
+    return false;
   }
   
   
