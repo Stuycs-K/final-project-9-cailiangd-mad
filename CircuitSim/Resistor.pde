@@ -33,10 +33,10 @@ public class Resistor extends Component{
   }
   //general connect methods
   public void connectPre(Component newComp) {
-    setPrevious(newComp);
+    if (previous() == null) setPrevious(newComp);
   }
   public void connectFol(Component newComp) {
-    setFollowing(newComp);
+    if (following() == null) setFollowing(newComp);
   }
   
   
@@ -44,7 +44,7 @@ public class Resistor extends Component{
       if (followR == null || followR.type() == endJunction) {
         setREQsub(resistance());
       }
-      setREQsub(followR.REQsub() + resistance());
+      else setREQsub(followR.REQsub() + resistance());
     return getREQsub();
   }
   
@@ -53,12 +53,13 @@ public class Resistor extends Component{
       setCur(previousR.current);
       setVol(current()*resistance());
       setPow(current()*voltage());
-      followR.calculate();
     }
     else if (previousR != null) {
       setVol(previousR.voltage());
       setCur(voltage()/resistance());
       setPow(current()*voltage());
+    }
+    if (followR != null) {
       followR.calculate();
     }
   }

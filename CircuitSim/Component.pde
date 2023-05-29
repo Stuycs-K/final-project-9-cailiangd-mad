@@ -106,8 +106,10 @@ public class Component{
     return target;
   }
   //Connection methods
-  public void connectPre(Component newComp) {
+  public boolean connectPre(Component newComp) {
+    return true;
   }
-  public void connectFol(Component newComp) {
+  public boolean connectFol(Component newComp) {
+   return true;
   }
 }

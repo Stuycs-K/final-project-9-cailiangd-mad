@@ -1,6 +1,6 @@
-private final int battery = -350;
+private final int battery = -550;
 private final int resistor = 15;
-private final int startJunction = 0;
+private final int startJunction = 1;
 private final int endJunction = 0;
 Circuit mainC;
 Component prev;
@@ -22,7 +22,17 @@ void draw() {
     rectMode(CENTER);
     noStroke();
   for (int i = 1; i < mainC.size(); i++) {
+    if (mainC.get(i).type() == resistor) {
     resistor(mainC.get(i).getX(),mainC.get(i).getY());
+    }
+    else if (mainC.get(i).type() == startJunction) {
+      fill(0);
+    circle(mainC.get(i).getX(),mainC.get(i).getY(),20);
+    }
+    else if (mainC.get(i).type() == endJunction) {
+      fill(0);
+      square(mainC.get(i).getX(),mainC.get(i).getY(),20);
+    }
   }
     dataExtract();
         circlePrev();
@@ -73,8 +83,8 @@ void screen() {
   }
   run(120,40);
   resistor(330,25);
-  startJunction(440,35);
-  endJunction(510,35);
+  startJunction(540,35);
+  endJunction(410,35);
     stroke(0);
   strokeWeight(6);
   strokeCap(SQUARE);
@@ -147,22 +157,27 @@ void mouseClicked() {
     boolean temp = true;
     for (int i = 1; i < mainC.size(); i++) {
     if (Math.sqrt(Math.pow(mouseX-mainC.get(i).getX(),2) + Math.pow(mouseY-mainC.get(i).getY(),2)) < 60) {
-      //prev.addFollowing(mainC.get(i));
-      //mainC.get(i).addPrevious(prev);
-      //------------------------------------------//
-      //ADD CODE HERE
-      //------------------------------------------//
+       //still have problems
+      prev.connectFol(mainC.get(i));
+      mainC.get(i).connectPre(prev);
       temp = false;
     }
   }
   if (temp && mouseY < height-150-30 && mouseY > 70+30 && (mouseY > height/2+50+30 || (mouseX > 50+30 && mouseX < width-100-30))) {
-    Component target = new Resistor(10,mouseX,mouseY);
+    Component target = new Component(0,0,0,0,startJunction);
+    if (compType == 0) {
+      target = new Resistor(10,mouseX,mouseY);
+    }
+    else if (compType == 1) {
+      target = new startJunction(mouseX,mouseY);
+    }
+    else if (compType == 2) {
+      target = new endJunction(mouseX,mouseY);
+    }
+    //still have problems
   mainC.add(target);
-  //prev.addFollowing(target);
-  //target.addPrevious(prev);
-  //------------------------------------------//
-  //ADD CODE HERE
-  //------------------------------------------//
+  prev.connectFol(target);
+  target.connectPre(prev);
   }
   else if(mouseX > 295 && mouseX < 395 && mouseY > 0 && mouseY < 80) {
     compType = 0;
@@ -173,9 +188,9 @@ void mouseClicked() {
   else if(mouseX > 495 && mouseX < 595 && mouseY > 0 && mouseY < 80) {
     compType = 2;
   }
+  }
   else if (mouseButton == RIGHT) {
       choosePrev(mouseX,mouseY);
-  }
   }
   }
   else {
@@ -212,15 +227,17 @@ void choosePrev(int x, int y) {
 */
 
 void generateConnections() {
-  //for (int i = 0; i < mainC.size(); i++) {
-  //  for (int k = 0; k < mainC.get(i).followList().size(); k++) {
-  //    stroke(0);
-  //    line(mainC.get(i).getX()+mainC.get(i).type(),mainC.get(i).getY(),mainC.get(i).followList().get(k).getX()-mainC.get(i).followList().get(k).type(),mainC.get(i).followList().get(k).getY());
-  //  }
-  //  if (!isEditMode && mainC.get(i).followList().size() == 0) {
-  //    line(mainC.get(i).getX()+mainC.get(i).type(),mainC.get(i).getY(),mainC.get(0).getX()-mainC.get(0).type(),mainC.get(0).getY());
-  //  }
-  //}
+  for (int i = 0; i < mainC.size(); i++) {
+    for (int k = 0; k < mainC.get(i).followList().size(); k++) {
+      stroke(0);
+      if (mainC.get(i).followList().get(k) != null) {
+      line(mainC.get(i).getX()+mainC.get(i).type(),mainC.get(i).getY(),mainC.get(i).followList().get(k).getX()-mainC.get(i).followList().get(k).type(),mainC.get(i).followList().get(k).getY());
+      }
+  }
+    if (!isEditMode && mainC.get(i).followList().get(0) == null) {
+      line(mainC.get(i).getX()+mainC.get(i).type(),mainC.get(i).getY(),mainC.get(0).getX()-mainC.get(0).type(),mainC.get(0).getY());
+    }
+  }
 }
 
 void circlePrev() {
@@ -237,6 +254,6 @@ void keyPressed() {
     isEditMode = !isEditMode;
   }
   if (key == 'c') {
-      compType = (compType+1)%3;   
+      compType = (compType+1)%3;
   }
 }

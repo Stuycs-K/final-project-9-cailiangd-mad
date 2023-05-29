@@ -3,7 +3,7 @@ Component follow;
 startJunction start;
 public class endJunction extends Component{
   public endJunction(int x, int y) {
-    super(0,0,x,y,startJunction);
+    super(0,0,x,y,endJunction);
   }
   
   // general get methods
@@ -52,7 +52,7 @@ public class endJunction extends Component{
     if (prev1() == null) {
       setPre1(newComp);
     }
-    if (prev2() == null) {
+    else if (prev2() == null) {
       setPre2(newComp);
     }
   }

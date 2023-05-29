@@ -52,7 +52,7 @@ public class startJunction extends Component{
     if (fol1() == null) {
       setFol1(newComp);
     }
-    if (fol2() == null) {
+    else if (fol2() == null) {
       setFol2(newComp);
     }
   }
