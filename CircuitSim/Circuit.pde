@@ -1,7 +1,6 @@
 import java.util.*;
 import java.io.*;
 public class Circuit{
-  private Component firstComp;
   private double REQ;
   private double IEQ;
   private double VEQ;
@@ -13,16 +12,12 @@ public class Circuit{
   }
 
   public Circuit(double voltage) {
-    Component battery = new Component(voltage, 0, 0, 0);
-    firstComp = battery;
+    Component battery1 = new Battery(voltage);
     VEQ = voltage;
     compList = new ArrayList<Component>();
-    add(battery);
+    add(battery1);
   }
 
-  public Component getFirstComp() {
-    return firstComp;
-  }
 
   public double getREQ() {
     return REQ;
@@ -44,8 +39,9 @@ public class Circuit{
     return "REQ: "+REQ+" IEQ: "+IEQ+" VEQ: "+VEQ+" PEQ: "+PEQ;
   }
 
-  private void setVEQ(double newVEQ) {
+  public void setVEQ(double newVEQ) {
     VEQ = newVEQ;
+    get(0).setVol(VEQ);
   }
 
   public void add(Component newComp) {
@@ -56,7 +52,7 @@ public class Circuit{
     return compList.toString();
   }
 
-  public int getCompNum() {
+  public int size() {
     return compList.size();
   }
 
@@ -68,5 +64,51 @@ public class Circuit{
     return res.substring(0,res.length()-1);
   }
 
+ public void calculateREQ() {
+    REQ = get(0).REQsub();
+ }
+
+ public void calculateIVPeq() {
+   IEQ = VEQ/REQ;
+   PEQ = VEQ * IEQ;
+ }
+
+public void calculateIVP() {
+  for (int i = 0; i < size(); i++) {
+    get(i).calculate();
+  }
+}
+
+public void calculate() {
+  calculateREQ();
+  calculateIVPeq();
+  calculateIVP();
+}
+
+public Component chooseComp(int x,int y) {
+  int pos = 0;
+  for (int i = 1; i < compList.size(); i++) {
+    if (
+    Math.sqrt(
+    (x-compList.get(i).getX())*(x-compList.get(i).getX())
+    +
+    (y-compList.get(i).getY())*(y-compList.get(i).getY())
+    )
+    <
+    Math.sqrt(
+    (x-compList.get(pos).getX())*(x-compList.get(pos).getX())
+    +
+    (y-compList.get(pos).getY())*(y-compList.get(pos).getY())
+    )
+    )
+    pos = i;
+  }
+  return compList.get(pos);
+}
+
+
+public Component get(int i) {
+  return compList.get(i);
+}
 
 }
