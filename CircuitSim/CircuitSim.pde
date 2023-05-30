@@ -5,7 +5,6 @@ private final int endJunction = 0;
 Circuit mainC;
 Component prev;
 boolean undo, debug;
-int Cx, Cy;
 int compType = 0;
 boolean isEditMode = true;
 void setup() {
@@ -159,13 +158,18 @@ void mouseClicked() {
     if (Math.sqrt(Math.pow(mouseX-mainC.get(i).getX(),2) + Math.pow(mouseY-mainC.get(i).getY(),2)) < 60) {
          //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
     //-----------------------------
-    //PROBLEMATIC 
+    //PROBLEMATIC - START
     //-----------------------------
     //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
       if (prev.connectFol(mainC.get(i))) {
       mainC.get(i).connectPre(prev);
       }
       temp = false;
+              //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+    //-----------------------------
+    //PROBLEMATIC - END
+    //-----------------------------
+    //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
     }
   }
   if (temp && mouseY < height-150-30 && mouseY > 70+30 && (mouseY > height/2+50+30 || (mouseX > 50+30 && mouseX < width-100-30))) {
@@ -181,13 +185,19 @@ void mouseClicked() {
     }
     //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
     //-----------------------------
-    //PROBLEMATIC 
+    //PROBLEMATIC - START
     //-----------------------------
     //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
   mainC.add(target);
   if (prev.connectFol(target)) {
   target.connectPre(prev);
+  target.connectFol(null);
   }
+      //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+    //-----------------------------
+    //PROBLEMATIC - START
+    //-----------------------------
+    //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
   }
   else if(mouseX > 295 && mouseX < 395 && mouseY > 0 && mouseY < 80) {
     compType = 0;

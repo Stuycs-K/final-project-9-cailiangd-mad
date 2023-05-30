@@ -49,10 +49,15 @@ public class Resistor extends Component{
   
   
     public double REQsub() {
-      if (followR == null || followR.type() == endJunction) {
+      println(this);
+      if (followR == null || followR.type() == endJunction) { //<>//
+        println("setREQ");
         setREQsub(resistance());
       }
-      else setREQsub(followR.REQsub() + resistance());
+      else { //<>//
+        println("hasNext"+followR);
+        setREQsub(followR.REQsub() + resistance());
+      }
     return getREQsub();
   }
   
