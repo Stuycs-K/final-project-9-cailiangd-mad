@@ -1,9 +1,13 @@
-Component previousR; 
-Component followR;
 public class Resistor extends Component{
+  Component previousR; 
+Component followR;
+ArrayList<Component> temp;
   public Resistor(double Res, int x, int y) {
     super(Res,0,x,y,resistor);  
+    previousR = null;
+    followR = null;
 }
+  
   // general get methods
   public Component following() {
     return followR;
@@ -14,7 +18,7 @@ public class Resistor extends Component{
   }
   
   public ArrayList<Component> followList() {
-    ArrayList<Component> temp = new ArrayList<Component> ();
+    temp = new ArrayList<Component> ();
     temp.add(followR);
     return temp;
   }
@@ -41,7 +45,7 @@ public class Resistor extends Component{
   }
   public boolean connectFol(Component newComp) {
     if (following() == null && previous() != newComp)  {
-      setFollowing(newComp);
+      followR = newComp;
       return true;
     }
     else return false;
@@ -52,7 +56,9 @@ public class Resistor extends Component{
       if (followR == null || followR.type() == endJunction) {
         setREQsub(resistance());
       }
-      else setREQsub(followR.REQsub() + resistance());
+      else {
+        setREQsub(followR.REQsub() + resistance());
+      }
     return getREQsub();
   }
   
@@ -74,7 +80,9 @@ public class Resistor extends Component{
   
     public void trace() {
       setTarget(true);
+      if (followR != null) {
       followR.trace();
+      }
   }
   
   public void tracker(startJunction start) {
@@ -83,7 +91,9 @@ public class Resistor extends Component{
   
   public void clearTrack() {
     setTarget(false);
+    if (followR != null) {
     followR.clearTrack();
+    }
   }
  
 }
