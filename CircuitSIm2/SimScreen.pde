@@ -133,13 +133,13 @@ void left() {
       target = new endJunction(mouseX,mouseY);
     }
   mainC.add(target);
-  if (prev.connectFol(target)) { //<>//
+  if (prev.connectFol(target)) { //<>// //<>//
   target.connectPre(prev);
   }
   else {
   //code here
   }
-  } 
+  }
   else if(mouseX > 295 && mouseX < 395 && mouseY > 0 && mouseY < 80) {
     compType = 0;
   }
@@ -240,4 +240,13 @@ void findPartnerAll() {
     }
   }
   }
+}
+
+void slider(int x, int y, int level) {
+  strokeWeight(4);
+  stroke(0);
+  fill(0,255,0);
+  rect(x,y,300,50,10);
+  fill(0,0,255);
+  rect(x,y,level,50,10,0,0,10);
 }
