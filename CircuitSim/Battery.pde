@@ -26,9 +26,9 @@ public class Battery extends Component{
  public double REQsub() {
    double temp = 0;
    for (int i = 0; i < followList.size(); i++) {
-     temp += 1/(followList.get(i).REQsub());
+     temp += 1.0/(followList.get(i).REQsub());
    }
-   return 1/temp;
+   return 1.0/temp;
  }
  
  public void calculate() {

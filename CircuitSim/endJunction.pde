@@ -53,7 +53,7 @@ public class endJunction extends Component{
       setPre1(newComp);
       return true;
     }
-    else if (prev2() == null) {
+    else if (prev2() == null && prev1() != newComp && fol() != newComp) {
       setPre2(newComp);
       return true;
     }
@@ -61,11 +61,11 @@ public class endJunction extends Component{
   }
   
   public boolean connectFol(Component newComp) {
-    if (fol() == null) {
+    if (fol() == null && prev1() != newComp && prev2() != newComp) {
       setFol(newComp);
       return true;
     }
-    return false;
+    else return false;
   }
   
     public void setStart(Component start_) {

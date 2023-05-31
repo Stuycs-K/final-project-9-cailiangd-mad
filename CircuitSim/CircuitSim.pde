@@ -13,7 +13,7 @@ boolean isEditMode = true;
 void setup() {
   //fullScreen();
   size(1200,800);
-  surface.setResizable(true);
+  //surface.setResizable(true);
   mainC = new Circuit();
   prev = mainC.get(0);
 }
@@ -45,7 +45,7 @@ void draw() {
     textSize(20);
     fill(255, 255, 255);
     text("Add Junction", 545, 580);
-    clickJunction();
+   
 }
 
 void screen() {
@@ -62,6 +62,7 @@ void screen() {
   //hit boxes for connections
   rect(width-45,height/2+16,40,10);
   rect(50,height/2,10,40);
+  
   //display area
   fill(100);
   rect(0,height-150,width,150);
@@ -225,19 +226,19 @@ void mouseClicked() {
   }
 }
 }
-void buttonClicked() {
-  if (mousePressed) {
-    if (mouseX >= 520 && mouseX <= 680 && mouseY >= 540 && mouseY <= 620) {
-      buttonPressed = true;
-      //clickJunction();
-    }
-  }
-}
-void clickJunction() {
-  if (mousePressed && buttonPressed) {
-    startJunction(mouseX, mouseY);
-  }
-}
+//void buttonClicked() {
+//  if (mousePressed) {
+//    if (mouseX >= 520 && mouseX <= 680 && mouseY >= 540 && mouseY <= 620) {
+//      buttonPressed = true;
+//      //clickJunction();
+//    }
+//  }
+//}
+//void clickJunction() {
+//  if (mousePressed && buttonPressed) {
+//    startJunction(mouseX, mouseY);
+//  }
+//}
 
 void dataExtract() {
   if (debug) {
@@ -266,7 +267,7 @@ void generateConnections() {
       line(mainC.get(i).getX()+mainC.get(i).type(),mainC.get(i).getY(),mainC.get(i).followList().get(k).getX()-mainC.get(i).followList().get(k).type(),mainC.get(i).followList().get(k).getY());
       }
   }
-    if (!isEditMode && mainC.get(i).followList().get(0) == null) {
+    if (!isEditMode && mainC.get(i).followList().size() != 0 && mainC.get(i).followList().get(0) == null) {
       line(mainC.get(i).getX()+mainC.get(i).type(),mainC.get(i).getY(),mainC.get(0).getX()-mainC.get(0).type(),mainC.get(0).getY());
     }
   }

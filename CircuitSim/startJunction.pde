@@ -53,7 +53,7 @@ public class startJunction extends Component{
       setFol1(newComp);
       return true;
     }
-    else if (fol2() == null) {
+    else if (fol2() == null && fol1() != newComp && prev() != newComp) {
       setFol2(newComp);
       return true;
     }
@@ -61,11 +61,11 @@ public class startJunction extends Component{
   }
   
   public boolean connectPre(Component newComp) {
-    if (prev() == null) {
+    if (prev() == null && fol1() != newComp && fol2() != newComp) {
       setPre(newComp);
       return true;
     }
-    return false;
+    else return false;
   }
   
     public void setStart(Component start_) {
@@ -101,10 +101,10 @@ public class startJunction extends Component{
        temp += 1/(fol1.REQsub());
        temp += 1/(fol2.REQsub());
        if (end != null) {
-   return (1/temp)+end.REQsub();
+   return (1.0/temp)+end.REQsub();
        }
        else {
-       return (1/temp);
+       return (1.0/temp);
        }
     }
     else if (fol1 != null) {

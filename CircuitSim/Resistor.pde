@@ -33,27 +33,31 @@ public class Resistor extends Component{
   }
   //general connect methods
   public boolean connectPre(Component newComp) {
-    if (previous() == null) {
+    if (previous() == null && following() != newComp) {
       setPrevious(newComp);
       return true;
     }
-      return false;
+    else  return false;
   }
   public boolean connectFol(Component newComp) {
-    if (following() == null)  {
+    if (following() == null && previous() != newComp)  {
       setFollowing(newComp);
       return true;
     }
-    return false;
+    else return false;
   }
   
   
     public double REQsub() {
       if (followR == null || followR.type() == endJunction) {
         setREQsub(resistance());
+        return getREQsub();    
       }
-      else setREQsub(followR.REQsub() + resistance());
-    return getREQsub();
+      else {
+        setREQsub(followR.REQsub() + resistance());
+        return getREQsub();
+      }
+      
   }
   
     public void calculate() {
