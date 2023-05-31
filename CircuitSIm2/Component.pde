@@ -78,7 +78,7 @@ public class Component{
   }
 
   public double REQsub() {
-  return REQsub;
+    return REQsub;
   }
 
   public void setREQsub(double in) {

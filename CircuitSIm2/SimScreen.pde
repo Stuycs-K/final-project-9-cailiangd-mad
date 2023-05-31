@@ -12,7 +12,7 @@ void screen() {
   //hit boxes for connections
   rect(width-45,height/2+16,40,10);
   rect(50,height/2,10,40);
-  
+
   //display area
   fill(100);
   rect(0,height-150,width,150);
@@ -191,31 +191,31 @@ void generateNodes() {
     fill(205,85,124);
     rect(x+12.5,y,25,30,0,15,15,0);
   }
-  
+
     public void endJunctionIcon(int x, int y) {
       fill(0);
   rect(x,y,40,10);
   quad(x+40,y+10,x+34,y+2,x+54,y-23,x+60,y-15);
   quad(x+40,y,x+34,y+8,x+54,y+33,x+60,y+25);
   }
-  
+
     public void endJunctionDisplay(int x, int y) {
     fill(0);
     square(x,y,20);
   }
-  
+
      public void startJunctionIcon(int x, int y) {
        fill(0);
   rect(x,y,40,10);
   quad(x,y+10,x+6,y+2,x-24,y-23,x-30,y-15);
   quad(x,y,x+6,y+8,x-24,y+33,x-30,y+25);
    }
-   
+
     public void startJunctionDisplay(int x, int y) {
           fill(0);
     circle(x,y,20);
    }
-   
+
    void dataExtract() {
   if (debug) {
   textSize(30);
@@ -235,4 +235,3 @@ void findPartnerAll() {
   }
   }
 }
-  
