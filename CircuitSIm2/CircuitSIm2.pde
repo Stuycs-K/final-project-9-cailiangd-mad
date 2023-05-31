@@ -10,9 +10,7 @@ int compType = 0;
 int level = 120;
 boolean isEditMode = true;
 void setup() {
-    //fullScreen();
-  size(1200,800);
-  //surface.setResizable(true);
+  fullScreen();
   mainC = new Circuit();
   prev = mainC.get(0);
 }
@@ -37,6 +35,9 @@ void keyPressed() {
   }
   if (key == 'c') {
       compType = (compType+1)%3;
+  }
+  if (key == 'r') {
+    setup();
   }
     findPartnerAll();
 }
