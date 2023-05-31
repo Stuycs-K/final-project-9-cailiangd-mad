@@ -1,7 +1,7 @@
 ArrayList<Component> followList;
 public class Battery extends Component{
   public Battery(double newVol) {
-  super(0,newVol,width/2,420,battery);
+  super(0,newVol,width/2,height/2+16,battery);
   followList = new ArrayList<Component>();
   }
   

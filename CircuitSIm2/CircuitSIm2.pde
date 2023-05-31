@@ -1,4 +1,4 @@
-private final int battery = -550;
+private int battery = -550;
 private final int resistor = 15;
 private final int startJunction = 1;
 private final int endJunction = 0;
@@ -10,7 +10,9 @@ int compType = 0;
 int level = 120;
 boolean isEditMode = true;
 void setup() {
+  //size(1200,800);
   fullScreen();
+  battery = -width/2+50;
   mainC = new Circuit();
   prev = mainC.get(0);
 }

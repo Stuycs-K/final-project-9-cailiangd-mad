@@ -54,17 +54,17 @@ void dataDisplay() {
         mainC.calculate();
     textSize(40);
     if (prev == mainC.get(0)) {
-    text("REQ: "+round((float)mainC.getREQ()*100.0)/100.0,10,700);
-    text("PEQ: "+round((float)mainC.getPEQ()*100.0)/100.0,10,750);
-    text("IEQ: "+round((float)mainC.getIEQ()*100.0)/100.0,350,700);
-    text("VEQ: "+round((float)mainC.getVEQ()*100.0)/100.0,350,750);
+    text("REQ: "+round((float)mainC.getREQ()*100.0)/100.0,10,height-100);
+    text("PEQ: "+round((float)mainC.getPEQ()*100.0)/100.0,10,height-50);
+    text("IEQ: "+round((float)mainC.getIEQ()*100.0)/100.0,350,height-100);
+    text("VEQ: "+round((float)mainC.getVEQ()*100.0)/100.0,350,height-50);
     stroke(0);
     }
     else {
-      text("resistance: "+round((float)prev.resistance()*100.0)/100.0,10,700);
-      text("        power: "+round((float)prev.power()*100.0)/100.0,10,750);
-      text("   current: "+round((float)prev.current()*100.0)/100.0,350,700);
-      text("   voltage: "+round((float)prev.voltage()*100.0)/100.0,350,750);
+      text("resistance: "+round((float)prev.resistance()*100.0)/100.0,10,height-100);
+      text("        power: "+round((float)prev.power()*100.0)/100.0,10,height-50);
+      text("   current: "+round((float)prev.current()*100.0)/100.0,350,height-100);
+      text("   voltage: "+round((float)prev.voltage()*100.0)/100.0,350,height-50);
     }
 }
 }
@@ -133,7 +133,7 @@ void left() {
       target = new endJunction(mouseX,mouseY);
     }
   mainC.add(target);
-  if (prev.connectFol(target)) { //<>// //<>//
+  if (prev.connectFol(target)) { //<>// //<>// //<>//
   target.connectPre(prev);
   }
   else {

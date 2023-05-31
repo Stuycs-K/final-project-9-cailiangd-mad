@@ -55,7 +55,6 @@ ArrayList<Component> temp;
     public double REQsub() {
       println(this);
       if (followR == null || followR.type() == endJunction) { //<>//
-        println("setREQ");
         setREQsub(resistance());
         return getREQsub();
       }
