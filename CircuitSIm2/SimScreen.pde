@@ -115,6 +115,9 @@ void left() {
       if (prev.connectFol(mainC.get(i))) {
       mainC.get(i).connectPre(prev);
       }
+      else {
+      //code here
+      }
       temp = false;
     }
   }
@@ -130,10 +133,13 @@ void left() {
       target = new endJunction(mouseX,mouseY);
     }
   mainC.add(target);
-  if (prev.connectFol(target)) {
+  if (prev.connectFol(target)) { //<>//
   target.connectPre(prev);
   }
-  } //<>//
+  else {
+  //code here
+  }
+  } 
   else if(mouseX > 295 && mouseX < 395 && mouseY > 0 && mouseY < 80) {
     compType = 0;
   }
