@@ -34,6 +34,10 @@ Continued work on new algorithm
 
 Worked on mouseClicked(); needs debugging
 
+### 5/30/2023
+
+Continued to work on the error; figured out what it is but no progress
+
 ## Dylan Ma
 
 ### 5/23/2023
@@ -62,3 +66,7 @@ Continued to work on the new algorithm, as we had to change up our components to
 ### 5/29/2023 
 
 We continued to work on the button to add a junction, but we haven't quite figured out our algorithm to generate connections yet, or our mouseClicked() function entirely.
+
+### 5/30/2023
+
+Continued to work on the bug; determined that the issue might be that the last components connects to itself, rather than to another component, which causes a infinite loop because there's no end point.
