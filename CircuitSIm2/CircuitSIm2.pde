@@ -8,10 +8,12 @@ Component prev;
 boolean undo, debug;
 int compType = 0;
 int level = 120;
+int level2 = 100;
+boolean tab;
 boolean isEditMode = true;
 void setup() {
-  //size(1200,800);
-  fullScreen();
+  size(1250,800);
+  //fullScreen();
   battery = -width/2+50;
   mainC = new Circuit();
   prev = mainC.get(0);
@@ -25,7 +27,7 @@ void draw() {
   circlePrev();
   rectMode(CORNER);
   dataDisplay();
-  slider(800,15,level);
+  slider(width-350,15,level,"Voltage: ");
 }
 
 void keyPressed() {
@@ -41,6 +43,10 @@ void keyPressed() {
   if (key == 'r') {
     setup();
   }
+    if(key == TAB) {
+      tab = true;
+    }
+    println(key);
     findPartnerAll();
 }
 
@@ -60,3 +66,9 @@ void mouseDragged() {
     mainC.setVEQ(level / 10);
   }
 }
+
+  void keyReleased() {
+    if(key == TAB) {
+      tab = true;
+    }
+  }
