@@ -1,31 +1,35 @@
-Component previousR; 
-Component followR;
 public class Resistor extends Component{
+  Component previousR;
+Component followR;
+ArrayList<Component> temp;
   public Resistor(double Res, int x, int y) {
-    super(Res,0,x,y,resistor);  
+    super(Res,0,x,y,resistor);
+    previousR = null;
+    followR = null;
 }
+
   // general get methods
   public Component following() {
     return followR;
   }
-  
+
   public Component previous() {
     return previousR;
   }
-  
+
   public ArrayList<Component> followList() {
-    ArrayList<Component> temp = new ArrayList<Component> ();
+    temp = new ArrayList<Component> ();
     temp.add(followR);
     return temp;
   }
-  
+
   // general set methods
   public Component setFollowing(Component newFol) {
     Component temp = followR;
     followR = newFol;
     return temp;
   }
-  
+
     public Component setPrevious(Component newPre) {
     Component temp = previousR;
     previousR = newPre;
@@ -33,34 +37,34 @@ public class Resistor extends Component{
   }
   //general connect methods
   public boolean connectPre(Component newComp) {
-    if (previous() == null) {
+    if (previous() == null && following() != newComp) {
       setPrevious(newComp);
       return true;
     }
-      return false;
+    else  return false;
   }
   public boolean connectFol(Component newComp) {
-    if (following() == null)  {
-      setFollowing(newComp);
+    if (following() == null && previous() != newComp)  {
+      followR = newComp;
       return true;
     }
-    return false;
+    else return false;
   }
-  
-  
+
+
     public double REQsub() {
       println(this);
       if (followR == null || followR.type() == endJunction) { //<>//
         println("setREQ");
         setREQsub(resistance());
+        return getREQsub();
       }
-      else { //<>//
-        println("hasNext"+followR);
+      else {
         setREQsub(followR.REQsub() + resistance());
       }
     return getREQsub();
   }
-  
+
     public void calculate() {
     if (previousR != null && previousR.type() == resistor && previousR.type() == endJunction) {
       setCur(previousR.current);
@@ -76,19 +80,23 @@ public class Resistor extends Component{
       followR.calculate();
     }
   }
-  
+
     public void trace() {
       setTarget(true);
+      if (followR != null) {
       followR.trace();
+      }
   }
-  
+
   public void tracker(startJunction start) {
     followR.tracker(start);
   }
-  
+
   public void clearTrack() {
     setTarget(false);
+    if (followR != null) {
     followR.clearTrack();
+    }
   }
- 
+
 }

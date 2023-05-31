@@ -1,5 +1,3 @@
-import java.util.*;
-import java.io.*;
 public class Circuit{
   private double REQ;
   private double IEQ;

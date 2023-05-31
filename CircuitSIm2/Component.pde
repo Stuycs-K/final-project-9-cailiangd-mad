@@ -78,7 +78,7 @@ public class Component{
   }
 
   public double REQsub() {
-  return REQsub;
+    return REQsub;
   }
 
   public void setREQsub(double in) {
@@ -97,6 +97,9 @@ public class Component{
 
   public void clearTrack() {
   }
+  
+      public void findPartner() {
+    }
 
   public void setTarget(boolean val) {
     target = val;
@@ -112,4 +115,5 @@ public class Component{
   public boolean connectFol(Component newComp) {
    return true;
   }
+  
 }

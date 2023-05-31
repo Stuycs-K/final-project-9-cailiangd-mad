@@ -1,9 +1,12 @@
-Component previous;
+public class startJunction extends Component{
+  Component previous;
 Component fol1, fol2;
 endJunction end;
-public class startJunction extends Component{
   public startJunction(int x, int y) {
     super(0,0,x,y,startJunction);
+    previous = null;
+    fol1 = null;
+    fol2 = null;
   }
   
   // general get methods
@@ -43,7 +46,7 @@ public class startJunction extends Component{
   }
   
     public Component setFol2(Component newFol) {
-    Component temp = prev2;
+    Component temp = fol2;
     fol2 = newFol;
     return temp;
   }
@@ -53,7 +56,7 @@ public class startJunction extends Component{
       setFol1(newComp);
       return true;
     }
-    else if (fol2() == null) {
+    else if (fol2() == null && fol1() != newComp && prev() != newComp) {
       setFol2(newComp);
       return true;
     }
@@ -61,16 +64,13 @@ public class startJunction extends Component{
   }
   
   public boolean connectPre(Component newComp) {
-    if (prev() == null) {
+    if (prev() == null && fol1() != newComp && fol2() != newComp) {
       setPre(newComp);
       return true;
     }
-    return false;
+    else return false;
   }
-  
-    public void setStart(Component start_) {
-      start = (startJunction) start_;
-    }
+
   public void setEnd(endJunction end_) {
     end = end_;
   }
@@ -96,21 +96,31 @@ public class startJunction extends Component{
   }
   
   public double REQsub() {
+        println("hello-1");
     if (fol1 != null && fol2 != null) {
              double temp = 0;
-       temp += 1/(fol1.REQsub());
-       temp += 1/(fol2.REQsub());
+       temp += 1.0/(fol1.REQsub());
+       temp += 1.0/(fol2.REQsub());
        if (end != null) {
-   return (1/temp)+end.REQsub();
+    setREQsub((1.0/temp)+end.REQsub());
+    println(end.REQsub());
+    println((1.0/temp)+end.REQsub());
+    println("hello0");
        }
        else {
-       return (1/temp);
+       setREQsub(1.0/temp);
+       println("hello1");
        }
     }
     else if (fol1 != null) {
-      return fol1.REQsub();
+      setREQsub(fol1.REQsub());
+      println("hello2");
     }
-    return 0;
+    else {
+      setREQsub(0);
+      println("hello3");
+    }
+    return getREQsub();
   }
   
   public void findPartner() {
@@ -120,8 +130,10 @@ public class startJunction extends Component{
   }
   
         public void trace() {
-      setTarget(false);
+      setTarget(true);
+      if (fol1 != null) {
       fol1.trace();
+      }
   }
   
   public void tracker(startJunction start) {
@@ -130,7 +142,9 @@ public class startJunction extends Component{
   
   public void clearTrack() {
           setTarget(false);
+          if (fol1 != null) {
       fol1.clearTrack();
+          }
   }
   
 }
