@@ -7,6 +7,7 @@ Circuit mainC;
 Component prev;
 boolean undo, debug;
 int compType = 0;
+int level = 120;
 boolean isEditMode = true;
 void setup() {
     //fullScreen();
@@ -24,6 +25,7 @@ void draw() {
   circlePrev();
   rectMode(CORNER);
   dataDisplay();
+  slider(800,15,level);
 }
 
 void keyPressed() {
@@ -47,4 +49,11 @@ void mouseClicked() {
   else {
   Running();
 }
+}
+
+void mouseDragged() {
+  if (mouseY > 15 && mouseY < 65 && mouseX > 800 && mouseX < 1100) {
+    level = mouseX - 800;
+    mainC.setVEQ(level / 10);
+  }
 }
