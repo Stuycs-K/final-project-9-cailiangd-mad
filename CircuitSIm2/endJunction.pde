@@ -1,9 +1,13 @@
-Component prev1, prev2;
+public class endJunction extends Component{
+  Component prev1, prev2;
 Component follow;
 startJunction start;
-public class endJunction extends Component{
+ArrayList<Component> temp;
   public endJunction(int x, int y) {
     super(0,0,x,y,endJunction);
+    follow = null;
+    prev1 = null;
+    prev2 = null;
   }
   
   // general get methods
@@ -24,7 +28,7 @@ public class endJunction extends Component{
   }
   
     public ArrayList<Component> followList() {
-    ArrayList<Component> temp = new ArrayList<Component> ();
+      temp = new ArrayList<Component> ();
     temp.add(follow);
     return temp;
   }
@@ -88,9 +92,14 @@ public class endJunction extends Component{
   
       public double REQsub() {
       if (follow == null || follow.type() == endJunction) {
-        setREQsub(resistance());
+        setREQsub(0);
       }
-      setREQsub(follow.REQsub() + resistance());
+      else if (follow != null) {
+        setREQsub(follow.REQsub());
+      }
+      else {
+        setREQsub(0);
+      }
     return getREQsub();
   }
   
@@ -102,6 +111,8 @@ public class endJunction extends Component{
   }
   
   public void tracker(startJunction starter) {
+    println(this);
+    println(starter);
     if (target()) {
       start = starter;
       starter.setEnd(this);
