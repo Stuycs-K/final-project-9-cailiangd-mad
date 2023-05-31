@@ -66,7 +66,10 @@ ArrayList<Component> temp;
 
     public void calculate() {
     if (previousR != null && previousR.type() == resistor && previousR.type() == endJunction) {
-      setCur(previousR.current);
+      System.out.println(this);
+      System.out.println(previousR.type());
+      System.out.println(previousR.current());
+      setCur(previousR.current());
       setVol(current()*resistance());
       setPow(current()*voltage());
     }

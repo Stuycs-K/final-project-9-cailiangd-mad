@@ -96,16 +96,16 @@ endJunction end;
   }
   
   public double REQsub() {
-        println("hello-1");
+        //println("hello-1");
     if (fol1 != null && fol2 != null) {
              double temp = 0;
        temp += 1.0/(fol1.REQsub());
        temp += 1.0/(fol2.REQsub());
        if (end != null) {
     setREQsub((1.0/temp)+end.REQsub());
-    println(end.REQsub());
-    println((1.0/temp)+end.REQsub());
-    println("hello0");
+    //println(end.REQsub());
+    //println((1.0/temp)+end.REQsub());
+    //println("hello0");
        }
        else {
        setREQsub(1.0/temp);
@@ -114,11 +114,11 @@ endJunction end;
     }
     else if (fol1 != null) {
       setREQsub(fol1.REQsub());
-      println("hello2");
+      //println("hello2");
     }
     else {
       setREQsub(0);
-      println("hello3");
+      //println("hello3");
     }
     return getREQsub();
   }
