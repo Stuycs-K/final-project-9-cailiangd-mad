@@ -46,6 +46,7 @@ void keyPressed() {
       compType = (compType+1)%3;
   }
   if (key == 'r') {
+    isEditMode = true;
     setup();
   }
     if(key == TAB) {

@@ -24,20 +24,23 @@ I worked on dealing with the flaw discovered yesterday and work on streamlining 
 
 ### 5/27/2023
 
-Worked on new algorithm, helped plan it out
+Worked on new algorithm and redesigned the data structure.
 
 ### 5/28/2023
 
-Continued work on new algorithm
+Continued work on new algorithm and data stucture.
 
 ### 5/29/2023
 
-Worked on mouseClicked(); needs debugging
+Worked on mouseClicked(); and the underlieing connection methods which needs debugging.
 
 ### 5/30/2023
 
 Continued to work on the error; figured out what it is but no progress.
 Update: Removed both errors from program, first error caused by variables being placed in the wrong location, second error caused by missing code protecting against null cases and a missing '!'
+
+### 6/1/2023
+Fixed the new junction issue partially, the junctions now work for where there are only a single layer of junctions and no interconnection between junction sets. I am not able to redesign the entire algorithm to fix this in 12 hours.
 
 ## Dylan Ma
 
