@@ -7,8 +7,8 @@ Circuit mainC;
 Component prev;
 boolean undo, debug;
 int compType = 0;
-int level = 120;
-int level2 = 100;
+double level = 120;
+double level2 = 100;
 boolean tab;
 boolean isEditMode = true;
 void setup() {
@@ -28,6 +28,11 @@ void draw() {
   rectMode(CORNER);
   dataDisplay();
   slider(width-350,15,level,"Voltage: ");
+  level = 10.0 * mainC.getVEQ();
+  if (isEditMode && prev.type() == resistor) {
+   level2 = 10.0*prev.resistance();
+  slider(width/2-100,height-120,level2,"Resistance: ");
+  }
 }
 
 void keyPressed() {
@@ -60,12 +65,21 @@ void mouseClicked() {
 }
 
 void mouseDragged() {
-  if (mouseY > 15 && mouseY < 65 && mouseX > 800 && mouseX < 1100) {
-    level = mouseX - 800;
+  if (mouseY > 15 && mouseY < 15+50 && mouseX > width-450 && mouseX < width-350+300) {
+    level = mouseX - (width-450);
+    if (level > 285) {
+      level = 285;
+    }
     mainC.setVEQ(level / 10);
   }
-}
-
+  if (isEditMode && prev.type() == resistor && mouseY > height - 120 && mouseY < height-120+50 && mouseX > width/2-100 && mouseX < width/2-100+300) {
+    level2 = mouseX - (width/2-100);
+    if (level2 > 285) {
+      level2 = 285;
+    }
+    prev.setRes(level2 / 10); 
+  }
+  }
   void keyReleased() {
     if(key == TAB) {
       tab = true;

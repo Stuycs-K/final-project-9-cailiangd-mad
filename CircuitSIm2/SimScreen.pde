@@ -54,21 +54,20 @@ void dataDisplay() {
         mainC.calculate();
     textSize(40);
     if (prev == mainC.get(0)) {
-    text("REQ: "+round((float)mainC.getREQ()*100.0)/100.0,10,height-100);
-    text("PEQ: "+round((float)mainC.getPEQ()*100.0)/100.0,10,height-50);
-    text("IEQ: "+round((float)mainC.getIEQ()*100.0)/100.0,350,height-100);
-    text("VEQ: "+round((float)mainC.getVEQ()*100.0)/100.0,350,height-50);
+    text("REQ: "+round((float)mainC.getREQ()*1000.0)/1000.0,10,height-100);
+    text("PEQ: "+round((float)mainC.getPEQ()*1000.0)/1000.0,10,height-50);
+    text("IEQ: "+round((float)mainC.getIEQ()*1000.0)/1000.0,350,height-100);
+    text("VEQ: "+round((float)mainC.getVEQ()*1000.0)/1000.0,350,height-50);
     stroke(0);
     }
     else {
-      text("resistance: "+round((float)prev.resistance()*100.0)/100.0,10,height-100);
-      text("        power: "+round((float)prev.power()*100.0)/100.0,10,height-50);
-      text("   current: "+round((float)prev.current()*100.0)/100.0,350,height-100);
-      text("   voltage: "+round((float)prev.voltage()*100.0)/100.0,350,height-50);
+      text("resistance: "+round((float)prev.resistance()*1000.0)/1000.0,10,height-100);
+      text("        power: "+round((float)prev.power()*1000.0)/1000.0,10,height-50);
+      text("   current: "+round((float)prev.current()*1000.0)/1000.0,350,height-100);
+      text("   voltage: "+round((float)prev.voltage()*1000.0)/1000.0,350,height-50);
       text("   REQ: "+prev.getREQsub(),700,height-100);
     }
 }
-else changeResist();
 }
 
 void generateConnections() {
@@ -118,7 +117,7 @@ void left() {
       mainC.get(i).connectPre(prev);
       }
       else {
-      //code here
+        prev = mainC.get(0);
       }
       temp = false;
     }
@@ -133,13 +132,14 @@ void left() {
     }
     else if (compType == 2) {
       target = new endJunction(mouseX,mouseY,mainC.get(0));
-    } //<>//
-  mainC.add(target);
+    }
+  mainC.add(target); //<>//
   if (prev.connectFol(target)) {
   target.connectPre(prev);
   }
   else {
-  //code here
+    mainC.remove(mainC.size()-1);
+  prev = mainC.get(0);
   }
   }
   else if(mouseX > 295 && mouseX < 395 && mouseY > 0 && mouseY < 80) {
@@ -244,21 +244,14 @@ void findPartnerAll() {
   }
 }
 
-void slider(int x, int y, int level, String attach) {
+void slider(int x, int y, double level, String attach) {
   fill(0);
   stroke(0);
   textSize(50);
-  text(attach+level/10,x-textWidth(attach+level/10)-20,y+40);
+  text(attach+level/10.0,x-textWidth(attach+level/10)-20,y+40);
   strokeWeight(4);
   fill(0,255,0);
   rect(x,y,300,50,10);
   fill(0,0,255);
-  rect(x,y,level,50,10,0,0,10);
-}
-
-void changeResist() {
-  slider(width/2-100,height-120,level2,"Resistance: ");
-  if (prev.type() == resistor) {
-  prev.setRes(level2 / 10); 
-  }
+  rect(x,y,(float)level,50,10,0,0,10);
 }

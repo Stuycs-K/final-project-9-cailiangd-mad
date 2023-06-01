@@ -45,6 +45,10 @@ public class Circuit{
   public void add(Component newComp) {
     compList.add(newComp);
   }
+  
+  public void remove(int pos) {
+    compList.remove(pos);
+  }
 
   public String getCompList() {
     return compList.toString();
