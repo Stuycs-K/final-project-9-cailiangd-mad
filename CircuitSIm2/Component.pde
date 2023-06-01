@@ -71,7 +71,6 @@ public class Component{
     power = newPow;
   }
 
-
   //REQ related methods
   public double getREQsub() {
     return REQsub;

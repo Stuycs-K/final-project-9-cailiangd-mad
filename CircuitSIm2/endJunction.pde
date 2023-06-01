@@ -1,13 +1,14 @@
 public class endJunction extends Component{
   Component prev1, prev2;
 Component follow;
-startJunction start;
+Component start;
 ArrayList<Component> temp;
-  public endJunction(int x, int y) {
+  public endJunction(int x, int y, Component newStart) {
     super(0,0,x,y,endJunction);
     follow = null;
     prev1 = null;
     prev2 = null;
+    start = newStart;
   }
   
   // general get methods
@@ -23,7 +24,7 @@ ArrayList<Component> temp;
     return prev2;
   }
   
-  public startJunction start() {
+  public Component start() {
     return start;
   }
   
@@ -78,15 +79,10 @@ ArrayList<Component> temp;
   
   //change to list, use loop
   public void calculate() {
-    setCur(0);
-    if (prev1 != null) {
-      setCur(current()+prev1.current());
-    }
-    if (prev2 != null) {
-      setCur(current()+prev2.current());
-    }
+    setCur(start.current());
     if (follow != null) {
     follow.calculate();
+    setVol(follow.voltage());
     }
   }
   
@@ -111,8 +107,6 @@ ArrayList<Component> temp;
   }
   
   public void tracker(startJunction starter) {
-    println(this);
-    println(starter);
     if (target()) {
       start = starter;
       starter.setEnd(this);

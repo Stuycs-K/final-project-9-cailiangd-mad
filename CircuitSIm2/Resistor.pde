@@ -1,11 +1,13 @@
 public class Resistor extends Component{
   Component previousR;
 Component followR;
+double VEQ;
 ArrayList<Component> temp;
-  public Resistor(double Res, int x, int y) {
+  public Resistor(double Res, int x, int y, double newVEQ) {
     super(Res,0,x,y,resistor);
     previousR = null;
     followR = null;
+    setVEQ(newVEQ);
 }
 
   // general get methods
@@ -53,8 +55,7 @@ ArrayList<Component> temp;
 
 
     public double REQsub() {
-      println(this);
-      if (followR == null || followR.type() == endJunction) { //<>//
+      if (followR == null || followR.type() == endJunction) {
         setREQsub(resistance());
         return getREQsub();
       }
@@ -65,11 +66,15 @@ ArrayList<Component> temp;
   }
 
     public void calculate() {
-    if (previousR != null && previousR.type() == resistor && previousR.type() == endJunction) {
-      System.out.println(this);
-      System.out.println(previousR.type());
-      System.out.println(previousR.current());
+    if (previousR != null && (previousR.type() == resistor || previousR.type() == endJunction)) {
       setCur(previousR.current());
+      setVol(current()*resistance());
+      setPow(current()*voltage());
+      //println(this);
+      //println(previousR);
+    }
+    else if (previousR != null  && previousR.type() == battery) {
+       setCur(previousR.voltage()/getREQsub());
       setVol(current()*resistance());
       setPow(current()*voltage());
     }
@@ -78,10 +83,10 @@ ArrayList<Component> temp;
       setCur(voltage()/resistance());
       setPow(current()*voltage());
     }
-    if (followR != null) {
+    if (followR != null && followR.type() != endJunction) {
       followR.calculate();
     }
-  }
+  } //<>//
 
     public void trace() {
       setTarget(true);
@@ -91,7 +96,9 @@ ArrayList<Component> temp;
   }
 
   public void tracker(startJunction start) {
+    if (followR != null) {
     followR.tracker(start);
+    }
   }
 
   public void clearTrack() {
@@ -99,6 +106,14 @@ ArrayList<Component> temp;
     if (followR != null) {
     followR.clearTrack();
     }
+  }
+  
+  public void setVEQ(double newVEQ) {
+    VEQ = newVEQ;
+  }
+  
+  public double VEQ() {
+  return VEQ;
   }
 
 }

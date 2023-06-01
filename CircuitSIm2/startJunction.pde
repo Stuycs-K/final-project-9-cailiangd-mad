@@ -77,16 +77,14 @@ endJunction end;
   
   
     public void calculate() {
-    if (previous != null && previous.type() == resistor && previous.type() == endJunction) {
-      setCur(previous.current);
-      setVol(current()*resistance());
-      setPow(current()*voltage());
-    }
-    else if (previous != null) {
-      setVol(previous.voltage());
-      setCur(voltage()/resistance());
-      setPow(current()*voltage());
-    }
+      setCur(previous.current());
+      if (end != null) {
+       end.calculate();
+      setVol(getREQsub()*current()-end.voltage());
+      }
+      else {
+        setVol(getREQsub()*current());
+      }
     if (fol1 != null) {
       fol1.calculate();
     }
@@ -109,7 +107,7 @@ endJunction end;
        }
        else {
        setREQsub(1.0/temp);
-       println("hello1");
+       //println("hello1");
        }
     }
     else if (fol1 != null) {

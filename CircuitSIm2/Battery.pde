@@ -24,14 +24,16 @@ public class Battery extends Component{
 
 
  public double REQsub() {
-   double temp = 0;
+   setREQsub(0);
    for (int i = 0; i < followList.size(); i++) {
-     temp += 1.0/(followList.get(i).REQsub());
+     setREQsub(getREQsub()+(1.0/(followList.get(i).REQsub())));
    }
-   return 1.0/temp;
+   setREQsub(1.0/getREQsub());
+   return getREQsub();
  }
  
  public void calculate() {
+     setCur(voltage()/getREQsub());
       for (int i = 0; i < followList.size(); i++) {
      followList.get(i).calculate();
    }

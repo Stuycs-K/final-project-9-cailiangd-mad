@@ -65,6 +65,7 @@ void dataDisplay() {
       text("        power: "+round((float)prev.power()*100.0)/100.0,10,height-50);
       text("   current: "+round((float)prev.current()*100.0)/100.0,350,height-100);
       text("   voltage: "+round((float)prev.voltage()*100.0)/100.0,350,height-50);
+      text("   REQ: "+prev.getREQsub(),700,height-100);
     }
 }
 else changeResist();
@@ -125,15 +126,15 @@ void left() {
   if (temp && mouseY < height-150-30 && mouseY > 70+30 && (mouseY > height/2+50+30 || (mouseX > 50+30 && mouseX < width-100-30))) {
     Component target = new Component(0,0,0,0,startJunction);
     if (compType == 0) {
-      target = new Resistor(10,mouseX,mouseY);
+      target = new Resistor(10,mouseX,mouseY,mainC.getVEQ());
     }
     else if (compType == 1) {
       target = new startJunction(mouseX,mouseY);
     }
     else if (compType == 2) {
-      target = new endJunction(mouseX,mouseY);
-    }
-  mainC.add(target); //<>//
+      target = new endJunction(mouseX,mouseY,mainC.get(0));
+    } //<>//
+  mainC.add(target);
   if (prev.connectFol(target)) {
   target.connectPre(prev);
   }

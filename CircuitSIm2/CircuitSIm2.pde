@@ -46,7 +46,6 @@ void keyPressed() {
     if(key == TAB) {
       tab = true;
     }
-    println(key);
     findPartnerAll();
 }
 
