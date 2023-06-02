@@ -78,12 +78,15 @@ ArrayList<Component> temp;
       setVol(current()*resistance());
       setPow(current()*voltage());
     }
+    else if (previousR != null && previousR.type() == startJunction) {
+      
+    }
     else if (previousR != null) {
       setVol(previousR.voltage());
       setCur(voltage()/resistance());
       setPow(current()*voltage());
     }
-    if (followR != null && followR.type() != endJunction) {
+    if (followR != null && followR.type() != endJunction) { //<>//
       followR.calculate();
     }
   } //<>//
