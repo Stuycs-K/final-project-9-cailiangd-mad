@@ -74,3 +74,7 @@ We continued to work on the button to add a junction, but we haven't quite figur
 ### 5/30/2023
 
 Continued to work on the bug; determined that the issue might be that the last components connects to itself, rather than to another component, which causes a infinite loop because there's no end point.
+
+### 6/4/2023
+
+Worked on an undo button so that we don't have to restart the simulation when we make a mistake. Still a few bugs

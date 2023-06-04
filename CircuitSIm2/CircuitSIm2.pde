@@ -49,12 +49,21 @@ void keyPressed() {
     isEditMode = true;
     setup();
   }
+  if (key == 'u') {
+    undo();
+  }
     if(key == TAB) {
       tab = true;
     }
     findPartnerAll();
 }
-
+public void undo() {
+  /* Remove the previously added last resistor from the list */
+  mainC.compList.remove(mainC.compList.size()-1);
+  /* disconnect that resistor */
+ 
+  
+}
 void mouseClicked() {
    EditModeChange();
   if (isEditMode) {
