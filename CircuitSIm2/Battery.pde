@@ -1,9 +1,7 @@
-import java.util.*;
-import java.io.*;
 ArrayList<Component> followList;
 public class Battery extends Component{
   public Battery(double newVol) {
-  super(0,newVol,width/2,420,battery);
+  super(0,newVol,width/2,height/2+16,battery);
   followList = new ArrayList<Component>();
   }
   
@@ -12,7 +10,7 @@ public class Battery extends Component{
     return true;
   }
   
-  public String toString() {
+  public String debugToString() {
     String temp = "";
     for (int i = 0; i < followList.size(); i++) {
     temp += followList.get(i).toString() + "\n";
@@ -23,15 +21,19 @@ public class Battery extends Component{
   return temp;
 }
 
+
+
  public double REQsub() {
-   double temp = 0;
+   setREQsub(0);
    for (int i = 0; i < followList.size(); i++) {
-     temp += 1.0/(followList.get(i).REQsub());
+     setREQsub(getREQsub()+(1.0/(followList.get(i).REQsub())));
    }
-   return 1.0/temp;
+   setREQsub(1.0/getREQsub());
+   return getREQsub();
  }
  
  public void calculate() {
+     setCur(voltage()/getREQsub());
       for (int i = 0; i < followList.size(); i++) {
      followList.get(i).calculate();
    }

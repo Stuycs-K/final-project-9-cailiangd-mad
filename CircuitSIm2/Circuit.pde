@@ -1,5 +1,3 @@
-import java.util.*;
-import java.io.*;
 public class Circuit{
   private double REQ;
   private double IEQ;
@@ -46,6 +44,10 @@ public class Circuit{
 
   public void add(Component newComp) {
     compList.add(newComp);
+  }
+  
+  public void remove(int pos) {
+    compList.remove(pos);
   }
 
   public String getCompList() {
@@ -110,5 +112,6 @@ public Component chooseComp(int x,int y) {
 public Component get(int i) {
   return compList.get(i);
 }
+
 
 }

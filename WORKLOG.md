@@ -22,21 +22,25 @@ Wrote the visual connection algorithm. Discovered multiple flaws in our code rel
 
 I worked on dealing with the flaw discovered yesterday and work on streamlining the code. This process involved replacing a lot of what we have already written to deal with this issue. This issue will likely mean it will take until at least Tuesday if not Wednesday for us to have enough functioning code to do a complete test. I also started working on the new generate connections method.
 
-### 5/27/2023 
+### 5/27/2023
 
-Worked on new algorithm, helped plan it out
+Worked on new algorithm and redesigned the data structure.
 
-### 5/28/2023 
+### 5/28/2023
 
-Continued work on new algorithm
+Continued work on new algorithm and data stucture.
 
-### 5/29/2023 
+### 5/29/2023
 
-Worked on mouseClicked(); needs debugging
+Worked on mouseClicked(); and the underlieing connection methods which needs debugging.
 
 ### 5/30/2023
 
-Continued to work on the error; figured out what it is but no progress
+Continued to work on the error; figured out what it is but no progress.
+Update: Removed both errors from program, first error caused by variables being placed in the wrong location, second error caused by missing code protecting against null cases and a missing '!'
+
+### 6/1/2023
+Fixed the new junction issue partially, the junctions now work for where there are only a single layer of junctions and no interconnection between junction sets. I am not able to redesign the entire algorithm to fix this in 12 hours.
 
 ## Dylan Ma
 
@@ -55,18 +59,22 @@ We continued to work on our reqSub() method - made headway on the make connectio
 
 We deal with the error related to not knowing where loops start and end. I work on the mousePressed method as well as the buttons for the junctions and resistor.
 
-### 5/27/2023 
+### 5/27/2023
 
 Figured out a new algorithm, as our old algorithm didn't work for parallel or series circuits, so we began implementing a new algorithm using the junctions as nodes.
 
-### 5/28/2023 
+### 5/28/2023
 
 Continued to work on the new algorithm, as we had to change up our components to have subclasses.
 
-### 5/29/2023 
+### 5/29/2023
 
 We continued to work on the button to add a junction, but we haven't quite figured out our algorithm to generate connections yet, or our mouseClicked() function entirely.
 
 ### 5/30/2023
 
 Continued to work on the bug; determined that the issue might be that the last components connects to itself, rather than to another component, which causes a infinite loop because there's no end point.
+
+### 6/4/2023
+
+Worked on an undo button so that we don't have to restart the simulation when we make a mistake. Still a few bugs

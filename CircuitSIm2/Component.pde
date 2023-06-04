@@ -71,7 +71,6 @@ public class Component{
     power = newPow;
   }
 
-
   //REQ related methods
   public double getREQsub() {
     return REQsub;
@@ -97,6 +96,9 @@ public class Component{
 
   public void clearTrack() {
   }
+  
+      public void findPartner() {
+    }
 
   public void setTarget(boolean val) {
     target = val;
@@ -112,4 +114,5 @@ public class Component{
   public boolean connectFol(Component newComp) {
    return true;
   }
+  
 }

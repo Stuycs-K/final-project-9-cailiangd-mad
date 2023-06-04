@@ -1,9 +1,14 @@
-Component prev1, prev2;
-Component follow;
-startJunction start;
 public class endJunction extends Component{
-  public endJunction(int x, int y) {
+  Component prev1, prev2;
+Component follow;
+Component start;
+ArrayList<Component> temp;
+  public endJunction(int x, int y, Component newStart) {
     super(0,0,x,y,endJunction);
+    follow = null;
+    prev1 = null;
+    prev2 = null;
+    start = newStart;
   }
   
   // general get methods
@@ -19,12 +24,12 @@ public class endJunction extends Component{
     return prev2;
   }
   
-  public startJunction start() {
+  public Component start() {
     return start;
   }
   
     public ArrayList<Component> followList() {
-    ArrayList<Component> temp = new ArrayList<Component> ();
+      temp = new ArrayList<Component> ();
     temp.add(follow);
     return temp;
   }
@@ -74,23 +79,23 @@ public class endJunction extends Component{
   
   //change to list, use loop
   public void calculate() {
-    setCur(0);
-    if (prev1 != null) {
-      setCur(current()+prev1.current());
-    }
-    if (prev2 != null) {
-      setCur(current()+prev2.current());
-    }
+    setCur(start.current());
     if (follow != null) {
     follow.calculate();
+    setVol(follow.voltage());
     }
   }
   
       public double REQsub() {
       if (follow == null || follow.type() == endJunction) {
-        setREQsub(resistance());
+        setREQsub(0);
       }
-      setREQsub(follow.REQsub() + resistance());
+      else if (follow != null) {
+        setREQsub(follow.REQsub());
+      }
+      else {
+        setREQsub(0);
+      }
     return getREQsub();
   }
   
