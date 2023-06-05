@@ -42,6 +42,9 @@ Update: Removed both errors from program, first error caused by variables being 
 ### 6/1/2023
 Fixed the new junction issue partially, the junctions now work for where there are only a single layer of junctions and no interconnection between junction sets. I am not able to redesign the entire algorithm to fix this in 12 hours.
 
+### 6/4/2023
+Worked on undo button. Got undo button working but the UI is terrible. Didn't have time to start working on asymmetric loops yet. 
+
 ## Dylan Ma
 
 ### 5/23/2023
