@@ -2,6 +2,7 @@ import java.util.*;
 import java.io.*;
 public class Component{
   private int type;
+  private int name;
   private double resistance;
   private double current;
   private double voltage;
@@ -10,13 +11,14 @@ public class Component{
   private int y;
   private ArrayList<Component> pre;
   private ArrayList<Component> fol;
-  public Component(double Resistance, double Voltage, int x_, int y_) {
+  public Component(double Resistance, double Voltage, int x_, int y_, int name_) {
     voltage = Voltage;
     resistance = Resistance;
     x=x_;
     y=y_;
     pre = new ArrayList<Component> ();
     fol = new ArrayList<Component> ();
+    name = name_;
   }
   //general get methods
   public double resistance() {
@@ -45,6 +47,10 @@ public class Component{
 
    public int type() {
      return type;
+   }
+   
+   public int name() {
+     return name;
    }
   
   public ArrayList<Component> fol() {
@@ -77,8 +83,20 @@ public class Component{
   }
 
   //calculate for RIVP
-  public ArrayList<double[]> calculate(double[]) {
-    
+  public ArrayList<double[]> genMatrix(double[] in) {
+    in[name()] = resistance();
+    ArrayList<double[]> gen = new ArrayList<double[]> ();
+    for (int i = 0; i < fol.size(); i++) {
+      ArrayList<double[]> temp = fol.get(i).genMatrix(in);
+      for (int k = 0; k < temp.size(); k++) {
+        gen.add(temp.get(k));
+      }
+    }
+    return gen;
+  }
+  
+  public void calculate() {
+    /*Need to implement.*/
   }
 
   //Connection methods
