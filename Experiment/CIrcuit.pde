@@ -15,7 +15,8 @@ public class Circuit{
     compList = new ArrayList<Component>();
     add(battery1);
   }
-  
+ 
+ //need to rebuild
 public void undo() {
   if (isEditMode) {
   /* Remove the previously added last resistor from the list */
@@ -95,6 +96,10 @@ public void undo() {
  public void RREF() {
    /*Need to implement.*/
  }
+ 
+ public void pullCurrent() {
+   /*Need to implement.*/
+ }
 
 public void calculateIVP() {
   for (int i = 0; i < size(); i++) {
@@ -102,9 +107,10 @@ public void calculateIVP() {
   }
 }
 
+//need to rebuild
 public void calculate() {
-  calculateREQ();
-  calculateIVPeq();
+  RREF();
+  pullCurrent();
   calculateIVP();
 }
 
