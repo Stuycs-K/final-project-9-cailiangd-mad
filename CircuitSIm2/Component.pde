@@ -119,4 +119,11 @@ public class Component{
    return true;
   }
   
+    public Component setFol(Component newFol, int mode) {
+    return null;
+  }
+
+    public Component setPre(Component newPre, int mode) {
+    return null;
+  }
 }

@@ -75,6 +75,7 @@ void generateConnections() {
     for (int k = 0; k < mainC.get(i).followList().size(); k++) {
       stroke(0);
       if (mainC.get(i).followList().get(k) != null) {
+        println(mainC.get(i).followList().get(k));
       line(mainC.get(i).getX()+mainC.get(i).type(),mainC.get(i).getY(),mainC.get(i).followList().get(k).getX()-mainC.get(i).followList().get(k).type(),mainC.get(i).followList().get(k).getY());
       }
   }
@@ -231,6 +232,7 @@ void generateNodes() {
   if (prev != null) {
   text(prev.toString(), 25, 550);
   }
+  text(mainC.chooseComp(mouseX,mouseY).followList().toString(),25,600);
   }
 }
 

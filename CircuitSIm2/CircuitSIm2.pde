@@ -51,6 +51,7 @@ void keyPressed() {
   }
   if (key == 'u') {
     mainC.undo();
+    prev = mainC.get(0);
   }
     if(key == TAB) {
       tab = true;

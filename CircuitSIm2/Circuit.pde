@@ -15,18 +15,30 @@ public class Circuit{
     compList = new ArrayList<Component>();
     add(battery1);
   }
+  
 public void undo() {
+  if (isEditMode) {
   /* Remove the previously added last resistor from the list */
-  mainC.compList.remove(mainC.compList.size()-1);
+  compList.remove(compList.size()-1);
   /* disconnect that resistor */
-  
-  if (mainC.compList.get(mainC.compList.size()-1).followList().size() > 1){
-    mainC.compList.get(mainC.compList.size()-1).followList().remove(followList.size()-1);
+  if (compList.get(compList.size()-1).type() == resistor) {
+    compList.get(compList.size()-1).setFol(null,0);
   }
-  else {
-    mainC.compList.get(mainC.compList.size()-1).connectFol(mainC.compList.get(0));
+  else if (compList.get(compList.size()-1).type() == startJunction) {
+    compList.get(compList.size()-1).setFol(null,0);
   }
-  
+  else if (compList.get(compList.size()-1).type() == endJunction) {
+    if (compList.get(compList.size()-1).followList().get(1) != null) {
+      compList.get(compList.size()-1).setFol(null,0);
+    }
+    else {
+      compList.get(compList.size()-1).setFol(null,1);
+    }
+  }
+  else if (compList.get(compList.size()-1).type() == battery){
+   compList.get(compList.size()-1).setFol(null,0);
+  }
+  }
 }
 
   public double getREQ() {

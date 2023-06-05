@@ -33,31 +33,33 @@ endJunction end;
     return temp;
   }
   
-  public Component setPre(Component newPrev) {
+  public Component setPre(Component newPrev, int mode) {
     Component temp = previous;
     previous = newPrev;
     return temp;
   }
   
-    public Component setFol1(Component newFol) {
-    Component temp = fol1;
+    public Component setFol(Component newFol, int mode) {
+    Component temp;
+    if (mode == 0) {
+    temp = fol1;
     fol1 = newFol;
-    return temp;
-  }
-  
-    public Component setFol2(Component newFol) {
-    Component temp = fol2;
+    }
+    else {
+    temp = fol2;
     fol2 = newFol;
+    }
     return temp;
   }
+
   //connect methodss
   public boolean connectFol(Component newComp) {
     if (fol1() == null) {
-      setFol1(newComp);
+      setFol(newComp,0);
       return true;
     }
     else if (fol2() == null && fol1() != newComp && prev() != newComp) {
-      setFol2(newComp);
+      setFol(newComp,1);
       return true;
     }
     else return false;
@@ -65,7 +67,7 @@ endJunction end;
   
   public boolean connectPre(Component newComp) {
     if (prev() == null && fol1() != newComp && fol2() != newComp) {
-      setPre(newComp);
+      setPre(newComp, 0);
       return true;
     }
     else return false;

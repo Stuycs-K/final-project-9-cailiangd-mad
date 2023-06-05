@@ -26,13 +26,13 @@ ArrayList<Component> temp;
   }
 
   // general set methods
-  public Component setFollowing(Component newFol) {
+  public Component setFol(Component newFol, int mode) {
     Component temp = followR;
     followR = newFol;
     return temp;
   }
 
-    public Component setPrevious(Component newPre) {
+    public Component setPre(Component newPre, int mode) {
     Component temp = previousR;
     previousR = newPre;
     return temp;
@@ -40,14 +40,14 @@ ArrayList<Component> temp;
   //general connect methods
   public boolean connectPre(Component newComp) {
     if (previous() == null && following() != newComp) {
-      setPrevious(newComp);
+      setPre(newComp, 0);
       return true;
     }
     else  return false;
   }
   public boolean connectFol(Component newComp) {
     if (following() == null && previous() != newComp)  {
-      followR = newComp;
+      setFol(newComp, 0);
       return true;
     }
     else return false;

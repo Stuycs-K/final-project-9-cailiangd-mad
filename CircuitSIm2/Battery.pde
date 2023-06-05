@@ -9,6 +9,13 @@ public class Battery extends Component{
     followList.add(newComp);
     return true;
   }
+ 
+   //actually just removes items from followList.
+  public Component setFol(Component newFol, int mode) {
+    Component temp = followList.get(followList.size()-1);
+    followList.set(followList.size()-1,newFol);
+    return temp;
+  }
   
   public String debugToString() {
     String temp = "";
