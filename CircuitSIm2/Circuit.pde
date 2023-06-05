@@ -15,7 +15,19 @@ public class Circuit{
     compList = new ArrayList<Component>();
     add(battery1);
   }
-
+public void undo() {
+  /* Remove the previously added last resistor from the list */
+  mainC.compList.remove(mainC.compList.size()-1);
+  /* disconnect that resistor */
+  
+  if (mainC.compList.get(mainC.compList.size()-1).followList().size() > 1){
+    mainC.compList.get(mainC.compList.size()-1).followList().remove(followList.size()-1);
+  }
+  else {
+    mainC.compList.get(mainC.compList.size()-1).connectFol(mainC.compList.get(0));
+  }
+  
+}
 
   public double getREQ() {
     return REQ;
@@ -112,5 +124,6 @@ public Component chooseComp(int x,int y) {
 public Component get(int i) {
   return compList.get(i);
 }
+
 
 }

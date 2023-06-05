@@ -65,7 +65,7 @@ void dataDisplay() {
       text("        power: "+round((float)prev.power()*1000.0)/1000.0,10,height-50);
       text("   current: "+round((float)prev.current()*1000.0)/1000.0,350,height-100);
       text("   voltage: "+round((float)prev.voltage()*1000.0)/1000.0,350,height-50);
-      text("   REQ: "+prev.getREQsub(),700,height-100);
+     // text("   REQ: "+prev.getREQsub(),700,height-100);
     }
 }
 }

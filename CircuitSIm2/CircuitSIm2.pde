@@ -49,6 +49,9 @@ void keyPressed() {
     isEditMode = true;
     setup();
   }
+  if (key == 'u') {
+    mainC.undo();
+  }
     if(key == TAB) {
       tab = true;
     }
