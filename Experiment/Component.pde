@@ -8,13 +8,15 @@ public class Component{
   private double power;
   private int x;
   private int y;
-  private ArrayList<Component> prev;
+  private ArrayList<Component> pre;
   private ArrayList<Component> fol;
   public Component(double Resistance, double Voltage, int x_, int y_) {
     voltage = Voltage;
     resistance = Resistance;
     x=x_;
     y=y_;
+    pre = new ArrayList<Component> ();
+    fol = new ArrayList<Component> ();
   }
   //general get methods
   public double resistance() {
@@ -45,8 +47,12 @@ public class Component{
      return type;
    }
   
-  public ArrayList<Component> followList() {
-    return new ArrayList<Component>();
+  public ArrayList<Component> fol() {
+    return fol;
+  }
+  
+  public ArrayList<Component> pre() {
+    return pre;
   }
   
   public String toString() {
@@ -71,22 +77,27 @@ public class Component{
   }
 
   //calculate for RIVP
-  public void calculate() {
+  public ArrayList<double[]> calculate(double[]) {
+    
   }
 
   //Connection methods
-  public boolean connectPre(Component newComp) {
-    return true;
+  public void connectPre(Component newComp) {
+    pre.add(newComp);
   }
-  public boolean connectFol(Component newComp) {
-   return true;
+  public void connectFol(Component newComp) {
+   fol.add(newComp);
   }
   
-    public Component setFol(Component newFol, int mode) {
-    return null;
+    public Component removeFol(int pos) {
+     Component temp = fol.get(pos);
+    fol.remove(pos);
+    return temp;
   }
 
-    public Component setPre(Component newPre, int mode) {
-    return null;
+    public Component removePre(int pos) {
+     Component temp = pre.get(pos);
+    pre.remove(pos);
+    return temp;
   }
 }
