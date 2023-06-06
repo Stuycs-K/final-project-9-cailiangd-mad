@@ -79,13 +79,7 @@ ArrayList<Component> temp;
       setPow(current()*voltage());
     }
     else if (previousR != null && previousR.type() == startJunction) {
-      if (previousR.followList().size() > 1) {
-      double val = (previousR.followList().get((previousR.followList().indexOf(this)+1)%2).getREQsub());
-      setCur(previousR.current()*(getREQsub()/(getREQsub()+val)));
-      }
-      else {
-        setCur(previousR.current());
-      }
+      setCur(previousR.voltage()/(getREQsub()));
       setVol(current()*resistance());
       setPow(current()*voltage());
     }
@@ -100,10 +94,10 @@ ArrayList<Component> temp;
   } //<>//
 
     public void trace() {
-      setTarget(true);
+      setTarget(true); //<>//
       if (followR != null) {
       followR.trace();
-      }
+      } //<>//
   }
 
   public void tracker(startJunction start) {

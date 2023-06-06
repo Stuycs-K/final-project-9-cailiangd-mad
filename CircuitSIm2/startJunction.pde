@@ -79,7 +79,12 @@ endJunction end;
   
   
     public void calculate() {
-      setCur(previous.current());
+      if (previous.type() == startJunction) {
+      setCur(previous.voltage()/getREQsub());
+      }
+      else {
+        setCur(previous.current());
+      }
       if (end != null) {
        end.calculate();
       setVol(getREQsub()*current()-end.voltage());
@@ -137,7 +142,9 @@ endJunction end;
   }
   
   public void tracker(startJunction start) {
+    if (fol2 != null) {
     fol2.tracker(start);
+    }
   }
   
   public void clearTrack() {

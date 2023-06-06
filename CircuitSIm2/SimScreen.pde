@@ -60,12 +60,12 @@ void dataDisplay() {
     text("VEQ: "+round((float)mainC.getVEQ()*1000.0)/1000.0,350,height-50);
     stroke(0);
     }
-    else {
+    else /*if (prev.type() == resistor)*/ {
       text("resistance: "+round((float)prev.resistance()*1000.0)/1000.0,10,height-100);
       text("        power: "+round((float)prev.power()*1000.0)/1000.0,10,height-50);
       text("   current: "+round((float)prev.current()*1000.0)/1000.0,350,height-100);
       text("   voltage: "+round((float)prev.voltage()*1000.0)/1000.0,350,height-50);
-     // text("   REQ: "+prev.getREQsub(),700,height-100);
+      text("   REQ: "+prev.getREQsub(),700,height-100);
     }
 }
 }
