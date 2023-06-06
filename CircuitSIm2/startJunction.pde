@@ -52,7 +52,7 @@ endJunction end;
     return temp;
   }
 
-  //connect methodss
+  //connect methods
   public boolean connectFol(Component newComp) {
     if (fol1() == null) {
       setFol(newComp,0);
@@ -79,6 +79,9 @@ endJunction end;
   
   
     public void calculate() {
+      /* ERROR
+      suggestion: setCur(previous.current() * (previous. (the val variable in the resistor))       double val = (previousR.followList().get((previousR.followList().indexOf(this)+1)%2).getREQsub());
+      */
       setCur(previous.current());
       if (end != null) {
        end.calculate();

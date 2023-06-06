@@ -81,8 +81,8 @@ ArrayList<Component> temp;
     else if (previousR != null && previousR.type() == startJunction) {
       if (previousR.followList().size() > 1) {
       double val = (previousR.followList().get((previousR.followList().indexOf(this)+1)%2).getREQsub());
-      /** ERROR MIGHT BE HERE */
-      setCur(previousR.current()*(getREQsub()/(getREQsub()+val)));
+      /** ERROR MIGHT BE HERE, getREQ value to val */
+      setCur(previousR.current()*(val/(getREQsub()+val)));
       }
       else {
         setCur(previousR.current());
