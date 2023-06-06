@@ -1,3 +1,5 @@
+import java.util.*;
+import java.io.*;
 public class Circuit{
   ArrayList<Component> compList;
   int count = 0;
@@ -10,42 +12,15 @@ public class Circuit{
     compList = new ArrayList<Component>();
     add(battery1);
   }
- 
+
    public int count() {
      return count++;
    }
-//need to rebuild
-//need to rebuild
-//need to rebuild
-//public void undo() {
-//  if (isEditMode) {
-//  /* Remove the previously added last resistor from the list */
-//  compList.remove(compList.size()-1);
-//  /* disconnect that resistor */
-//  if (compList.get(compList.size()-1).type() == resistor) {
-//    compList.get(compList.size()-1).setFol(null,0);
-//  }
-//  else if (compList.get(compList.size()-1).type() == startJunction) {
-//    compList.get(compList.size()-1).setFol(null,0);
-//  }
-//  else if (compList.get(compList.size()-1).type() == endJunction) {
-//    if (compList.get(compList.size()-1).followList().get(1) != null) {
-//      compList.get(compList.size()-1).setFol(null,0);
-//    }
-//    else {
-//      compList.get(compList.size()-1).setFol(null,1);
-//    }
-//  }
-//  else if (compList.get(compList.size()-1).type() == battery){
-//   compList.get(compList.size()-1).setFol(null,0);
-//  }
-//  }
-//}
 
   public void add(Component newComp) {
     compList.add(newComp);
   }
-  
+
   public void remove(int pos) {
     compList.remove(pos);
   }
@@ -66,31 +41,14 @@ public class Circuit{
     return res.substring(0,res.length()-1);
   }
 
- public void RREF() {
-   ArrayList<double[]> matrix = compList.get(0).genMatrix(new double[compList.size()+1]);
-   matrixOut(matrix);
-   //debugging method
-   /*Need to implement.*/
-   /*Need to implement.*/
-   /*Need to implement.*/
- }
- 
- public void pullCurrent() {
-      /*Need to implement.*/
-   /*Need to implement.*/
-   /*Need to implement.*/
+ public void getMatrix() {
+    Driver.matrixOut(compList.get(0).genMatrix(new double[compList.size()+1]));
  }
 
 public void calculateIVP() {
   for (int i = 0; i < size(); i++) {
     get(i).calculate();
   }
-}
-
-public void calculate() {
-  RREF();
-  pullCurrent();
-  calculateIVP();
 }
 
 public Component chooseComp(int x,int y) {

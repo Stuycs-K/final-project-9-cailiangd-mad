@@ -1,6 +1,9 @@
 private int battery = -550;
 private final int resistor = 15;
-
+/////////////////
+//testing variables
+boolean testing;
+/////////////////
 Circuit mainC;
 Component prev;
 boolean undo, debug;
@@ -25,10 +28,10 @@ void draw() {
   rectMode(CORNER);
   dataDisplay();
   level = 10.0 * mainC.get(0).voltage();
-  slider(width-350,15,level,"Voltage: ");
+  slider(width-350,15,level,"Voltage: "); //<>//
   if (isEditMode && prev.type() == resistor) {
    level2 = 10.0*prev.resistance();
-  slider(width/2-100,height-120,level2,"Resistance: "); //<>//
+  slider(width/2-100,height-120,level2,"Resistance: ");
   }
 }
 
@@ -63,12 +66,12 @@ void mouseClicked() {
 }
 
 void mouseDragged() {
-  if (mouseY > 15 && mouseY < 15+50 && mouseX > width-450 && mouseX < width-350+300) {
+  if (isEditMode && mouseY > 15 && mouseY < 15+50 && mouseX > width-450 && mouseX < width-350+300) {
     level = mouseX - (width-450);
     if (level > 285) {
       level = 285;
     }
-    //mainC.get(0).setVol(level / 10);
+    mainC.get(0).setVol(level / 10);
   }
   if (isEditMode && prev.type() == resistor && mouseY > height - 120 && mouseY < height-120+50 && mouseX > width/2-100 && mouseX < width/2-100+300) {
     level2 = mouseX - (width/2-100);

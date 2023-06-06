@@ -49,19 +49,19 @@ public class Component{
    public int type() {
      return type;
    }
-   
+
    public int name() {
      return name;
    }
-  
+
   public ArrayList<Component> fol() {
     return fol;
   }
-  
+
   public ArrayList<Component> pre() {
     return pre;
   }
-  
+
   public String toString() {
     return "R: "+resistance+"  I: "+current+"  V: "+voltage+"  P: "+power+ "  X: "+x+"  Y: "+y+"  name: "+name;
   }
@@ -98,14 +98,14 @@ public class Component{
       }
     }
     }
-    //println(this);
-    //println(in);
-    //println(Arrays.toString(in));
-    //println("matrix");
-    //matrixOut(gen);
+    System.out.println(this);
+    System.out.println(in);
+    System.out.println(Arrays.toString(in));
+    System.out.println("matrix");
+    Driver.matrixOut(gen);
     return gen;
   }
-  
+
   public void calculate() {
   }
 
@@ -116,7 +116,7 @@ public class Component{
   public void connectFol(Component newComp) {
    fol.add(newComp);
   }
-  
+
     public Component removeFol(int pos) {
      Component temp = fol.get(pos);
     fol.remove(pos);

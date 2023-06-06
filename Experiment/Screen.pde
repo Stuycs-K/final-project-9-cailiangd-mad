@@ -32,7 +32,10 @@ void screen() {
 
 void dataDisplay() {
     if (!isEditMode) {
-        mainC.calculate();
+      if (!testing) {
+              mainC.calculate();
+              testing = !testing;
+      }
     if (prev != mainC.get(0)) {
       textSize(40);
       text("resistance: "+round((float)prev.resistance()*1000.0)/1000.0,10,height-100);
@@ -78,7 +81,10 @@ void Editing() {
      left();
   }
   else if (mouseButton == RIGHT || (tab && mouseButton == LEFT)) {
-      choosePrev(mouseX,mouseY);
+    if (Math.sqrt(Math.pow(mouseX-prev.getX(),2) + Math.pow(mouseY-prev.getY(),2)) < 60) {
+      prev = mainC.get(0);
+    }
+     else  choosePrev(mouseX,mouseY);
   }
   }
 
@@ -163,3 +169,9 @@ void slider(int x, int y, double level, String attach) {
   fill(0,0,255);
   rect(x,y,(float)level,50,10,0,0,10);
 }
+
+  public void matrixOut(ArrayList<double[]> matrix) {
+     for (int i = 0; i < matrix.size(); i++) {
+       println(Arrays.toString(matrix.get(i)));
+     }
+  }
