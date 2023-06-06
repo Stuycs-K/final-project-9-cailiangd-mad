@@ -102,8 +102,6 @@ public class Component{
   }
   
   public void calculate() {
-    setVol(resistance()*current());
-    setPow(current()*voltage());
   }
 
   //Connection methods

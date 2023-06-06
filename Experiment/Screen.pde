@@ -129,7 +129,6 @@ void generateNodes() {
     for (int i = 1; i < mainC.size(); i++) {
     if (mainC.get(i).type() == resistor) {
     resistorIcon(mainC.get(i).getX(),mainC.get(i).getY());
-    println("help");
     }
     /*Need to implement.*/
   }
