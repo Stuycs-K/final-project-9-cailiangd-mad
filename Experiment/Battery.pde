@@ -1,8 +1,6 @@
-ArrayList<Component> followList;
 public class Battery extends Component{
-  public Battery(double newVol) {
-  super(0,newVol,width/2,height/2+16,battery);
-  followList = new ArrayList<Component>();
+  public Battery(double newVol, int name) {
+  super(0,newVol,width/2,height/2+16,battery,name);
   }
   
    //calculate for RIVP
@@ -21,8 +19,8 @@ public class Battery extends Component{
   
   public String debugToString() {
     String temp = "";
-    for (int i = 0; i < followList.size(); i++) {
-    temp += followList.get(i).toString() + "\n";
+    for (int i = 0; i < fol().size(); i++) {
+    temp += fol().get(i).toString() + "\n";
   }
   if (temp.length() > 0) {
   return temp.substring(0,temp.length()-1);

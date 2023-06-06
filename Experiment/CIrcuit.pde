@@ -1,71 +1,46 @@
 public class Circuit{
-  private double REQ;
-  private double IEQ;
-  private double VEQ;
-  private double PEQ;
   ArrayList<Component> compList;
-
+  int count = 0;
   public Circuit() {
     this(12);
   }
 
   public Circuit(double voltage) {
-    Component battery1 = new Battery(voltage);
-    VEQ = voltage;
+    Component battery1 = new Battery(voltage,count());
     compList = new ArrayList<Component>();
     add(battery1);
   }
  
- //need to rebuild
-public void undo() {
-  if (isEditMode) {
-  /* Remove the previously added last resistor from the list */
-  compList.remove(compList.size()-1);
-  /* disconnect that resistor */
-  if (compList.get(compList.size()-1).type() == resistor) {
-    compList.get(compList.size()-1).setFol(null,0);
-  }
-  else if (compList.get(compList.size()-1).type() == startJunction) {
-    compList.get(compList.size()-1).setFol(null,0);
-  }
-  else if (compList.get(compList.size()-1).type() == endJunction) {
-    if (compList.get(compList.size()-1).followList().get(1) != null) {
-      compList.get(compList.size()-1).setFol(null,0);
-    }
-    else {
-      compList.get(compList.size()-1).setFol(null,1);
-    }
-  }
-  else if (compList.get(compList.size()-1).type() == battery){
-   compList.get(compList.size()-1).setFol(null,0);
-  }
-  }
-}
-
-  public double getREQ() {
-    return REQ;
-  }
-
-  public double getIEQ() {
-    return IEQ;
-  }
-
-  public double getVEQ() {
-    return VEQ;
-  }
-
-  public double getPEQ() {
-    return PEQ;
-  }
-
-  public String toString() {
-    return "REQ: "+REQ+" IEQ: "+IEQ+" VEQ: "+VEQ+" PEQ: "+PEQ;
-  }
-
-  public void setVEQ(double newVEQ) {
-    VEQ = newVEQ;
-    get(0).setVol(VEQ);
-  }
+   public int count() {
+     return count++;
+   }
+//need to rebuild
+//need to rebuild
+//need to rebuild
+//public void undo() {
+//  if (isEditMode) {
+//  /* Remove the previously added last resistor from the list */
+//  compList.remove(compList.size()-1);
+//  /* disconnect that resistor */
+//  if (compList.get(compList.size()-1).type() == resistor) {
+//    compList.get(compList.size()-1).setFol(null,0);
+//  }
+//  else if (compList.get(compList.size()-1).type() == startJunction) {
+//    compList.get(compList.size()-1).setFol(null,0);
+//  }
+//  else if (compList.get(compList.size()-1).type() == endJunction) {
+//    if (compList.get(compList.size()-1).followList().get(1) != null) {
+//      compList.get(compList.size()-1).setFol(null,0);
+//    }
+//    else {
+//      compList.get(compList.size()-1).setFol(null,1);
+//    }
+//  }
+//  else if (compList.get(compList.size()-1).type() == battery){
+//   compList.get(compList.size()-1).setFol(null,0);
+//  }
+//  }
+//}
 
   public void add(Component newComp) {
     compList.add(newComp);
@@ -83,7 +58,7 @@ public void undo() {
     return compList.size();
   }
 
-  public String debugToString() {
+  public String toString() {
     String res = "";
     for (int i = 0; i < compList.size(); i++) {
       res+=compList.get(i)+"\n";
@@ -91,13 +66,24 @@ public void undo() {
     return res.substring(0,res.length()-1);
   }
 
-
-
  public void RREF() {
+   ArrayList<double[]> matrix = compList.get(0).genMatrix(new double[compList.size()+1]);
+   //debugging method
+   matrixOut(matrix);
+   /*Need to implement.*/
+   /*Need to implement.*/
    /*Need to implement.*/
  }
  
+   public void matrixOut(ArrayList<double[]> matrix) {
+     for (int i = 0; i < matrix.size(); i++) {
+       //println(Arrays.toString(matrix.get(i)));
+     }
+  }
+ 
  public void pullCurrent() {
+      /*Need to implement.*/
+   /*Need to implement.*/
    /*Need to implement.*/
  }
 
@@ -107,7 +93,6 @@ public void calculateIVP() {
   }
 }
 
-//need to rebuild
 public void calculate() {
   RREF();
   pullCurrent();

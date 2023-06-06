@@ -22,50 +22,23 @@ void screen() {
       fill(185,32,96);
     rect(70,0,100,80);
   }
-  if (compType == 0) {
-      fill(185,32,96);
-     rect(295,0,100,80);
-  }
-  else if (compType == 1) {
-    fill(185,32,96);
-    rect(395,0,100,80);
-  }
-  else if (compType == 2) {
-    fill(185,32,96);
-    rect(495,0,100,80);
-  }
   run(120,40);
-  resistorIcon(330,25);
-  startJunctionIcon(540,35);
-  endJunctionIcon(410,35);
     stroke(0);
   strokeWeight(6);
   strokeCap(SQUARE);
   line(70,0,70,80);
   line(170,0,170,80);
-  line(295,0,295,80);
-  line(395,0,395,80);
-  line(495,0,495,80);
-  line(595,0,595,80);
 }
 
 void dataDisplay() {
     if (!isEditMode) {
         mainC.calculate();
-    textSize(40);
-    if (prev == mainC.get(0)) {
-    text("REQ: "+round((float)mainC.getREQ()*1000.0)/1000.0,10,height-100);
-    text("PEQ: "+round((float)mainC.getPEQ()*1000.0)/1000.0,10,height-50);
-    text("IEQ: "+round((float)mainC.getIEQ()*1000.0)/1000.0,350,height-100);
-    text("VEQ: "+round((float)mainC.getVEQ()*1000.0)/1000.0,350,height-50);
-    stroke(0);
-    }
-    else {
+    if (prev != mainC.get(0)) {
+      textSize(40);
       text("resistance: "+round((float)prev.resistance()*1000.0)/1000.0,10,height-100);
       text("        power: "+round((float)prev.power()*1000.0)/1000.0,10,height-50);
       text("   current: "+round((float)prev.current()*1000.0)/1000.0,350,height-100);
       text("   voltage: "+round((float)prev.voltage()*1000.0)/1000.0,350,height-50);
-     // text("   REQ: "+prev.getREQsub(),700,height-100);
     }
 }
 }
@@ -75,7 +48,6 @@ void generateConnections() {
     for (int k = 0; k < mainC.get(i).fol().size(); k++) {
       stroke(0);
       if (mainC.get(i).fol().get(k) != null) {
-        println(mainC.get(i).fol().get(k));
       line(mainC.get(i).getX()+mainC.get(i).type(),mainC.get(i).getY(),mainC.get(i).fol().get(k).getX()-mainC.get(i).fol().get(k).type(),mainC.get(i).fol().get(k).getY());
       }
   }
@@ -120,23 +92,10 @@ void left() {
     }
   }
   if (temp && mouseY < height-150-30 && mouseY > 70+30 && (mouseY > height/2+50+30 || (mouseX > 50+30 && mouseX < width-100-30))) {
-    Component target = new Component(0,0,0,0,startJunction);
-    if (compType == 0) {
-      target = new Resistor(10,mouseX,mouseY,mainC.getVEQ());
-    }
-    /*Need to implement.*/
-  mainC.add(target);
-  prev.connectFol(target);
-  target.connectPre(prev);
-  }
-  else if(mouseX > 295 && mouseX < 395 && mouseY > 0 && mouseY < 80) {
-    compType = 0;
-  }
-  else if(mouseX > 395 && mouseX < 495 && mouseY > 0 && mouseY < 80) {
-    compType = 1;
-  }
-  else if(mouseX > 495 && mouseX < 595 && mouseY > 0 && mouseY < 80) {
-    compType = 2;
+    Component newComp = new Resistor(10,mouseX,mouseY,mainC.count());
+    prev.connectFol(newComp);
+    newComp.connectPre(prev);
+    mainC.add(newComp);
   }
 }
 
@@ -170,6 +129,7 @@ void generateNodes() {
     for (int i = 1; i < mainC.size(); i++) {
     if (mainC.get(i).type() == resistor) {
     resistorIcon(mainC.get(i).getX(),mainC.get(i).getY());
+    println("help");
     }
     /*Need to implement.*/
   }
@@ -181,30 +141,6 @@ void generateNodes() {
     fill(205,85,124);
     rect(x+12.5,y,25,30,0,15,15,0);
   }
-
-    public void endJunctionIcon(int x, int y) {
-      fill(0);
-  rect(x,y,40,10);
-  quad(x+40,y+10,x+34,y+2,x+54,y-23,x+60,y-15);
-  quad(x+40,y,x+34,y+8,x+54,y+33,x+60,y+25);
-  }
-
-    public void endJunctionDisplay(int x, int y) {
-    fill(0);
-    square(x,y,20);
-  }
-
-     public void startJunctionIcon(int x, int y) {
-       fill(0);
-  rect(x,y,40,10);
-  quad(x,y+10,x+6,y+2,x-24,y-23,x-30,y-15);
-  quad(x,y,x+6,y+8,x-24,y+33,x-30,y+25);
-   }
-
-    public void startJunctionDisplay(int x, int y) {
-          fill(0);
-    circle(x,y,20);
-   }
 
    void dataExtract() {
   if (debug) {

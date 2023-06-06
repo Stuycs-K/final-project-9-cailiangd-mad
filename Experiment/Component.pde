@@ -11,7 +11,7 @@ public class Component{
   private int y;
   private ArrayList<Component> pre;
   private ArrayList<Component> fol;
-  public Component(double Resistance, double Voltage, int x_, int y_, int name_) {
+  public Component(double Resistance, double Voltage, int x_, int y_, int type_, int name_) {
     voltage = Voltage;
     resistance = Resistance;
     x=x_;
@@ -19,6 +19,7 @@ public class Component{
     pre = new ArrayList<Component> ();
     fol = new ArrayList<Component> ();
     name = name_;
+    type = type_;
   }
   //general get methods
   public double resistance() {
@@ -86,17 +87,23 @@ public class Component{
   public ArrayList<double[]> genMatrix(double[] in) {
     in[name()] = resistance();
     ArrayList<double[]> gen = new ArrayList<double[]> ();
+    if (fol.size() == 0) {
+      gen.add(in);
+    }
+    else {
     for (int i = 0; i < fol.size(); i++) {
       ArrayList<double[]> temp = fol.get(i).genMatrix(in);
       for (int k = 0; k < temp.size(); k++) {
         gen.add(temp.get(k));
       }
     }
+    }
     return gen;
   }
   
   public void calculate() {
-    /*Need to implement.*/
+    setVol(resistance()*current());
+    setPow(current()*voltage());
   }
 
   //Connection methods
