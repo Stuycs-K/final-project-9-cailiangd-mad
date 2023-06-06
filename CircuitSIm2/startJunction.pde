@@ -96,6 +96,8 @@ endJunction end;
   }
   
   public double REQsub() {
+        println("this junction's x y coordinates" + this.getX() + " " + this.getY());
+        println("ending junction x y coordinates" + end.getX() + " " + end.getY());
         //println("hello-1");
     if (fol1 != null && fol2 != null) {
              double temp = 0;
