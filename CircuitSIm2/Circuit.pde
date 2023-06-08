@@ -19,25 +19,31 @@ public class Circuit{
 public void undo() {
   if (isEditMode) {
   /* Remove the previously added last resistor from the list */
-  compList.remove(compList.size()-1);
-  /* disconnect that resistor */
-  if (compList.get(compList.size()-1).type() == resistor) {
-    compList.get(compList.size()-1).setFol(null,0);
-  }
-  else if (compList.get(compList.size()-1).type() == startJunction) {
-    compList.get(compList.size()-1).setFol(null,0);
-  }
-  else if (compList.get(compList.size()-1).type() == endJunction) {
-    if (compList.get(compList.size()-1).followList().get(1) != null) {
-      compList.get(compList.size()-1).setFol(null,0);
+  Component target = compList.get(compList.size()-1);
+  if (target.type() == endJunction) {
+    endJunction targetE = (endJunction) target;
+    if (targetE.prev1().followList().size() == 2 && targetE.prev1().followList().get(1) == targetE) {
+      targetE.prev1().setFol(null,1);
     }
     else {
-      compList.get(compList.size()-1).setFol(null,1);
+      targetE.prev1().setFol(null,0);
+    }
+        if (targetE.prev2().followList().size() == 2 && targetE.prev2().followList().get(1) == targetE) {
+      targetE.prev2().setFol(null,1);
+    }
+    else {
+      targetE.prev2().setFol(null,0);
     }
   }
-  else if (compList.get(compList.size()-1).type() == battery){
-   compList.get(compList.size()-1).setFol(null,0);
+  else if (target.type() != battery) {
+        if (target.prev().followList().size() == 2 && target.prev().followList().get(1) == target) {
+      target.prev().setFol(null,1);
+    }
+    else {
+      target.prev().setFol(null,0);
+    }
   }
+  compList.remove(compList.size()-1);
   }
 }
 

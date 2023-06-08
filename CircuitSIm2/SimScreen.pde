@@ -35,7 +35,7 @@ void screen() {
     rect(495,0,100,80);
   }
   run(120,40);
-  resistorIcon(330,25);
+  resistorIcon(330,25,false);
   startJunctionIcon(540,35);
   endJunctionIcon(410,35);
     stroke(0);
@@ -114,8 +114,8 @@ void left() {
       boolean temp = true;
     for (int i = 1; i < mainC.size(); i++) {
     if (Math.sqrt(Math.pow(mouseX-mainC.get(i).getX(),2) + Math.pow(mouseY-mainC.get(i).getY(),2)) < 60) {
-      if (prev.connectFol(mainC.get(i))) {
-      mainC.get(i).connectPre(prev);
+      if (mainC.get(i).connectPre(prev)) {
+      prev.connectFol(mainC.get(i));
       }
       else {
         prev = mainC.get(0);
@@ -135,8 +135,11 @@ void left() {
       target = new endJunction(mouseX,mouseY,mainC.get(0));
     }
   mainC.add(target); //<>//
-  if (prev.connectFol(target)) {
-  target.connectPre(prev);
+  if (target.connectPre(prev)) {
+   if (!prev.connectFol(target)) {
+  mainC.remove(mainC.size()-1);
+  prev = mainC.get(0);
+   }
   }
   else {
     mainC.remove(mainC.size()-1);
@@ -183,7 +186,7 @@ void generateNodes() {
     noStroke();
     for (int i = 1; i < mainC.size(); i++) {
     if (mainC.get(i).type() == resistor) {
-    resistorIcon(mainC.get(i).getX(),mainC.get(i).getY());
+    resistorIcon(mainC.get(i).getX(),mainC.get(i).getY(),true);
     }
     else if (mainC.get(i).type() == startJunction) {
     startJunctionDisplay(mainC.get(i).getX(),mainC.get(i).getY());
@@ -232,13 +235,14 @@ void generateNodes() {
    }
 
    void dataExtract() {
-  if (debug) {
+  if (debug && prev != null) {
   textSize(30);
-  text(mainC.chooseComp(mouseX,mouseY).toString(),25,500);
-  if (prev != null) {
-  text(prev.toString(), 25, 550);
+  text(prev.toString(),25,500);
+  if (prev.type() == resistor) {
+    Resistor prev2 = (Resistor) prev;
+  text(prev2.prev().toString(), 25, 550);
+  text(prev2.followList().toString(),25,600);
   }
-  text(mainC.chooseComp(mouseX,mouseY).followList().toString(),25,600);
   }
 }
 
