@@ -34,6 +34,8 @@ public void undo() {
     else {
       targetE.prev2().setFol(null,0);
     }
+    prev = targetE.prev1();
+    compList.remove(compList.size()-1);
   }
   else if (target.type() != battery) {
         if (target.prev().followList().size() == 2 && target.prev().followList().get(1) == target) {
@@ -42,8 +44,9 @@ public void undo() {
     else {
       target.prev().setFol(null,0);
     }
+    prev = target.prev();
+   compList.remove(compList.size()-1);
   }
-  compList.remove(compList.size()-1);
   }
 }
 

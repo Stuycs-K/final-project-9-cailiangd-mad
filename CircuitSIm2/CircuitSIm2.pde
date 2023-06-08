@@ -6,13 +6,14 @@ private final int endJunction = 0;
 Circuit mainC;
 Component prev;
 boolean undo, debug;
-int compType = 0;
+int compType, alternative, decimal;
 double level = 120;
 double level2 = 100;
 boolean tab;
+double typing;
 boolean isEditMode = true;
 void setup() {
-  size(1250,800);
+  size(1300,800);
   //fullScreen();
   battery = -width/2+50;
   mainC = new Circuit();
@@ -31,8 +32,9 @@ void draw() {
   level = 10.0 * mainC.getVEQ();
   if (isEditMode && prev.type() == resistor) {
    level2 = 10.0*prev.resistance();
-  slider(width/2-100,height-120,level2,"Resistance: ");
+  slider(width/2+300,height-120,level2,"Resistance: ");
   }
+  newInput();
 }
 
 void keyPressed() {
@@ -41,6 +43,7 @@ void keyPressed() {
   }
   if (key == 'e') {
     isEditMode = !isEditMode;
+        findPartnerAll();
   }
   if (key == 'c') {
       compType = (compType+1)%3;
@@ -51,12 +54,37 @@ void keyPressed() {
   }
   if (key == ' ') {
     mainC.undo();
-    prev = mainC.get(0);
   }
     if(key == TAB) {
       tab = true;
     }
-    findPartnerAll();
+    if (key == 'a') {
+      alternative = (alternative + 1) % 3;
+    }
+    if ((key+"").matches("[0-9]")) {
+      if (decimal == 0) {
+        typing = typing*10.0 + Double.parseDouble(key+"");
+      }
+      else {
+        typing = typing + Double.parseDouble(key+"")/Math.pow(10,decimal);
+        decimal++;
+      }
+    }
+    if (key == '.') {
+      decimal++;
+    }
+    if (key == '\n') {
+      if (alternative == 1) {
+        mainC.setVEQ(typing);
+        typing = 0.0;
+        decimal = 0;
+      }
+        else if (alternative == 2 && prev.type() == resistor) {
+        prev.setRes(typing);
+        typing = 0.0;
+        decimal = 0;
+    }
+}
 }
 
 void mouseClicked() {
@@ -77,14 +105,15 @@ void mouseDragged() {
     }
     mainC.setVEQ(level / 10);
   }
-  if (isEditMode && prev.type() == resistor && mouseY > height - 120 && mouseY < height-120+50 && mouseX > width/2-100 && mouseX < width/2-100+300) {
-    level2 = mouseX - (width/2-100);
+  if (isEditMode && prev.type() == resistor && mouseY > height - 120 && mouseY < height-120+50 && mouseX > width/2+300 && mouseX < width/2+300+300) {
+    level2 = mouseX - (width/2+300);
     if (level2 > 285) {
       level2 = 285;
     }
     prev.setRes(level2 / 10); 
   }
   }
+  
   void keyReleased() {
     if(key == TAB) {
       tab = false;

@@ -86,16 +86,16 @@ ArrayList<Component> temp;
       setCur(voltage()/resistance());
       setPow(current()*voltage());
     }
-    if (followR != null && followR.type() != endJunction) { //<>// //<>//
+    if (followR != null && followR.type() != endJunction) { //<>//
       followR.calculate();
     }
-  } //<>// //<>//
+  } //<>//
 
     public void trace() {
-      setTarget(true); //<>// //<>//
+      setTarget(true); //<>//
       if (followR != null) {
       followR.trace();
-      } //<>// //<>//
+      } //<>//
   }
 
   public void tracker(startJunction start) {

@@ -260,10 +260,31 @@ void slider(int x, int y, double level, String attach) {
   fill(0);
   stroke(0);
   textSize(50);
-  text(attach+level/10.0,x-textWidth(attach+level/10)-20,y+40);
+  text(attach+round((float)level*1000.0)/10000.0,x-textWidth(attach+round((float)level*1000.0)/10000.0)-20,y+40);
   strokeWeight(4);
   fill(0,255,0);
   rect(x,y,300,50,10);
   fill(0,0,255);
   rect(x,y,(float)level,50,10,0,0,10);
+}
+
+void newInput() {
+  if (isEditMode) {
+  if (alternative == 2) {
+  fill(0);
+  text("New Resistance: "+round((float)typing*1000.0)/1000.0,40,height-80);
+  }
+   else if (alternative == 1) {
+  fill(0);
+  text("New Voltage: "+round((float)typing*1000.0)/1000.0,40,height-80);
+  }
+  else {
+    fill(0);
+    textSize(20);
+    text("- 'd'\n\t- Debug\n- 'e'\n\t- editMode ON/OFF",10,height-120);
+    text("-'c'\n\t- Switch Components\n- 'r'\n\t- Restart",200, height-120);
+    text("- ' '\n\t- Undo",410,height-120);
+    textSize(30);
+  }
+}
 }
