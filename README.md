@@ -58,9 +58,9 @@ Bottom Slider
     - chooses the component for the next component you place down connect to
     - chooses the component for a previously placed component to connect to
     - The selected component will the component from which charge flows in these connections.
- - Run mode
-  - Click on component to see its statistics.
-  - Click on a component that is already selected as in the selection circle to see the statistics for the whole circuit.
+  - Run mode
+   - Click on component to see its statistics.
+   - Click on a component that is already selected as in the selection circle to see the statistics for the whole circuit.
 
 Note: You would right click on an element to set it as the prior element to connect to and any spot you left click where there isn't already a component will create a component such that component is tied to the one you previously right clicked. If there is already an element, the simulator will attempt to connect it using the same logic as when there isn't a component already there.
 
