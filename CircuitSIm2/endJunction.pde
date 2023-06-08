@@ -35,31 +35,33 @@ ArrayList<Component> temp;
   }
   
   //general set methods
-  public Component setFol(Component newFol) {
+  public Component setFol(Component newFol, int mode) {
     Component temp = follow;
     follow = newFol;
     return temp;
   }
   
-    public Component setPre1(Component newPre) {
-    Component temp = prev1;
+    public Component setPre(Component newPre, int mode) {
+    Component temp;
+    if (mode == 0) {
+    temp = prev1;
     prev1 = newPre;
+    }
+    else {
+      temp = prev2;
+      prev2 = newPre;
+    }
     return temp;
   }
-  
-    public Component setPre2(Component newPre) {
-    Component temp = prev2;
-    prev1 = newPre;
-    return temp;
-  }
+ 
   //connect methodss
   public boolean connectPre(Component newComp) {
     if (prev1() == null) {
-      setPre1(newComp);
+      setPre(newComp,0);
       return true;
     }
     else if (prev2() == null && prev1() != newComp && fol() != newComp) {
-      setPre2(newComp);
+      setPre(newComp,1);
       return true;
     }
     else return false;
@@ -67,7 +69,7 @@ ArrayList<Component> temp;
   
   public boolean connectFol(Component newComp) {
     if (fol() == null && prev1() != newComp && prev2() != newComp) {
-      setFol(newComp);
+      setFol(newComp, 0);
       return true;
     }
     else return false;

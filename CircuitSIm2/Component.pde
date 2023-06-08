@@ -21,6 +21,10 @@ public class Component{
   public double resistance() {
     return resistance;
   }
+  
+  public Component prev() {
+    return null;
+  }
 
   public double current() {
     return current;
@@ -48,6 +52,10 @@ public class Component{
   
   public ArrayList<Component> followList() {
     return new ArrayList<Component>();
+  }
+
+  public ArrayList<Double> REQlist() {
+    return new ArrayList<Double> ();
   }
   
   public String toString() {
@@ -115,4 +123,11 @@ public class Component{
    return true;
   }
   
+    public Component setFol(Component newFol, int mode) {
+    return null;
+  }
+
+    public Component setPre(Component newPre, int mode) {
+    return null;
+  }
 }

@@ -15,18 +15,39 @@ public class Circuit{
     compList = new ArrayList<Component>();
     add(battery1);
   }
+  
 public void undo() {
+  if (isEditMode) {
   /* Remove the previously added last resistor from the list */
-  mainC.compList.remove(mainC.compList.size()-1);
-  /* disconnect that resistor */
-  
-  if (mainC.compList.get(mainC.compList.size()-1).followList().size() > 1){
-    mainC.compList.get(mainC.compList.size()-1).followList().remove(followList.size()-1);
+  Component target = compList.get(compList.size()-1);
+  if (target.type() == endJunction) {
+    endJunction targetE = (endJunction) target;
+    if (targetE.prev1().followList().size() == 2 && targetE.prev1().followList().get(1) == targetE) {
+      targetE.prev1().setFol(null,1);
+    }
+    else {
+      targetE.prev1().setFol(null,0);
+    }
+        if (targetE.prev2().followList().size() == 2 && targetE.prev2().followList().get(1) == targetE) {
+      targetE.prev2().setFol(null,1);
+    }
+    else {
+      targetE.prev2().setFol(null,0);
+    }
+    prev = targetE.prev1();
+    compList.remove(compList.size()-1);
   }
-  else {
-    mainC.compList.get(mainC.compList.size()-1).connectFol(mainC.compList.get(0));
+  else if (target.type() != battery) {
+        if (target.prev().followList().size() == 2 && target.prev().followList().get(1) == target) {
+      target.prev().setFol(null,1);
+    }
+    else {
+      target.prev().setFol(null,0);
+    }
+    prev = target.prev();
+   compList.remove(compList.size()-1);
   }
-  
+  }
 }
 
   public double getREQ() {
@@ -119,7 +140,6 @@ public Component chooseComp(int x,int y) {
   }
   return compList.get(pos);
 }
-
 
 public Component get(int i) {
   return compList.get(i);

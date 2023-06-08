@@ -33,31 +33,33 @@ endJunction end;
     return temp;
   }
   
-  public Component setPre(Component newPrev) {
+  public Component setPre(Component newPrev, int mode) {
     Component temp = previous;
     previous = newPrev;
     return temp;
   }
   
-    public Component setFol1(Component newFol) {
-    Component temp = fol1;
+    public Component setFol(Component newFol, int mode) {
+    Component temp;
+    if (mode == 0) {
+    temp = fol1;
     fol1 = newFol;
-    return temp;
-  }
-  
-    public Component setFol2(Component newFol) {
-    Component temp = fol2;
+    }
+    else {
+    temp = fol2;
     fol2 = newFol;
+    }
     return temp;
   }
-  //connect methodss
+
+  //connect methods
   public boolean connectFol(Component newComp) {
     if (fol1() == null) {
-      setFol1(newComp);
+      setFol(newComp,0);
       return true;
     }
     else if (fol2() == null && fol1() != newComp && prev() != newComp) {
-      setFol2(newComp);
+      setFol(newComp,1);
       return true;
     }
     else return false;
@@ -65,7 +67,7 @@ endJunction end;
   
   public boolean connectPre(Component newComp) {
     if (prev() == null && fol1() != newComp && fol2() != newComp) {
-      setPre(newComp);
+      setPre(newComp, 0);
       return true;
     }
     else return false;
@@ -77,7 +79,14 @@ endJunction end;
   
   
     public void calculate() {
-      setCur(previous.current());
+
+      if (previous.type() == startJunction) {
+      setCur(previous.voltage()/getREQsub());
+      }
+      else {
+        setCur(previous.current());
+      }
+
       if (end != null) {
        end.calculate();
       setVol(getREQsub()*current()-end.voltage());
@@ -94,29 +103,27 @@ endJunction end;
   }
   
   public double REQsub() {
+
+        println("this junction's x y coordinates" + this.getX() + " " + this.getY());
+        println("ending junction x y coordinates" + end.getX() + " " + end.getY());
         //println("hello-1");
+
     if (fol1 != null && fol2 != null) {
              double temp = 0;
        temp += 1.0/(fol1.REQsub());
        temp += 1.0/(fol2.REQsub());
        if (end != null) {
     setREQsub((1.0/temp)+end.REQsub());
-    //println(end.REQsub());
-    //println((1.0/temp)+end.REQsub());
-    //println("hello0");
        }
        else {
        setREQsub(1.0/temp);
-       //println("hello1");
        }
     }
     else if (fol1 != null) {
       setREQsub(fol1.REQsub());
-      //println("hello2");
     }
     else {
       setREQsub(0);
-      //println("hello3");
     }
     return getREQsub();
   }
@@ -135,7 +142,9 @@ endJunction end;
   }
   
   public void tracker(startJunction start) {
+    if (fol2 != null) {
     fol2.tracker(start);
+    }
   }
   
   public void clearTrack() {

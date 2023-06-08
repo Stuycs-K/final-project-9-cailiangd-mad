@@ -9,6 +9,13 @@ public class Battery extends Component{
     followList.add(newComp);
     return true;
   }
+ 
+   //actually just removes items from followList.
+  public Component setFol(Component newFol, int mode) {
+    Component temp = followList.get(followList.size()-1);
+    followList.set(followList.size()-1,newFol);
+    return temp;
+  }
   
   public String debugToString() {
     String temp = "";
@@ -26,7 +33,9 @@ public class Battery extends Component{
  public double REQsub() {
    setREQsub(0);
    for (int i = 0; i < followList.size(); i++) {
+     if (followList.get(i) != null) {
      setREQsub(getREQsub()+(1.0/(followList.get(i).REQsub())));
+     }
    }
    setREQsub(1.0/getREQsub());
    return getREQsub();

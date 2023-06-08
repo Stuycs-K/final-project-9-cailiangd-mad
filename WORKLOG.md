@@ -28,11 +28,11 @@ Worked on new algorithm and redesigned the data structure.
 
 ### 5/28/2023
 
-Continued work on new algorithm and data stucture.
+Continued work on new algorithm and data structure.
 
 ### 5/29/2023
 
-Worked on mouseClicked(); and the underlieing connection methods which needs debugging.
+Worked on mouseClicked(); and the underlying connection methods which needs debugging.
 
 ### 5/30/2023
 
@@ -41,6 +41,15 @@ Update: Removed both errors from program, first error caused by variables being 
 
 ### 6/1/2023
 Fixed the new junction issue partially, the junctions now work for where there are only a single layer of junctions and no interconnection between junction sets. I am not able to redesign the entire algorithm to fix this in 12 hours.
+
+### 6/4/2023
+Worked on undo button. Got undo button working but the UI is terrible. Didn't have time to start working on asymmetric loops yet.
+
+### 6/5/2023
+Started working on the RREF algorithm and the more advanced UI. Mainly working on logistics so far.
+
+### 6/6/2023
+Made additional UI improvements and asked the CS dojo for recommendations and help.
 
 ## Dylan Ma
 
