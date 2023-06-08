@@ -51,6 +51,10 @@ Started working on the RREF algorithm and the more advanced UI. Mainly working o
 ### 6/6/2023
 Made additional UI improvements and asked the CS dojo for recommendations and help.
 
+### 6/7/2023
+
+Worked on UI, made tweaks to make it better
+
 ## Dylan Ma
 
 ### 5/23/2023
@@ -87,3 +91,15 @@ Continued to work on the bug; determined that the issue might be that the last c
 ### 6/4/2023
 
 Worked on an undo button so that we don't have to restart the simulation when we make a mistake. Still a few bugs
+
+### 6/6/2023
+
+Worked on algebraic method to manipulate the matrix which would make the RREF algorithm possible - also went to the CS Dojo
+
+### 6/7/2023
+
+Went to the CS Dojo for help - worked on a error we were facing.
+
+### 6/8/2023
+
+Worked on the UI to improve the appearance - we're still trying to improve our algorithm so it can be more efficient at calculating stats for circuits with many loops and intersections.
