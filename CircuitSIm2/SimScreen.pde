@@ -194,8 +194,14 @@ void generateNodes() {
   }
 }
 
-  public void resistorIcon(int x, int y) {
-        fill(0);
+  public void resistorIcon(int x, int y, boolean tag) {
+    if (tag) {
+    Component prev = mainC.chooseComp(x,y);
+    textSize(20);
+    fill(0);
+    text(prev.resistance()+"",x-15,y-20);
+    }
+    fill(0);
     rect(x-12.5,y,25,30,15,0,0,15);
     fill(205,85,124);
     rect(x+12.5,y,25,30,0,15,15,0);
