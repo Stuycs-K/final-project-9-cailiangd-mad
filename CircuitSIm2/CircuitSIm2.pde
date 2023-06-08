@@ -1,3 +1,4 @@
+import processing.dxf.*;
 private int battery = -550;
 private final int resistor = 15;
 private final int startJunction = 1;
@@ -16,9 +17,9 @@ boolean isEditMode = true;
 void setup() {
   
   size(1300,800);
-  PFont mono;
-  mono = createFont("andalemo.ttf", 128);
-  textFont(mono);
+  PFont font;
+ // font = createFont("andalemo.ttf", 128);
+  //textFont(font);
   //fullScreen();
   battery = -width/2+50;
   mainC = new Circuit();
