@@ -202,7 +202,7 @@ void generateNodes() {
     Component prev = mainC.chooseComp(x,y);
     textSize(20);
     fill(0);
-    text(prev.resistance()+"",x-15,y-20);
+    text(round((float)prev.resistance()*1000.0)/1000.0+"",x-15,y-20);
     }
     fill(0);
     rect(x-12.5,y,25,30,15,0,0,15);

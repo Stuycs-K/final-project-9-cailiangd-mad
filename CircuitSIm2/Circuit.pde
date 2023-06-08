@@ -141,7 +141,6 @@ public Component chooseComp(int x,int y) {
   return compList.get(pos);
 }
 
-
 public Component get(int i) {
   return compList.get(i);
 }

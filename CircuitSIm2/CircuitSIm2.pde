@@ -79,11 +79,14 @@ void keyPressed() {
         typing = 0.0;
         decimal = 0;
       }
-        else if (alternative == 2 && prev.type() == resistor) {
+        else {
+          if (alternative == 2 && prev.type() == resistor) {
         prev.setRes(typing);
         typing = 0.0;
         decimal = 0;
     }
+    else alternative = 0;
+        }
 }
 }
 
