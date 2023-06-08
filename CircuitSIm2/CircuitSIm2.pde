@@ -15,11 +15,15 @@ double typing;
 boolean isEditMode = true;
 
 void setup() {
+
   
   size(1300,800);
   PFont font;
  // font = createFont("andalemo.ttf", 128);
   //textFont(font);
+
+  size(1300,800);
+
   //fullScreen();
   battery = -width/2+50;
   mainC = new Circuit();
