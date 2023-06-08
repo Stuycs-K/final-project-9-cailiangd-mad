@@ -64,7 +64,9 @@ Bottom Slider
 
 Note: You would right click on an element to set it as the prior element to connect to and any spot you left click where there isn't already a component will create a component such that component is tied to the one you previously right clicked. If there is already an element, the simulator will attempt to connect it using the same logic as when there isn't a component already there.
 
-Note: There is a undo button in this simulator as mentioned above but it is highly unreliable.
+Note: All endJunctions must have a corresponding startJunction that is placed before the endJunction. Both output paths from the startJunction must lead to the endJunction, if the endJunction is preseent. startJunctions don't necessarily need a corresponding endJunction.
+
+Note: This program can only handle uni-directional current flow and not bi-directional current flow. If you input a situation that results in bi-directional current flow, the resistance, current, voltage, and power readings for all components and the whole circuit will be inaccurate. Please use the following circuit simulator if you a situation that can't be handled by our simulator: https://www.falstad.com/circuit/
 
 Note: If a connection fails, there is a non-insignificant chance that when you transition to run mode it will fail.
 
