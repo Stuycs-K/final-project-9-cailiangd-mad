@@ -28,11 +28,11 @@ Worked on new algorithm and redesigned the data structure.
 
 ### 5/28/2023
 
-Continued work on new algorithm and data stucture.
+Continued work on new algorithm and data structure.
 
 ### 5/29/2023
 
-Worked on mouseClicked(); and the underlieing connection methods which needs debugging.
+Worked on mouseClicked(); and the underlying connection methods which needs debugging.
 
 ### 5/30/2023
 
@@ -47,6 +47,10 @@ Worked on undo button. Got undo button working but the UI is terrible. Didn't ha
 
 ### 6/5/2023
 Started working on the RREF algorithm and the more advanced UI. Mainly working on logistics so far.
+
+### 6/6/2023
+Made additional UI improvements and asked the CS dojo for recommendations and help.
+
 ## Dylan Ma
 
 ### 5/23/2023
