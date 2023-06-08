@@ -79,20 +79,14 @@ endJunction end;
   
   
     public void calculate() {
-<<<<<<< HEAD
 
-=======
->>>>>>> 53326e1895eabb7c622be548b87abab857539246
       if (previous.type() == startJunction) {
       setCur(previous.voltage()/getREQsub());
       }
       else {
         setCur(previous.current());
       }
-<<<<<<< HEAD
 
-=======
->>>>>>> 53326e1895eabb7c622be548b87abab857539246
       if (end != null) {
        end.calculate();
       setVol(getREQsub()*current()-end.voltage());
@@ -109,14 +103,6 @@ endJunction end;
   }
   
   public double REQsub() {
-<<<<<<< HEAD
-
-        println("this junction's x y coordinates" + this.getX() + " " + this.getY());
-        println("ending junction x y coordinates" + end.getX() + " " + end.getY());
-        //println("hello-1");
-
-=======
->>>>>>> 53326e1895eabb7c622be548b87abab857539246
     if (fol1 != null && fol2 != null) {
              double temp = 0;
        temp += 1.0/(fol1.REQsub());
