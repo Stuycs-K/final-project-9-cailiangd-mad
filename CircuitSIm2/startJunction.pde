@@ -79,10 +79,14 @@ endJunction end;
   
   
     public void calculate() {
-      /* ERROR
-      suggestion: setCur(previous.current() * (previous. (the val variable in the resistor))       double val = (previousR.followList().get((previousR.followList().indexOf(this)+1)%2).getREQsub());
-      */
-      setCur(previous.current());
+
+      if (previous.type() == startJunction) {
+      setCur(previous.voltage()/getREQsub());
+      }
+      else {
+        setCur(previous.current());
+      }
+
       if (end != null) {
        end.calculate();
       setVol(getREQsub()*current()-end.voltage());
@@ -99,31 +103,27 @@ endJunction end;
   }
   
   public double REQsub() {
+
         println("this junction's x y coordinates" + this.getX() + " " + this.getY());
         println("ending junction x y coordinates" + end.getX() + " " + end.getY());
         //println("hello-1");
+
     if (fol1 != null && fol2 != null) {
              double temp = 0;
        temp += 1.0/(fol1.REQsub());
        temp += 1.0/(fol2.REQsub());
        if (end != null) {
     setREQsub((1.0/temp)+end.REQsub());
-    //println(end.REQsub());
-    //println((1.0/temp)+end.REQsub());
-    //println("hello0");
        }
        else {
        setREQsub(1.0/temp);
-       //println("hello1");
        }
     }
     else if (fol1 != null) {
       setREQsub(fol1.REQsub());
-      //println("hello2");
     }
     else {
       setREQsub(0);
-      //println("hello3");
     }
     return getREQsub();
   }
@@ -142,7 +142,9 @@ endJunction end;
   }
   
   public void tracker(startJunction start) {
+    if (fol2 != null) {
     fol2.tracker(start);
+    }
   }
   
   public void clearTrack() {

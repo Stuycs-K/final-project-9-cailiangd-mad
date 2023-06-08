@@ -21,6 +21,10 @@ public class Component{
   public double resistance() {
     return resistance;
   }
+  
+  public Component prev() {
+    return null;
+  }
 
   public double current() {
     return current;

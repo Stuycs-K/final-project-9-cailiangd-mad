@@ -35,7 +35,7 @@ void screen() {
     rect(495,0,100,80);
   }
   run(120,40);
-  resistorIcon(330,25);
+  resistorIcon(330,25,false);
   startJunctionIcon(540,35);
   endJunctionIcon(410,35);
     stroke(0);
@@ -60,12 +60,12 @@ void dataDisplay() {
     text("VEQ: "+round((float)mainC.getVEQ()*1000.0)/1000.0,350,height-50);
     stroke(0);
     }
-    else {
+    else /*if (prev.type() == resistor)*/ {
       text("resistance: "+round((float)prev.resistance()*1000.0)/1000.0,10,height-100);
       text("        power: "+round((float)prev.power()*1000.0)/1000.0,10,height-50);
       text("   current: "+round((float)prev.current()*1000.0)/1000.0,350,height-100);
       text("   voltage: "+round((float)prev.voltage()*1000.0)/1000.0,350,height-50);
-     // text("   REQ: "+prev.getREQsub(),700,height-100);
+      text("   REQ: "+prev.getREQsub(),700,height-100);
     }
 }
 }
@@ -114,8 +114,8 @@ void left() {
       boolean temp = true;
     for (int i = 1; i < mainC.size(); i++) {
     if (Math.sqrt(Math.pow(mouseX-mainC.get(i).getX(),2) + Math.pow(mouseY-mainC.get(i).getY(),2)) < 60) {
-      if (prev.connectFol(mainC.get(i))) {
-      mainC.get(i).connectPre(prev);
+      if (mainC.get(i).connectPre(prev)) {
+      prev.connectFol(mainC.get(i));
       }
       else {
         prev = mainC.get(0);
@@ -135,8 +135,11 @@ void left() {
       target = new endJunction(mouseX,mouseY,mainC.get(0));
     }
   mainC.add(target); //<>//
-  if (prev.connectFol(target)) {
-  target.connectPre(prev);
+  if (target.connectPre(prev)) {
+   if (!prev.connectFol(target)) {
+  mainC.remove(mainC.size()-1);
+  prev = mainC.get(0);
+   }
   }
   else {
     mainC.remove(mainC.size()-1);
@@ -183,7 +186,7 @@ void generateNodes() {
     noStroke();
     for (int i = 1; i < mainC.size(); i++) {
     if (mainC.get(i).type() == resistor) {
-    resistorIcon(mainC.get(i).getX(),mainC.get(i).getY());
+    resistorIcon(mainC.get(i).getX(),mainC.get(i).getY(),true);
     }
     else if (mainC.get(i).type() == startJunction) {
     startJunctionDisplay(mainC.get(i).getX(),mainC.get(i).getY());
@@ -194,8 +197,14 @@ void generateNodes() {
   }
 }
 
-  public void resistorIcon(int x, int y) {
-        fill(0);
+  public void resistorIcon(int x, int y, boolean tag) {
+    if (tag) {
+    Component prev = mainC.chooseComp(x,y);
+    textSize(20);
+    fill(0);
+    text(round((float)prev.resistance()*1000.0)/1000.0+"",x-15,y-20);
+    }
+    fill(0);
     rect(x-12.5,y,25,30,15,0,0,15);
     fill(205,85,124);
     rect(x+12.5,y,25,30,0,15,15,0);
@@ -226,13 +235,14 @@ void generateNodes() {
    }
 
    void dataExtract() {
-  if (debug) {
+  if (debug && prev != null) {
   textSize(30);
-  text(mainC.chooseComp(mouseX,mouseY).toString(),25,500);
-  if (prev != null) {
-  text(prev.toString(), 25, 550);
+  text(prev.toString(),25,500);
+  if (prev.type() == resistor) {
+    Resistor prev2 = (Resistor) prev;
+  text(prev2.prev().toString(), 25, 550);
+  text(prev2.followList().toString(),25,600);
   }
-  text(mainC.chooseComp(mouseX,mouseY).followList().toString(),25,600);
   }
 }
 
@@ -250,10 +260,31 @@ void slider(int x, int y, double level, String attach) {
   fill(0);
   stroke(0);
   textSize(50);
-  text(attach+level/10.0,x-textWidth(attach+level/10)-20,y+40);
+  text(attach+round((float)level*1000.0)/10000.0,x-textWidth(attach+round((float)level*1000.0)/10000.0)-20,y+40);
   strokeWeight(4);
   fill(0,255,0);
   rect(x,y,300,50,10);
   fill(0,0,255);
   rect(x,y,(float)level,50,10,0,0,10);
+}
+
+void newInput() {
+  if (isEditMode) {
+  if (alternative == 2) {
+  fill(0);
+  text("New Resistance: "+round((float)typing*1000.0)/1000.0,40,height-80);
+  }
+   else if (alternative == 1) {
+  fill(0);
+  text("New Voltage: "+round((float)typing*1000.0)/1000.0,40,height-80);
+  }
+  else {
+    fill(0);
+    textSize(20);
+    text("- 'd'\n\t- Debug\n- 'e'\n\t- editMode ON/OFF",10,height-120);
+    text("-'c'\n\t- Switch Components\n- 'r'\n\t- Restart",200, height-120);
+    text("- ' '\n\t- Undo",410,height-120);
+    textSize(30);
+  }
+}
 }

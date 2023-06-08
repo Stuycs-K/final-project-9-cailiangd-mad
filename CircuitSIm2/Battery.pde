@@ -33,7 +33,9 @@ public class Battery extends Component{
  public double REQsub() {
    setREQsub(0);
    for (int i = 0; i < followList.size(); i++) {
+     if (followList.get(i) != null) {
      setREQsub(getREQsub()+(1.0/(followList.get(i).REQsub())));
+     }
    }
    setREQsub(1.0/getREQsub());
    return getREQsub();

@@ -11,11 +11,11 @@ ArrayList<Component> temp;
 }
 
   // general get methods
-  public Component following() {
+  public Component fol() {
     return followR;
   }
 
-  public Component previous() {
+  public Component prev() {
     return previousR;
   }
 
@@ -39,21 +39,19 @@ ArrayList<Component> temp;
   }
   //general connect methods
   public boolean connectPre(Component newComp) {
-    if (previous() == null && following() != newComp) {
+    if (prev() == null && fol() != newComp) {
       setPre(newComp, 0);
       return true;
     }
     else  return false;
   }
   public boolean connectFol(Component newComp) {
-    if (following() == null && previous() != newComp)  {
+    if (fol() == null && prev() != newComp)  {
       setFol(newComp, 0);
       return true;
     }
     else return false;
   }
-
-
     public double REQsub() {
       if (followR == null || followR.type() == endJunction) {
         setREQsub(resistance());
@@ -79,6 +77,7 @@ ArrayList<Component> temp;
       setPow(current()*voltage());
     }
     else if (previousR != null && previousR.type() == startJunction) {
+
       if (previousR.followList().size() > 1) {
       double val = (previousR.followList().get((previousR.followList().indexOf(this)+1)%2).getREQsub());
       /** ERROR MIGHT BE HERE, getREQ value to val */
@@ -87,6 +86,7 @@ ArrayList<Component> temp;
       else {
         setCur(previousR.current());
       }
+
       setVol(current()*resistance());
       setPow(current()*voltage());
     }
@@ -101,10 +101,10 @@ ArrayList<Component> temp;
   } //<>//
 
     public void trace() {
-      setTarget(true);
+      setTarget(true); //<>//
       if (followR != null) {
       followR.trace();
-      }
+      } //<>//
   }
 
   public void tracker(startJunction start) {
