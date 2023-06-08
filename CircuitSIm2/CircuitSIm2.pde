@@ -49,7 +49,7 @@ void keyPressed() {
     isEditMode = true;
     setup();
   }
-  if (key == 'u') {
+  if (key == ' ') {
     mainC.undo();
     prev = mainC.get(0);
   }
@@ -87,6 +87,6 @@ void mouseDragged() {
   }
   void keyReleased() {
     if(key == TAB) {
-      tab = true;
+      tab = false;
     }
   }
