@@ -13,14 +13,15 @@ double level2 = 100;
 boolean tab;
 double typing;
 boolean isEditMode = true;
-
+PFont font;
+  
 void setup() {
 
   
   size(1300,800);
-  PFont font;
- // font = createFont("andalemo.ttf", 128);
-  //textFont(font);
+
+  font = loadFont("CenturyGothic-72.vlw");
+  textFont(font);
 
   size(1300,800);
 
