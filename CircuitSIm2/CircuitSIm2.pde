@@ -97,7 +97,7 @@ void keyPressed() {
     if (key == 's') {
           LocalDateTime myObj = LocalDateTime.now();
       output = createWriter(myObj.toString()+".txt");
-      output.print(dataReturn());
+      output.print(mainC.dataReturn());
     }
 }
 
