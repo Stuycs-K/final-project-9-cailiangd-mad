@@ -16,15 +16,9 @@ boolean isEditMode = true;
 PFont font;
   
 void setup() {
-
-  
   size(1300,800);
-
   font = loadFont("CenturyGothic-72.vlw");
   textFont(font);
-
-  size(1300,800);
-
   //fullScreen();
   battery = -width/2+50;
   mainC = new Circuit();
@@ -54,7 +48,6 @@ void keyPressed() {
   }
   if (key == 'e') {
     isEditMode = !isEditMode;
-        findPartnerAll();
   }
   if (key == 'c') {
       compType = (compType+1)%3;
