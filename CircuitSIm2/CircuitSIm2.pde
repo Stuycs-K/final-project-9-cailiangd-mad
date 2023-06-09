@@ -1,3 +1,4 @@
+import processing.dxf.*;
 private int battery = -550;
 private final int resistor = 15;
 private final int startJunction = 1;
@@ -12,8 +13,18 @@ double level2 = 100;
 boolean tab;
 double typing;
 boolean isEditMode = true;
+PFont font;
+  
 void setup() {
+
+  
   size(1300,800);
+
+  font = loadFont("CenturyGothic-72.vlw");
+  textFont(font);
+
+  size(1300,800);
+
   //fullScreen();
   battery = -width/2+50;
   mainC = new Circuit();

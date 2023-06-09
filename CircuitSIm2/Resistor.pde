@@ -86,16 +86,15 @@ ArrayList<Component> temp;
     }
     if (followR != null && followR.type() != endJunction) {
       followR.calculate();
-    } //<>//
+    }
   }
 
-    public void trace() { //<>//
+    public void trace() {
       setTarget(true);
       if (followR != null) {
-      followR.trace(); //<>//
+      followR.trace();
       }
   }
- //<>//
   public void tracker(startJunction start) {
     if (followR != null) {
     followR.tracker(start);
@@ -108,11 +107,11 @@ ArrayList<Component> temp;
     followR.clearTrack();
     }
   }
-  
+
   public void setVEQ(double newVEQ) {
     VEQ = newVEQ;
   }
-  
+
   public double VEQ() {
   return VEQ;
   }

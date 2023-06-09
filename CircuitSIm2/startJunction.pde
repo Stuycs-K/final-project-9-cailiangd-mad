@@ -52,7 +52,7 @@ endJunction end;
     return temp;
   }
 
-  //connect methodss
+  //connect methods
   public boolean connectFol(Component newComp) {
     if (fol1() == null) {
       setFol(newComp,0);
@@ -79,12 +79,14 @@ endJunction end;
   
   
     public void calculate() {
+
       if (previous.type() == startJunction) {
       setCur(previous.voltage()/getREQsub());
       }
       else {
         setCur(previous.current());
       }
+
       if (end != null) {
        end.calculate();
       setVol(getREQsub()*current()-end.voltage());
