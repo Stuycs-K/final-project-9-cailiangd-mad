@@ -44,7 +44,9 @@ public class Battery extends Component{
  public void calculate() {
      setCur(voltage()/getREQsub());
       for (int i = 0; i < followList.size(); i++) {
+        if (followList.get(i) != null) {
      followList.get(i).calculate();
+        }
    }
  }
  
