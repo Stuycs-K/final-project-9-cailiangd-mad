@@ -15,7 +15,7 @@ public class Circuit{
     compList = new ArrayList<Component>();
     add(battery1);
   }
-  
+
 public void undo() {
   if (isEditMode) {
   /* Remove the previously added last resistor from the list */
@@ -38,6 +38,16 @@ public void undo() {
     compList.remove(compList.size()-1);
   }
   else if (target.type() != battery) {
+    if (target.prev().type() == battery) {
+      Battery targetPrev = (Battery) target.prev();
+      for (int i = 0; i < targetPrev.followList().size(); i++) {
+        if (targetPrev.followList().get(i) == target) {
+          targetPrev.remove(i);
+        }
+      }
+      prev = targetPrev;
+    }
+    else {
         if (target.prev().followList().size() == 2 && target.prev().followList().get(1) == target) {
       target.prev().setFol(null,1);
     }
@@ -45,7 +55,8 @@ public void undo() {
       target.prev().setFol(null,0);
     }
     prev = target.prev();
-   compList.remove(compList.size()-1);
+  }
+     compList.remove(compList.size()-1);
   }
   }
 }
@@ -78,7 +89,7 @@ public void undo() {
   public void add(Component newComp) {
     compList.add(newComp);
   }
-  
+
   public void remove(int pos) {
     compList.remove(pos);
   }
@@ -141,5 +152,9 @@ public Component get(int pos) {
   return compList.get(pos);
 }
 
-
+public void setAllFollow() {
+  for (int i = 0; i < compList.size(); i++) {
+  compList.get(i).prepFollowList();
+  }
+}
 }

@@ -1,13 +1,10 @@
 public class Resistor extends Component{
   Component previousR;
 Component followR;
-double VEQ;
-ArrayList<Component> temp;
-  public Resistor(double Res, int x, int y, double newVEQ) {
+  public Resistor(double Res, int x, int y) {
     super(Res,0,x,y,resistor);
     previousR = null;
     followR = null;
-    setVEQ(newVEQ);
 }
 
   // general get methods
@@ -19,10 +16,10 @@ ArrayList<Component> temp;
     return previousR;
   }
 
-  public ArrayList<Component> followList() {
-    temp = new ArrayList<Component> ();
-    temp.add(followR);
-    return temp;
+  public ArrayList<Component> prepFollowList() {
+    super.clearFollowList();
+    super.addFollowList(followR);
+    return super.followList();
   }
 
   // general set methods
@@ -112,14 +109,6 @@ ArrayList<Component> temp;
     if (followR != null) {
     followR.clearTrack();
     }
-  }
-
-  public void setVEQ(double newVEQ) {
-    VEQ = newVEQ;
-  }
-
-  public double VEQ() {
-  return VEQ;
   }
 
 }

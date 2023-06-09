@@ -10,18 +10,20 @@ public class Component{
   private int x;
   private int y;
   private boolean target; //allows startJunction / endJunction interaction
+  private ArrayList<Component> followList;
   public Component(double Resistance, double Voltage, int x_, int y_, int Type) {
     voltage = Voltage;
     resistance = Resistance;
     type = Type;
     x=x_;
     y=y_;
+    followList = new ArrayList<Component>();
   }
   //general get methods
   public double resistance() {
     return resistance;
   }
-  
+
   public Component prev() {
     return null;
   }
@@ -49,15 +51,27 @@ public class Component{
    public int type() {
      return type;
    }
-  
+
   public ArrayList<Component> followList() {
-    return new ArrayList<Component>();
+    return followList;
   }
 
-  public ArrayList<Double> REQlist() {
-    return new ArrayList<Double> ();
+  public void addFollowList(Component newComp) {
+    followList.add(newComp);
   }
   
+  public void setFollowList(int pos, Component newComp) {
+    followList.set(pos, newComp);
+  }
+  
+  public void clearFollowList() {
+    followList = new ArrayList<Component>();
+  }
+  
+  public ArrayList<Component> prepFollowList() {
+    return null;
+  }
+
   public String toString() {
     return "R: "+resistance+"  I: "+current+"  V: "+voltage+"  P: "+power+ "  X: "+x+"  Y: "+y+ "  REQsub: "+REQsub;
   }
@@ -104,7 +118,7 @@ public class Component{
 
   public void clearTrack() {
   }
-  
+
       public void findPartner() {
     }
 
@@ -122,7 +136,7 @@ public class Component{
   public boolean connectFol(Component newComp) {
    return true;
   }
-  
+
     public Component setFol(Component newFol, int mode) {
     return null;
   }

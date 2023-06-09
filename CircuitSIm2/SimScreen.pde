@@ -72,6 +72,7 @@ void dataDisplay() {
 }
 
 void generateConnections() {
+ mainC.setAllFollow();
   for (int i = 0; i < mainC.size(); i++) {
     for (int k = 0; k < mainC.get(i).followList().size(); k++) {
       stroke(0);
@@ -127,7 +128,7 @@ void left() {
   if (temp && mouseY < height-150-30 && mouseY > 70+30 && (mouseY > height/2+50+30 || (mouseX > 50+30 && mouseX < width-100-30))) {
     Component target = new Component(0,0,0,0,startJunction);
     if (compType == 0) {
-      target = new Resistor(10,mouseX,mouseY,mainC.getVEQ());
+      target = new Resistor(10,mouseX,mouseY);
     }
     else if (compType == 1) {
       target = new startJunction(mouseX,mouseY);
@@ -282,8 +283,8 @@ void newInput() {
   else {
     fill(0);
     textSize(25);
-    text("- ' '\n\t- Undo\n- 'e'\n\t- editMode ON/OFF",10,height-120);
-    text("-'c'\n\t- Switch Components\n- 'r'\n\t- Restart",260, height-120);
+    text("- ' '\n  - Undo\n- 'e'\n  - editMode ON/OFF",10,height-120);
+    text("-'c'\n  - Switch Components\n- 'r'\n  - Restart",260, height-120);
   }
 }
 }
