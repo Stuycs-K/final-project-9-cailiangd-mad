@@ -1,13 +1,10 @@
 public class Resistor extends Component{
   Component previousR;
 Component followR;
-double VEQ;
-ArrayList<Component> temp;
-  public Resistor(double Res, int x, int y, double newVEQ) {
+  public Resistor(double Res, int x, int y) {
     super(Res,0,x,y,resistor);
     previousR = null;
     followR = null;
-    setVEQ(newVEQ);
 }
 
   // general get methods
@@ -19,10 +16,10 @@ ArrayList<Component> temp;
     return previousR;
   }
 
-  public ArrayList<Component> followList() {
-    temp = new ArrayList<Component> ();
-    temp.add(followR);
-    return temp;
+  public ArrayList<Component> prepFollowList() {
+    super.clearFollowList();
+    super.addFollowList(followR);
+    return super.followList();
   }
 
   // general set methods
@@ -68,8 +65,6 @@ ArrayList<Component> temp;
       setCur(previousR.current());
       setVol(current()*resistance());
       setPow(current()*voltage());
-      //println(this);
-      //println(previousR);
     }
     else if (previousR != null  && previousR.type() == battery) {
        setCur(previousR.voltage()/getREQsub());
@@ -77,17 +72,13 @@ ArrayList<Component> temp;
       setPow(current()*voltage());
     }
     else if (previousR != null && previousR.type() == startJunction) {
-
-      if (previousR.followList().size() > 1) {
+            if (previousR.followList().size() > 1) {
       double val = (previousR.followList().get((previousR.followList().indexOf(this)+1)%2).getREQsub());
-      /** ERROR MIGHT BE HERE, getREQ value to val */
       setCur(previousR.current()*(val/(getREQsub()+val)));
       }
       else {
         setCur(previousR.current());
       }
-
-
       setVol(current()*resistance());
       setPow(current()*voltage());
     }
@@ -95,19 +86,18 @@ ArrayList<Component> temp;
       setVol(previousR.voltage());
       setCur(voltage()/resistance());
       setPow(current()*voltage());
-    } //<>//
-    if (followR != null && followR.type() != endJunction) { //<>//
+    }
+    if (followR != null && followR.type() != endJunction) {
       followR.calculate();
-    } //<>//
-  } //<>//
-
-    public void trace() { //<>//
-      setTarget(true); //<>//
-      if (followR != null) {
-      followR.trace(); //<>//
-      } //<>//
+    }
   }
 
+    public void trace() {
+      setTarget(true);
+      if (followR != null) {
+      followR.trace();
+      }
+  }
   public void tracker(startJunction start) {
     if (followR != null) {
     followR.tracker(start);
@@ -119,14 +109,6 @@ ArrayList<Component> temp;
     if (followR != null) {
     followR.clearTrack();
     }
-  }
-  
-  public void setVEQ(double newVEQ) {
-    VEQ = newVEQ;
-  }
-  
-  public double VEQ() {
-  return VEQ;
   }
 
 }

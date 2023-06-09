@@ -8,37 +8,37 @@ endJunction end;
     fol1 = null;
     fol2 = null;
   }
-  
+
   // general get methods
    public Component prev() {
     return previous;
   }
-  
+
   public Component fol1() {
     return fol1;
   }
- 
+
   public Component fol2() {
     return fol2;
   }
-  
+
   public Component end() {
     return end;
   }
-  
-   public ArrayList<Component> followList() {
-    ArrayList<Component> temp = new ArrayList<Component> ();
-    temp.add(fol1);
-    temp.add(fol2);
-    return temp;
+
+   public ArrayList<Component> prepFollowList() {
+    clearFollowList();
+    super.addFollowList(fol1);
+    super.addFollowList(fol2);
+    return super.followList();
   }
-  
+
   public Component setPre(Component newPrev, int mode) {
     Component temp = previous;
     previous = newPrev;
     return temp;
   }
-  
+
     public Component setFol(Component newFol, int mode) {
     Component temp;
     if (mode == 0) {
@@ -64,7 +64,7 @@ endJunction end;
     }
     else return false;
   }
-  
+
   public boolean connectPre(Component newComp) {
     if (prev() == null && fol1() != newComp && fol2() != newComp) {
       setPre(newComp, 0);
@@ -76,17 +76,15 @@ endJunction end;
   public void setEnd(endJunction end_) {
     end = end_;
   }
-  
-  
-    public void calculate() {
 
+
+    public void calculate() {
       if (previous.type() == startJunction) {
       setCur(previous.voltage()/getREQsub());
       }
       else {
         setCur(previous.current());
       }
-
       if (end != null) {
        end.calculate();
       setVol(getREQsub()*current()-end.voltage());
@@ -101,7 +99,7 @@ endJunction end;
       fol2.calculate();
     }
   }
-  
+
   public double REQsub() {
     if (fol1 != null && fol2 != null) {
              double temp = 0;
@@ -122,31 +120,31 @@ endJunction end;
     }
     return getREQsub();
   }
-  
+
   public void findPartner() {
     trace();
     tracker(this);
     clearTrack();
   }
-  
+
         public void trace() {
       setTarget(true);
       if (fol1 != null) {
       fol1.trace();
       }
   }
-  
+
   public void tracker(startJunction start) {
     if (fol2 != null) {
     fol2.tracker(start);
     }
   }
-  
+
   public void clearTrack() {
           setTarget(false);
           if (fol1 != null) {
       fol1.clearTrack();
           }
   }
-  
+
 }
