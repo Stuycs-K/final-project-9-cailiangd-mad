@@ -1,5 +1,6 @@
 import processing.dxf.*;
 import java.time.*;
+private PrintWriter output;
 private int battery = -550;
 private final int resistor = 15;
 private final int startJunction = 1;
@@ -17,8 +18,8 @@ boolean isEditMode = true;
 PFont font;
   
 void setup() {
-  //size(1300,800);
-  fullScreen();
+  size(1300,800);
+  //fullScreen();
   font = loadFont("CenturyGothic-72.vlw");
   textFont(font);
   battery = -width/2+50;
@@ -93,6 +94,11 @@ void keyPressed() {
     else alternative = 0;
         }
 }
+    if (key == 's') {
+          LocalDateTime myObj = LocalDateTime.now();
+      output = createWriter(myObj.toString()+".txt");
+      output.print(dataReturn());
+    }
 }
 
 void mouseClicked() {
