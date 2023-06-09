@@ -75,21 +75,27 @@ ArrayList<Component> temp;
       setPow(current()*voltage());
     }
     else if (previousR != null && previousR.type() == startJunction) {
-      setCur(previousR.voltage()/(getREQsub()));
+            if (previousR.followList().size() > 1) {
+      double val = (previousR.followList().get((previousR.followList().indexOf(this)+1)%2).getREQsub());
+      setCur(previousR.current()*(val/(getREQsub()+val)));
+      }
+      else {
+        setCur(previousR.current());
+      }
       setVol(current()*resistance());
       setPow(current()*voltage());
     }
     else if (previousR != null) {
-      setVol(previousR.voltage());
+      setVol(previousR.voltage()); //<>//
       setCur(voltage()/resistance());
       setPow(current()*voltage());
-    }
+    } //<>//
     if (followR != null && followR.type() != endJunction) {
       followR.calculate();
-    }
+    } //<>//
   }
 
-    public void trace() {
+    public void trace() { //<>//
       setTarget(true);
       if (followR != null) {
       followR.trace();
