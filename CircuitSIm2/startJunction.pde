@@ -79,14 +79,12 @@ endJunction end;
   
   
     public void calculate() {
-
       if (previous.type() == startJunction) {
       setCur(previous.voltage()/getREQsub());
       }
       else {
         setCur(previous.current());
       }
-
       if (end != null) {
        end.calculate();
       setVol(getREQsub()*current()-end.voltage());
