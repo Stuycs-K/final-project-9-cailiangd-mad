@@ -76,7 +76,7 @@ void generateConnections() {
     for (int k = 0; k < mainC.get(i).followList().size(); k++) {
       stroke(0);
       if (mainC.get(i).followList().get(k) != null) {
-        println(mainC.get(i).followList().get(k));
+        //println(mainC.get(i).followList().get(k));
       line(mainC.get(i).getX()+mainC.get(i).type(),mainC.get(i).getY(),mainC.get(i).followList().get(k).getX()-mainC.get(i).followList().get(k).type(),mainC.get(i).followList().get(k).getY());
       }
   }
@@ -281,10 +281,10 @@ void newInput() {
   }
   else {
     fill(0);
-    textSize(20);
+    textSize(21);
     text("- 'd'\n\t- Debug\n- 'e'\n\t- editMode ON/OFF",10,height-120);
-    text("-'c'\n\t- Switch Components\n- 'r'\n\t- Restart",200, height-120);
-    text("- ' '\n\t- Undo",410,height-120);
+    text("-'c'\n\t- Switch Components\n- 'r'\n\t- Restart",260, height-120);
+    text("- ' '\n\t- Undo",510,height-120);
     textSize(30);
   }
 }

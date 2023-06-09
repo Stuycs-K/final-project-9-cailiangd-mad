@@ -17,9 +17,9 @@ PFont font;
   
 void setup() {
   size(1300,800);
+  //fullScreen();
   font = loadFont("CenturyGothic-72.vlw");
   textFont(font);
-  //fullScreen();
   battery = -width/2+50;
   mainC = new Circuit();
   prev = mainC.get(0);
