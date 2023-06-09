@@ -68,8 +68,6 @@ ArrayList<Component> temp;
       setCur(previousR.current());
       setVol(current()*resistance());
       setPow(current()*voltage());
-      //println(this);
-      //println(previousR);
     }
     else if (previousR != null  && previousR.type() == battery) {
        setCur(previousR.voltage()/getREQsub());
@@ -86,18 +84,18 @@ ArrayList<Component> temp;
       setCur(voltage()/resistance());
       setPow(current()*voltage());
     }
-    if (followR != null && followR.type() != endJunction) { //<>//
+    if (followR != null && followR.type() != endJunction) {
       followR.calculate();
-    }
-  } //<>//
-
-    public void trace() {
-      setTarget(true); //<>//
-      if (followR != null) {
-      followR.trace();
-      } //<>//
+    } //<>//
   }
 
+    public void trace() { //<>//
+      setTarget(true);
+      if (followR != null) {
+      followR.trace(); //<>//
+      }
+  }
+ //<>//
   public void tracker(startJunction start) {
     if (followR != null) {
     followR.tracker(start);

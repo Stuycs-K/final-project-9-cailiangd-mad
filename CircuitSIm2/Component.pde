@@ -9,7 +9,7 @@ public class Component{
   private double power;
   private int x;
   private int y;
-  private boolean target;
+  private boolean target; //allows startJunction / endJunction interaction
   public Component(double Resistance, double Voltage, int x_, int y_, int Type) {
     voltage = Voltage;
     resistance = Resistance;

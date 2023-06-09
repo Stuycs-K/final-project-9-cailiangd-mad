@@ -83,10 +83,6 @@ public void undo() {
     compList.remove(pos);
   }
 
-  public String getCompList() {
-    return compList.toString();
-  }
-
   public int size() {
     return compList.size();
   }
@@ -99,22 +95,22 @@ public void undo() {
     return res.substring(0,res.length()-1);
   }
 
- public void calculateREQ() {
+ private void calculateREQ() {
     REQ = get(0).REQsub();
  }
 
- public void calculateIVPeq() {
+ private void calculateIVPeq() {
    IEQ = VEQ/REQ;
    PEQ = VEQ * IEQ;
  }
 
-public void calculateIVP() {
+private void calculateIVP() {
   for (int i = 0; i < size(); i++) {
     get(i).calculate();
   }
 }
 
-public void calculate() {
+private void calculate() {
   calculateREQ();
   calculateIVPeq();
   calculateIVP();
@@ -141,8 +137,8 @@ public Component chooseComp(int x,int y) {
   return compList.get(pos);
 }
 
-public Component get(int i) {
-  return compList.get(i);
+public Component get(int pos) {
+  return compList.get(pos);
 }
 
 
