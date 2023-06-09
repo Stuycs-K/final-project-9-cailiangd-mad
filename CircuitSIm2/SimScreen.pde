@@ -134,8 +134,8 @@ void left() {
     }
     else if (compType == 2) {
       target = new endJunction(mouseX,mouseY,mainC.get(0));
-    } //<>//
-  mainC.add(target); //<>//
+    }
+  mainC.add(target);
   if (target.connectPre(prev)) {
    if (!prev.connectFol(target)) {
   mainC.remove(mainC.size()-1);
