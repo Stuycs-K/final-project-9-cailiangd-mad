@@ -1,6 +1,6 @@
 import processing.dxf.*;
 import java.time.*;
-private PrintWriter output;
+PrintWriter output;
 private int battery = -550;
 private final int resistor = 15;
 private final int startJunction = 1;
@@ -96,8 +96,10 @@ void keyPressed() {
 }
     if (key == 's') {
           LocalDateTime myObj = LocalDateTime.now();
-      output = createWriter(myObj.toString()+".txt");
+      output = createWriter("output.txt");
       output.print(dataReturn());
+        output.flush(); // Writes the remaining data to the file
+  output.close(); // Finishes the file
     }
 }
 

@@ -288,3 +288,23 @@ void newInput() {
   }
 }
 }
+
+
+String dataReturn() {
+  String temp = "";
+  for (int i = 0; i < mainC.size(); i++) {
+    temp+=mainC.get(i).toString();
+    temp+=" a";
+    for (int k = 0; k < mainC.get(i).followList().size(); k++) {
+      if (mainC.get(i).followList().get(k) != null) {
+      temp+=mainC.get(i).followList().get(k).getX()+"-"+mainC.get(i).followList().get(k).getY()+"_";
+      }
+    }
+    if (temp.charAt(temp.length()-1) == '_') {
+      temp = temp.substring(0,temp.length()-1);
+  }
+  temp+="\n";
+}
+temp = temp.substring(0,temp.length()-1);
+return temp;
+}
