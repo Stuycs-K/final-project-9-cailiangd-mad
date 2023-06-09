@@ -281,11 +281,9 @@ void newInput() {
   }
   else {
     fill(0);
-    textSize(21);
-    text("- 'd'\n\t- Debug\n- 'e'\n\t- editMode ON/OFF",10,height-120);
+    textSize(25);
+    text("- ' '\n\t- Undo\n- 'e'\n\t- editMode ON/OFF",10,height-120);
     text("-'c'\n\t- Switch Components\n- 'r'\n\t- Restart",260, height-120);
-    text("- ' '\n\t- Undo",510,height-120);
-    textSize(30);
   }
 }
 }

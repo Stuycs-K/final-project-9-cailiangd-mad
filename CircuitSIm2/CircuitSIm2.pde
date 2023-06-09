@@ -16,8 +16,8 @@ boolean isEditMode = true;
 PFont font;
   
 void setup() {
-  size(1300,800);
-  //fullScreen();
+  //size(1300,800);
+  fullScreen();
   font = loadFont("CenturyGothic-72.vlw");
   textFont(font);
   battery = -width/2+50;
