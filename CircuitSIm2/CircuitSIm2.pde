@@ -16,7 +16,7 @@ boolean tab;
 double typing;
 boolean isEditMode = true;
 PFont font;
-  
+
 void setup() {
   size(1300,800);
   //fullScreen();
@@ -126,10 +126,10 @@ void mouseDragged() {
     if (level2 > 285) {
       level2 = 285;
     }
-    prev.setRes(level2 / 10); 
+    prev.setRes(level2 / 10);
   }
   }
-  
+
   void keyReleased() {
     if(key == TAB) {
       tab = false;
