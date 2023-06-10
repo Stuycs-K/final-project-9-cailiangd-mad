@@ -38,26 +38,23 @@ void draw() {
    level2 = 10.0*prev.resistance();
   slider(width/2+300,height-120,level2,"Resistance: ");
   }
-  newInput();
   copiedSignal();
 }
 
 void keyPressed() {
+    if (key == ' ') {
+    mainC.undo();
+  }
+    if (key == 'c') {
+      compType = (compType+1)%3;
+  }
+      EditModeChange();
   if (key == 'd') {
     debug = !debug;
-  }
-  if (key == 'e') {
-    isEditMode = !isEditMode;
-  }
-  if (key == 'c') {
-      compType = (compType+1)%3;
   }
   if (key == 'r') {
     isEditMode = true;
     setup();
-  }
-  if (key == ' ') {
-    mainC.undo();
   }
     if(key == TAB) {
       tab = true;
