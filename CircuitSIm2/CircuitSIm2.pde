@@ -101,7 +101,7 @@ void keyPressed() {
       output.print(dataReturn());
         output.flush(); // Writes the remaining data to the file
   output.close(); // Finishes the file
-  signal = 100;
+  signal = 120;
     }
     if (key == 'g') {
       selectInput("Select a file to process:", "fileRead");

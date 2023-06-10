@@ -29,11 +29,11 @@ Bottom Slider
   - This allows you adjust the resistance of a resistor.
   - Goes from 0 ohms to 28.5 ohms.
 
-5 Hotkeys
+8 Hotkeys
 - 'd'
   - opens up debug mode
 - 'e'
-  - does same thing as 4 part circle
+  - does same thing as 4 part circle (read more below)
 - 'c'
   - allows you to switch the objects you place down from resistor to start junction to end junction and back
 - 'r'
@@ -53,6 +53,13 @@ Bottom Slider
       - similar to voltage mode but for resistors.
       - when you press the 'enter' / 'return' button you must have selected a resistor (the circle is around it) for the resistor's resistance to be changed.
       - This has limitation similar to that of voltage mode.
+- 's'
+  - saves the current position into a text file that can be found in the program folder.
+  - you have to wait 2 seconds between each time you press the button.
+  - the name of the file generated will have the following format: YEAR-MONTH-DAY-HOUR-MINUTE-SECOND.txt
+- 'g'
+  - will open up a window where you can choose which file to open in CircuitSim2.
+  - you choose to press open on any files, all current work will be deleted PERMANENTLY if you haven't already saved it.
 
 2 Mouse Inputs
 - 'left click'
