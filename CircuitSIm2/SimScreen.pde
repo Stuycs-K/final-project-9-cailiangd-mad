@@ -66,7 +66,7 @@ void dataDisplay() {
       text("        power: "+round((float)prev.power()*1000.0)/1000.0,10,height-50);
       text("   current: "+round((float)prev.current()*1000.0)/1000.0,350,height-100);
       text("   voltage: "+round((float)prev.voltage()*1000.0)/1000.0,350,height-50);
-      text("   REQ: "+prev.getREQsub(),700,height-100);
+      //text("   REQ: "+prev.getREQsub(),700,height-100);
     }
 }
 }
@@ -328,28 +328,23 @@ void fileRead(File Selection) {
    while (input.hasNextLine()) {
      ArrayList<Double> inner = new ArrayList<Double> ();
      String line = input.nextLine(); 
-     println("hello4");
      for (int i = 0; i < 7; i++) {
        if (i == 0) {
          inner.add(Double.parseDouble(line.substring(0,line.indexOf(" "))));
        }
      else inner.add(Double.parseDouble(line.substring(2,line.indexOf(" "))));
       line = line.substring(line.indexOf(" ")+1);
-      println("hello");
       }
       while(line.length() > 0) {
         if (line.indexOf("_") == -1) {
-          println("hello1");
           inner.add(Double.parseDouble(line));
           line = "";
         }
         else {
-                  println("hello2");
           inner.add(Double.parseDouble(line.substring(0,line.indexOf("_"))));
         line = line.substring(line.indexOf("_")+1);
         }
       }
-      println("hello3");
       temp.add(inner);
    }
       input.close();
