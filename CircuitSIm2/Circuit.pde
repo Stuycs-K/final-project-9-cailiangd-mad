@@ -81,6 +81,7 @@ public void undo() {
     return "REQ: "+REQ+" IEQ: "+IEQ+" VEQ: "+VEQ+" PEQ: "+PEQ;
   }
 
+  
   public void setVEQ(double newVEQ) {
     VEQ = newVEQ;
     get(0).setVol(VEQ);

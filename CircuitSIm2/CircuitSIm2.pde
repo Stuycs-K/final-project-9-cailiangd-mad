@@ -48,7 +48,9 @@ void keyPressed() {
     if (key == 'c') {
       compType = (compType+1)%3;
   }
+  if (key == 'e') {
       EditModeChange();
+  }
   if (key == 'd') {
     debug = !debug;
   }
@@ -102,7 +104,9 @@ void keyPressed() {
 }
 
 void mouseClicked() {
+  if (mouseX > 70 && mouseX < 170 && mouseY > 0 && mouseY < 80) {
    EditModeChange();
+  }
   if (isEditMode) {
    Editing();
   }

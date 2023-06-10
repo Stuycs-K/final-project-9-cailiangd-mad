@@ -111,7 +111,7 @@ void dataDisplay() {
     text("VEQ: "+round((float)mainC.getVEQ()*1000.0)/1000.0,350,height-50);
     stroke(0);
     }
-    else {
+    else if (prev.type() == resistor) {
       text("resistance: "+round((float)prev.resistance()*1000.0)/1000.0,10,height-100);
       text("        power: "+round((float)prev.power()*1000.0)/1000.0,10,height-50);
       text("   current: "+round((float)prev.current()*1000.0)/1000.0,350,height-100);
@@ -161,7 +161,6 @@ void copiedSignal() {
 //Inputs
 //MouseClicked && KeyPressed
 void EditModeChange() {
-      if((mouseX > 70 && mouseX < 170 && mouseY > 0 && mouseY < 80) || key == 'e') {
     isEditMode = !isEditMode;
     if (!isEditMode) {
            for (int i = 0; i < mainC.compList.size(); i++) {
@@ -171,7 +170,6 @@ void EditModeChange() {
   }
         mainC.calculate();
     }
-  }
 }
 
 //MouseClicked
@@ -185,7 +183,6 @@ void Editing() {
   }
 
 void left() {
-      boolean temp = true;
       Component target = mainC.chooseComp(mouseX,mouseY);
       if (target != null) {
         if (target.connectPre(prev)) {
@@ -195,7 +192,7 @@ void left() {
         prev = mainC.get(0);
       }
       }
-      else if (temp && mouseY < height-150-30 && mouseY > 70+30 && (mouseY > height/2+50+30 || (mouseX > 50+30 && mouseX < width-100-30))) {
+      else if (mouseY < height-150-30 && mouseY > 70+30 && (mouseY > height/2+50+30 || (mouseX > 50+30 && mouseX < width-100-30))) {
     Component target2 = new Component(0,0,0,0,startJunction);
     if (compType == 0) {
       target2 = new Resistor(10,mouseX,mouseY);
@@ -206,7 +203,7 @@ void left() {
     else if (compType == 2) {
       target2 = new endJunction(mouseX,mouseY,mainC.get(0));
     }
-  mainC.add(target);
+  mainC.add(target2);
   if (target2.connectPre(prev)) {
    if (!prev.connectFol(target2)) {
   mainC.remove(mainC.size()-1);
