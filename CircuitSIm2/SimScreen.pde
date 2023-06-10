@@ -328,23 +328,28 @@ void fileRead(File Selection) {
    while (input.hasNextLine()) {
      ArrayList<Double> inner = new ArrayList<Double> ();
      String line = input.nextLine(); 
+     println("hello4");
      for (int i = 0; i < 7; i++) {
-     inner.add(Double.parseDouble(line.substring(2,line.indexOf(" "))));
+       if (i == 0) {
+         inner.add(Double.parseDouble(line.substring(0,line.indexOf(" "))));
+       }
+     else inner.add(Double.parseDouble(line.substring(2,line.indexOf(" "))));
       line = line.substring(line.indexOf(" ")+1);
       println("hello");
       }
       while(line.length() > 0) {
         if (line.indexOf("_") == -1) {
+          println("hello1");
           inner.add(Double.parseDouble(line));
           line = "";
-          println("hello1");
         }
         else {
+                  println("hello2");
           inner.add(Double.parseDouble(line.substring(0,line.indexOf("_"))));
         line = line.substring(line.indexOf("_")+1);
-        println("hello2");
         }
       }
+      println("hello3");
       temp.add(inner);
    }
       input.close();
@@ -355,7 +360,6 @@ catch (FileNotFoundException ex) {
 }
 
 void generate(ArrayList<ArrayList<Double>> data) {
-  println(data);
   mainC = new Circuit(data.get(0).get(3));
   for (int i = 1; i < data.size(); i++) {
     if (data.get(i).get(0) == resistor) {
@@ -369,6 +373,13 @@ void generate(ArrayList<ArrayList<Double>> data) {
     else if (data.get(i).get(0) == endJunction) {
       endJunction temp = new endJunction(data.get(i).get(5).intValue(),data.get(i).get(6).intValue(),mainC.get(0));
      mainC.add(temp);
+    }
+  }
+  for (int i = 0; i < data.size(); i++) {
+    for (int k = 7; k < data.get(i).size(); k+=2) {
+      Component temp = mainC.chooseComp(data.get(i).get(k).intValue(),data.get(i).get(k+1).intValue());
+      mainC.get(i).connectFol(temp);
+      temp.connectPre(mainC.get(i));
     }
   }
 }
