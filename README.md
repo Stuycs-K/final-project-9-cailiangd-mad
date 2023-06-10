@@ -2,6 +2,7 @@
 THIS DOCUMENT IS REQUIRED
 ## Group Info
 Group Members: Dylan Ma and David Cai Liang
+Group Name: Dangerous Direct Current
 ## Overview
 We've created a circuit simulator that returns the total charge of the circuit as well as that of individual components; you are allowed to add and remove components.
 ## Instructions
@@ -48,11 +49,11 @@ Bottom Slider
       - provides information about Hotkeys
     - voltage
       - type the voltage and press 'enter' / 'return' to set it.
-      - if you want digits to the right of a decimal point press the decimal point / period button and type your following digits. You can have a max of 3 digits to the right of the decimal point. Please don't numbers with two many digits as our code isn't able to switch units in real time.
+      - if you want digits to the right of a decimal point press the 'decimal point' / 'period' button and type your following digits. You can have a max of 3 digits to the right of the decimal point. Please don't numbers with more than 5 digits as things tend to break past that.
     - resistance
       - similar to voltage mode but for resistors.
       - when you press the 'enter' / 'return' button you must have selected a resistor (the circle is around it) for the resistor's resistance to be changed.
-      - This has limitation similar to that of voltage mode.
+      - This has limitations similar to that of voltage mode.
 - 's'
   - saves the current position into a text file that can be found in the program folder.
   - you have to wait 2 seconds between each time you press the button.
