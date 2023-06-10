@@ -9,16 +9,17 @@ private final int endJunction = 0;
 Circuit mainC;
 Component prev;
 boolean undo, debug;
-int compType, alternative, decimal, signal;
+int compType, alternative, decimal, signal; //demical = number of digits left of decimal place, signal = save result signal
 double level = 120;
 double level2 = 100;
-boolean tab;
+boolean tab, text;
 double typing, experimental;
 boolean isEditMode = true;
 PFont font;
 void setup() {
-  size(1300,800);
-  //fullScreen();
+  //size(1300,800);
+  cursor(CROSS);
+  fullScreen();
   font = loadFont("CenturyGothic-72.vlw");
   textFont(font);
   battery = -width/2+50;
@@ -67,6 +68,8 @@ void keyPressed() {
       alternative = (alternative + 1) % 3;
     }
     if (alternative > 0 && (key+"").matches("[0-9]")) {
+      noCursor();
+      text = true;
       if (decimal == 0) {
         typing = typing*10.0 + Double.parseDouble(key+"");
       }
@@ -79,6 +82,7 @@ void keyPressed() {
       decimal++;
     }
     if (alternative > 0 && key == '\n') {
+      cursor(CROSS);
       if (alternative == 1) {
         mainC.setVEQ(typing);
         typing = 0.0;

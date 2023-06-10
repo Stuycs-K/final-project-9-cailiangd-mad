@@ -122,10 +122,12 @@ void dataDisplay() {
 else {
      if (alternative == 2) {
   fill(0);
+  textSize(40);
   text("New Resistance: "+round((float)typing*1000.0)/1000.0,40,height-80);
   }
    else if (alternative == 1) {
   fill(0);
+  textSize(40);
   text("New Voltage: "+round((float)typing*1000.0)/1000.0,40,height-80);
   }
   else {
