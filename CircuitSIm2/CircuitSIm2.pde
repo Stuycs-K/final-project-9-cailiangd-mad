@@ -12,7 +12,7 @@ boolean undo, debug;
 int compType, alternative, decimal, signal; //demical = number of digits left of decimal place, signal = save result signal
 double level = 120;
 double level2 = 100;
-boolean tab, text;
+boolean tab;
 double typing, experimental;
 boolean isEditMode = true;
 PFont font;
@@ -69,7 +69,6 @@ void keyPressed() {
     }
     if (alternative > 0 && (key+"").matches("[0-9]")) {
       noCursor();
-      text = true;
       if (decimal == 0) {
         typing = typing*10.0 + Double.parseDouble(key+"");
       }
