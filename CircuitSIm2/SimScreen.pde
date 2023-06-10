@@ -301,7 +301,7 @@ void generate(ArrayList<ArrayList<Double>> data) {
   mainC = new Circuit(data.get(0).get(3));
   for (int i = 1; i < data.size(); i++) {
     if (data.get(i).get(0) == resistor) {
-     Resistor temp = new Resistor(data.get(i).get(2),data.get(i).get(5).intValue(),data.get(i).get(6).intValue());
+     Resistor temp = new Resistor(data.get(i).get(1),data.get(i).get(5).intValue(),data.get(i).get(6).intValue());
      mainC.add(temp);
     }
     else if (data.get(i).get(0) == startJunction) {
