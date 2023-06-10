@@ -1,3 +1,5 @@
+import java.time.LocalDateTime; // Import the LocalDateTime class
+import java.time.format.DateTimeFormatter; // Import the DateTimeFormatter class
 PrintWriter output;
 private int battery = -550;
 private final int resistor = 15;
@@ -92,7 +94,10 @@ void keyPressed() {
         }
 }
     if (key == 's' && signal == 0) {
-      output = createWriter(experimental+++".txt");
+    LocalDateTime myDateObj = LocalDateTime.now();
+    DateTimeFormatter myFormatObj = DateTimeFormatter.ofPattern("yyyy-MM-dd-HH-mm-ss");
+    String formattedDate = myDateObj.format(myFormatObj);
+      output = createWriter(formattedDate+".txt");
       output.print(dataReturn());
         output.flush(); // Writes the remaining data to the file
   output.close(); // Finishes the file
