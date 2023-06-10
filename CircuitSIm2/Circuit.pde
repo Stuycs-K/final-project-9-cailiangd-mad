@@ -156,13 +156,5 @@ public void setAllFollow() {
   for (int i = 0; i < compList.size(); i++) {
   compList.get(i).prepFollowList();
   }
-  //public ArrayList<Object> dataReturn2() {
-  //  ArrayList<Object> result = new ArrayList<Object>;
-  //  result.add(this.REQ);
-  //  result.add(this.VEQ);
-  //  result.add(this.PEQ);
-  //  result.add(this.IEQ);
-  //  result.add(this.compList);
-  //}
 }
 }

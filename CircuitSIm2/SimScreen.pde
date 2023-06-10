@@ -272,7 +272,7 @@ void slider(int x, int y, double level, String attach) {
 
 void newInput() {
   if (isEditMode) {
-  if (alternative == 2) {
+   if (alternative == 2) {
   fill(0);
   text("New Resistance: "+round((float)typing*1000.0)/1000.0,40,height-80);
   }
@@ -293,11 +293,13 @@ void newInput() {
 String dataReturn() {
   String temp = "";
   for (int i = 0; i < mainC.size(); i++) {
+    temp+=mainC.get(i).type();
+    temp+=" ";
     temp+=mainC.get(i).toString();
-    temp+=" a";
+    temp+=" ";
     for (int k = 0; k < mainC.get(i).followList().size(); k++) {
       if (mainC.get(i).followList().get(k) != null) {
-      temp+=mainC.get(i).followList().get(k).getX()+"-"+mainC.get(i).followList().get(k).getY()+"_";
+      temp+=mainC.get(i).followList().get(k).getX()+"_"+mainC.get(i).followList().get(k).getY()+"_";
       }
     }
     if (temp.charAt(temp.length()-1) == '_') {
@@ -307,4 +309,66 @@ String dataReturn() {
 }
 temp = temp.substring(0,temp.length()-1);
 return temp;
+}
+
+
+void copiedSignal() {
+  noStroke();
+  fill(255,0,0,signal);
+  circle(232.5,40,50);
+  if (signal > 0) {
+    signal--;
+  }
+}
+
+void fileRead(File Selection) {
+  ArrayList temp = new ArrayList<ArrayList<Double>> ();
+    try {
+      Scanner input = new Scanner(Selection);
+   while (input.hasNextLine()) {
+     ArrayList<Double> inner = new ArrayList<Double> ();
+     String line = input.nextLine(); 
+     for (int i = 0; i < 7; i++) {
+     inner.add(Double.parseDouble(line.substring(2,line.indexOf(" "))));
+      line = line.substring(line.indexOf(" ")+1);
+      println("hello");
+      }
+      while(line.length() > 0) {
+        if (line.indexOf("_") == -1) {
+          inner.add(Double.parseDouble(line));
+          line = "";
+          println("hello1");
+        }
+        else {
+          inner.add(Double.parseDouble(line.substring(0,line.indexOf("_"))));
+        line = line.substring(line.indexOf("_")+1);
+        println("hello2");
+        }
+      }
+      temp.add(inner);
+   }
+      input.close();
+      generate(temp);
+}
+catch (FileNotFoundException ex) {
+    }
+}
+
+void generate(ArrayList<ArrayList<Double>> data) {
+  println(data);
+  mainC = new Circuit(data.get(0).get(3));
+  for (int i = 1; i < data.size(); i++) {
+    if (data.get(i).get(0) == resistor) {
+     Resistor temp = new Resistor(data.get(i).get(2),data.get(i).get(5).intValue(),data.get(i).get(6).intValue());
+     mainC.add(temp);
+    }
+    else if (data.get(i).get(0) == startJunction) {
+      startJunction temp = new startJunction(data.get(i).get(5).intValue(),data.get(i).get(6).intValue());
+     mainC.add(temp);
+    }
+    else if (data.get(i).get(0) == endJunction) {
+      endJunction temp = new endJunction(data.get(i).get(5).intValue(),data.get(i).get(6).intValue(),mainC.get(0));
+     mainC.add(temp);
+    }
+  }
 }

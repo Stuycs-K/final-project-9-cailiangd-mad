@@ -1,5 +1,3 @@
-import processing.dxf.*;
-import java.time.*;
 PrintWriter output;
 private int battery = -550;
 private final int resistor = 15;
@@ -9,14 +7,13 @@ private final int endJunction = 0;
 Circuit mainC;
 Component prev;
 boolean undo, debug;
-int compType, alternative, decimal;
+int compType, alternative, decimal, signal;
 double level = 120;
 double level2 = 100;
 boolean tab;
-double typing;
+double typing, experimental;
 boolean isEditMode = true;
 PFont font;
-
 void setup() {
   size(1300,800);
   //fullScreen();
@@ -42,6 +39,7 @@ void draw() {
   slider(width/2+300,height-120,level2,"Resistance: ");
   }
   newInput();
+  copiedSignal();
 }
 
 void keyPressed() {
@@ -67,7 +65,7 @@ void keyPressed() {
     if (key == 'a') {
       alternative = (alternative + 1) % 3;
     }
-    if ((key+"").matches("[0-9]")) {
+    if (alternative > 0 && (key+"").matches("[0-9]")) {
       if (decimal == 0) {
         typing = typing*10.0 + Double.parseDouble(key+"");
       }
@@ -76,17 +74,17 @@ void keyPressed() {
         decimal++;
       }
     }
-    if (key == '.') {
+    if (alternative > 0 && alternative < 3 && key == '.') {
       decimal++;
     }
-    if (key == '\n') {
+    if (alternative > 0 && key == '\n') {
       if (alternative == 1) {
         mainC.setVEQ(typing);
         typing = 0.0;
         decimal = 0;
       }
-        else {
-          if (alternative == 2 && prev.type() == resistor) {
+        else if (alternative == 2) {
+          if (prev.type() == resistor) {
         prev.setRes(typing);
         typing = 0.0;
         decimal = 0;
@@ -94,12 +92,15 @@ void keyPressed() {
     else alternative = 0;
         }
 }
-    if (key == 's') {
-          LocalDateTime myObj = LocalDateTime.now();
-      output = createWriter("output.txt");
+    if (key == 's' && signal == 0) {
+      output = createWriter(experimental+++".txt");
       output.print(dataReturn());
         output.flush(); // Writes the remaining data to the file
   output.close(); // Finishes the file
+  signal = 100;
+    }
+    if (key == 'g') {
+      selectInput("Select a file to process:", "fileRead");
     }
 }
 
