@@ -103,6 +103,17 @@ void circlePrev() {
 
 void dataDisplay() {
     if (!isEditMode) {
+      //sound affects
+      if (!mute) {
+        pulse.set((float)mainC.getVEQ()*10, 0.1, 0, -0.5);
+       if (SoundTimer % (int) mainC.getREQ() == 0) {
+         pulse.play();
+       }
+       if (SoundTimer % (int) mainC.getREQ() == (int) mainC.getREQ()/2) {
+         pulse.stop();
+       }
+       SoundTimer++;
+      }
     textSize(40);
     if (prev == mainC.get(0)) {
     text("REQ: "+round((float)mainC.getREQ()*1000.0)/1000.0,10,height-100);
@@ -120,6 +131,7 @@ void dataDisplay() {
     }
 }
 else {
+  pulse.stop();
      if (alternative == 2) {
   fill(0);
   textSize(40);

@@ -8,7 +8,7 @@ private final int endJunction = 0;
 Circuit mainC;
 Component prev;
 boolean undo, debug;
-int compType, alternative, decimal, signal; //demical = number of digits left of decimal place, signal = save result signal
+int compType, alternative, decimal, signal, SoundTimer; //demical = number of digits left of decimal place, signal = save result signal
 double level = 120;
 double level2 = 100;
 boolean tab, mute;
@@ -16,6 +16,7 @@ double typing, experimental;
 boolean isEditMode = true;
 PFont font;
 SoundFile res, start, end, open;
+Pulse pulse;
 void setup() {
   //size(1300,800);
   cursor(CROSS);
@@ -29,6 +30,7 @@ void setup() {
   start = new SoundFile(this,"Xylophone.hardrubber.ff.D6.stereo.aif");
   end = new SoundFile(this,"Xylophone.hardrubber.ff.G7.stereo.aif");
   open = new SoundFile(this,"Marimba.yarn.ff.D3.stereo.aif");
+  pulse = new Pulse(this);
 }
 
 void draw() {
