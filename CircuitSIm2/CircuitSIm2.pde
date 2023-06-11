@@ -1,3 +1,4 @@
+import processing.sound.*;
 PrintWriter output;
 private int battery = -550;
 private final int resistor = 15;
@@ -14,6 +15,7 @@ boolean tab;
 double typing, experimental;
 boolean isEditMode = true;
 PFont font;
+SoundFile res, start, end;
 void setup() {
   //size(1300,800);
   cursor(CROSS);
@@ -23,6 +25,8 @@ void setup() {
   battery = -width/2+50;
   mainC = new Circuit();
   prev = mainC.get(0);
+  res = new SoundFile(this,"Xylophone.hardrubber.ff.F4.stereo.aif");
+  start = new SoundFile(this,"Xylophone.hardrubber.ff.D6.stereo.aif");
 }
 
 void draw() {
