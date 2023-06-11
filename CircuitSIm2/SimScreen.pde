@@ -80,18 +80,6 @@ void generateNodes() {
   }
 }
 
-   void dataExtract() {
-  if (debug && prev != null) {
-  textSize(30);
-  text(prev.toString(),25,500);
-  if (prev.type() == resistor) {
-    Resistor prev2 = (Resistor) prev;
-  text("pre: "+prev2.prev().toString(), 25, 550);
-  text("fol: "+prev2.followList().toString(),25,600);
-  }
-  }
-}
-
 void circlePrev() {
   if (prev == null) {
     prev = mainC.get(0);

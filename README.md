@@ -51,9 +51,7 @@ Bottom Slider
      - Click on a component that is already selected as in the selection circle to see the statistics for the whole circuit.
 
 #Keyboard
-9 Hotkeys
-- 'd'
-  - opens up debug mode
+8 Hotkeys
 - 'e'
   - does same thing as 4 part circle (read more below)
 - 'c'

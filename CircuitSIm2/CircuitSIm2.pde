@@ -7,7 +7,6 @@ private final int endJunction = 0;
 
 Circuit mainC;
 Component prev;
-boolean undo, debug;
 int compType, alternative, decimal, signal, SoundTimer; //demical = number of digits left of decimal place, signal = save result signal
 double level = 120;
 double level2 = 100;
@@ -36,7 +35,6 @@ void draw() {
   screen();
   generateConnections();
   generateNodes();
-  dataExtract();
   circlePrev();
   rectMode(CORNER);
   dataDisplay();
@@ -58,9 +56,6 @@ void keyPressed() {
   }
   if (key == 'e') {
       EditModeChange();
-  }
-  if (key == 'd') {
-    debug = !debug;
   }
   if (key == 'r') {
     isEditMode = true;
