@@ -11,7 +11,7 @@ boolean undo, debug;
 int compType, alternative, decimal, signal; //demical = number of digits left of decimal place, signal = save result signal
 double level = 120;
 double level2 = 100;
-boolean tab;
+boolean tab, mute;
 double typing, experimental;
 boolean isEditMode = true;
 PFont font;
@@ -27,6 +27,7 @@ void setup() {
   prev = mainC.get(0);
   res = new SoundFile(this,"Xylophone.hardrubber.ff.F4.stereo.aif");
   start = new SoundFile(this,"Xylophone.hardrubber.ff.D6.stereo.aif");
+  end = new SoundFile(this,"Xylophone.hardrubber.ff.G7.stereo.aif");
 }
 
 void draw() {
@@ -107,6 +108,9 @@ void keyPressed() {
     }
     if (key == 'g') {
       selectInput("Select a file to process:", "fileRead");
+    }
+    if (key == 'm') {
+      mute = !mute;
     }
 }
 

@@ -198,14 +198,15 @@ void left() {
     Component target2 = new Component(0,0,0,0,startJunction);
     if (compType == 0) {
       target2 = new Resistor(10,mouseX,mouseY);
-       res.play(0.25);
+       if (!mute) res.play(0.1);
     }
     else if (compType == 1) {
       target2 = new startJunction(mouseX,mouseY);
-      start.play(0.25);
+      if (!mute) start.play(0.1);
     }
     else if (compType == 2) {
       target2 = new endJunction(mouseX,mouseY,mainC.get(0));
+      if (!mute) end.play(0.1);
     }
   mainC.add(target2);
   if (target2.connectPre(prev)) {
