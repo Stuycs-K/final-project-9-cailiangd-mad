@@ -6,7 +6,8 @@ Group Name: Dangerous Direct Current
 ## Overview
 We've created a circuit simulator that returns the total charge of the circuit as well as that of individual components; you are allowed to add and remove components.
 ## Instructions
-4 Buttons Along Top From Left to Right
+#Mouse
+4 On Screen Buttons From Left to Right
 - 4 part circle
   - Allows you to move between run mode and edit mode.
   - You can only edit current components and their connections in edit mode.
@@ -21,7 +22,7 @@ We've created a circuit simulator that returns the total charge of the circuit a
   - allows you to select end junctions as the objects you put down
     - end junctions have two input and one output components
 
-2 Slider
+2 On Screen Sliders
 Top - Right of Screen Slider
   - Allows you to adjust the total amount of voltage through the circuit, pull right to increase voltage
   - Goes from 0 volts to 28.5 volts.
@@ -30,7 +31,27 @@ Bottom Slider
   - This allows you adjust the resistance of a resistor.
   - Goes from 0 ohms to 28.5 ohms.
 
-8 Hotkeys
+2 Mouse Inputs
+  - 'left click'
+    - Edit mode
+      - You can place down components.
+      - Will sometimes fail when you do not follow the rules provided above about resistors, startJunctions, and endJunctions in the buttons documentation.
+      - If attempt to place down components fails, your selection circle will go to center and no new component will be made.
+      - If you want to return selection circle to the center for any reason, you can double left click on any component.
+    - Run mode
+      - Click on component to see its statistics.
+      - Click on a component that is already selected as in the selection circle to see the statistics for the whole circuit.
+  - 'right click' or 'TAB' + 'left click'
+    - Edit mode
+      - chooses the component for the next component you place down connect to
+      - chooses the component for a previously placed component to connect to
+      - The selected component will the component from which charge flows in these connections.
+    - Run mode
+     - Click on component to see its statistics.
+     - Click on a component that is already selected as in the selection circle to see the statistics for the whole circuit.
+
+#Keyboard
+9 Hotkeys
 - 'd'
   - opens up debug mode
 - 'e'
@@ -63,24 +84,9 @@ Bottom Slider
   - you choose to press open on any files, all current work will be deleted PERMANENTLY if you don't choose to save it
 - 'm'
   - will mute all audio effects.
-2 Mouse Inputs
-- 'left click'
-  - Edit mode
-    - You can place down components.
-    - Will sometimes fail when you do not follow the rules provided above about resistors, startJunctions, and endJunctions in the buttons documentation.
-    - If attempt to place down components fails, your selection circle will go to center and no new component will be made.
-    - If you want to return selection circle to the center for any reason, you can double left click on any component.
-  - Run mode
-    - Click on component to see its statistics.
-    - Click on a component that is already selected as in the selection circle to see the statistics for the whole circuit.
-- 'right click' or 'TAB' + 'left click'
-  - Edit mode
-    - chooses the component for the next component you place down connect to
-    - chooses the component for a previously placed component to connect to
-    - The selected component will the component from which charge flows in these connections.
-  - Run mode
-   - Click on component to see its statistics.
-   - Click on a component that is already selected as in the selection circle to see the statistics for the whole circuit.
+  -audio effects includes one for placing down resistors, startJunctions, and endJunctions
+  -audio effects for transitioning into run mode
+  -a tone when in run mode where the time between each beep represents resistance equivalence of the circuit in term of frames, with a frame rate of 60 frames per second. The pitch of the tone correlates with the voltage through the circuit.
 
 Note: You would right click on an element to set it as the prior element to connect to and any spot you left click where there isn't already a component will create a component such that component is tied to the one you previously right clicked. If there is already an element, the simulator will attempt to connect it using the same logic as when there isn't a component already there.
 

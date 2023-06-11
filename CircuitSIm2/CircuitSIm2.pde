@@ -18,7 +18,6 @@ PFont font;
 SoundFile res, start, end, open;
 Pulse pulse;
 void setup() {
-  //size(1300,800);
   cursor(CROSS);
   fullScreen();
   font = loadFont("CenturyGothic-72.vlw");
