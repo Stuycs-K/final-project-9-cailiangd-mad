@@ -15,7 +15,7 @@ boolean tab, mute;
 double typing, experimental;
 boolean isEditMode = true;
 PFont font;
-SoundFile res, start, end;
+SoundFile res, start, end, open;
 void setup() {
   //size(1300,800);
   cursor(CROSS);
@@ -28,6 +28,7 @@ void setup() {
   res = new SoundFile(this,"Xylophone.hardrubber.ff.F4.stereo.aif");
   start = new SoundFile(this,"Xylophone.hardrubber.ff.D6.stereo.aif");
   end = new SoundFile(this,"Xylophone.hardrubber.ff.G7.stereo.aif");
+  open = new SoundFile(this,"Marimba.yarn.ff.D3.stereo.aif");
 }
 
 void draw() {

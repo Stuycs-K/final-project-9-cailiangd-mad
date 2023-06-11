@@ -55,7 +55,7 @@ Went back to original algorithm and started working on how the start junction, e
 Made additional UI improvements and asked the CS dojo for recommendations and help. Made the simulation show resistances for resistor in a clearer way.
 
 ### 6/9/2023
-Worked on UI, made tweaks to make it better. Started working on two new features allowing the user to save a txt file representing the current simulation position and then pull up a new file.
+Worked on UI, made tweaks to make it better. Started working on two new features allowing the user to save a txt file representing the current simulation position and then pull up a new file. Also started exploring options involving audio.
 
 ## Dylan Ma
 

@@ -60,8 +60,9 @@ Bottom Slider
   - the name of the file generated will have the following format: YEAR-MONTH-DAY-HOUR-MINUTE-SECOND.txt
 - 'g'
   - will open up a window where you can choose which file to open in CircuitSim2.
-  - you choose to press open on any files, all current work will be deleted PERMANENTLY if you haven't already saved it.
-
+  - you choose to press open on any files, all current work will be deleted PERMANENTLY if you don't choose to save it
+- 'm'
+  - will mute all audio effects.
 2 Mouse Inputs
 - 'left click'
   - Edit mode
