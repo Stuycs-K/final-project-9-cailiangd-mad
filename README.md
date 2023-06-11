@@ -90,3 +90,5 @@ Note: This program can only handle uni-directional current flow and not bi-direc
 Note: If a connection fails, there is a non-insignificant chance that when you transition to run mode it will fail.
 
 Note: If the program crashes, please restart the simulation with r, if possible, and re-input all the components and their relationships while avoiding the same error.
+
+Note: All audio taken from the following website: https://theremin.music.uiowa.edu/MIS-Pitches-2012/
