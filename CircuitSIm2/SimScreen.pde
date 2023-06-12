@@ -171,7 +171,7 @@ void EditModeChange() {
     }
   }
         mainC.calculate();
-        open.play(1);
+        open.play();
     }
 }
 
