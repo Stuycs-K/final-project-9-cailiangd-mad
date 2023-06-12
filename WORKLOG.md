@@ -57,6 +57,10 @@ Made additional UI improvements and asked the CS dojo for recommendations and he
 ### 6/9/2023
 Worked on UI, made tweaks to make it better. Started working on two new features allowing the user to save a txt file representing the current simulation position and then pull up a new file. Also started exploring options involving audio.
 
+### 6/10/2023 & 6/11/2023
+
+Worked on the sound effects for our project, imported sound and soundfile
+
 ## Dylan Ma
 
 ### 5/23/2023
@@ -105,3 +109,11 @@ Went to the CS Dojo for help - worked on a error we were facing.
 ### 6/8/2023
 
 Worked on the UI to improve the appearance - we're still trying to improve our algorithm so it can be more efficient at calculating stats for circuits with many loops and intersections.
+
+### 6/9/2023
+
+Worked on adding new fonts, sounds to project
+
+### 6/11/2023
+
+Worked on sound effects so that there'd be sound when we add resistors and run program
