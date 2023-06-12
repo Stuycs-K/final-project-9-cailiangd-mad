@@ -59,7 +59,7 @@ Worked on UI, made tweaks to make it better. Started working on two new features
 
 ### 6/10/2023 & 6/11/2023
 
-Worked on adding fonts and sound to the UI
+Worked on adding fonts and sound to the UI; wrote documentation for our project
 
 ## Dylan Ma
 
@@ -116,4 +116,4 @@ Worked on adding fonts and sound to our project
 
 ### 6/11/2023
 
-Tweaked some sound effects to make it slightly better
+Tweaked some sound effects to make it slightly better; also added to the documentation
