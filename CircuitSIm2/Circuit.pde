@@ -15,7 +15,8 @@ public class Circuit{
     compList = new ArrayList<Component>();
     add(battery1);
   }
-
+/* This undo feature allows you to undo the most recently added feature - it works by disconnecting the added resistor and then removing all connections it 
+has. */
 public void undo() {
   if (isEditMode) {
   /* Remove the previously added last resistor from the list */

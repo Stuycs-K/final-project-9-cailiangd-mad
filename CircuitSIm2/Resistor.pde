@@ -59,7 +59,9 @@ Component followR;
       }
     return getREQsub();
   }
-
+    /* Our calculate methods rely on recursion to calculate the REQ of the following resistors, with a check to determine whether or not the next 
+    component is a start or end junction. When that happens, we set the current on the junction to be the same. 
+    */
     public void calculate() {
     if (previousR != null && (previousR.type() == resistor || previousR.type() == endJunction)) {
       setCur(previousR.current());
