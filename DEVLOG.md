@@ -14,7 +14,7 @@
 13. Ability to change the resistance of resistors in two different ways: typing the value / sliding the slider.
 14. Ability to change the voltage of the entire curcuit in two different ways: typing the value / sliding the slider.
 15. Putting 0 for voltage for the entire circuit and/or for individual resistors doesn't break anything.
-16. Ability to have light audio affects.
+16. Ability to have audio affects.
 ##Broken Features
 1. Voltage / Current for startJunctions and endJunctions tend to be inaccuruate.
 2. The debugging mode with junctions and battery will print out arrays that cover the screen, making them pretty much useless.
