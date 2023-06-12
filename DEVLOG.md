@@ -14,7 +14,7 @@
 13. Ability to change the resistance of resistors in two different ways: typing the value / sliding the slider.
 14. Ability to change the voltage of the entire curcuit in two different ways: typing the value / sliding the slider.
 15. Putting 0 for voltage for the entire circuit and/or for individual resistors doesn't break anything.
-16. Ability to have light audio affects.
+16. Ability to have audio affects.
 ##Broken Features
 1. Voltage / Current for startJunctions and endJunctions tend to be inaccuruate.
 2. The debugging mode with junctions and battery will print out arrays that cover the screen, making them pretty much useless.
@@ -22,4 +22,8 @@
 4. Very large numbers being directly inputted into the the circuit voltage and individual resistor resistance tend to malfunction with the numbers not being registered accurately.
 5. The system that prevents you from making bad connections such as connecting two components to a resistor sometimes fails and when you put the program in run mode, an error might occur. This system also might crash the program once in a while.
 ##Content Resources
-1. www.falstad.com/circuit/
+1. https://www.falstad.com/circuit/
+2. https://phet.colorado.edu/en/simulations/circuit-construction-kit-dc
+The bottom two are just inspiration more than anything.
+3. https://www.youtube.com/watch?v=yvlFrzIsrhY
+4. https://electronics.stackexchange.com/questions/182022/is-sound-produced-by-varying-current-or-voltage

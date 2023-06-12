@@ -55,7 +55,7 @@ public class Component{
   public ArrayList<Component> followList() {
     return followList;
   }
-
+  /* These are essentially our set methods, that adjust the instance variables on a particular resistor. */
   public void addFollowList(Component newComp) {
     followList.add(newComp);
   }
