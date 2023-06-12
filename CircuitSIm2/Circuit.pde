@@ -81,6 +81,7 @@ public void undo() {
     return "REQ: "+REQ+" IEQ: "+IEQ+" VEQ: "+VEQ+" PEQ: "+PEQ;
   }
 
+  
   public void setVEQ(double newVEQ) {
     VEQ = newVEQ;
     get(0).setVol(VEQ);
@@ -128,24 +129,15 @@ private void calculate() {
 }
 
 public Component chooseComp(int x,int y) {
-  int pos = 0;
-  for (int i = 1; i < compList.size(); i++) {
-    if (
-    Math.sqrt(
-    (x-compList.get(i).getX())*(x-compList.get(i).getX())
-    +
-    (y-compList.get(i).getY())*(y-compList.get(i).getY())
-    )
-    <
-    Math.sqrt(
-    (x-compList.get(pos).getX())*(x-compList.get(pos).getX())
-    +
-    (y-compList.get(pos).getY())*(y-compList.get(pos).getY())
-    )
-    )
-    pos = i;
+  return chooseComp(x,y,1);
+}
+
+public Component chooseComp(int x,int y, int start) {
+  for (int i = start; i < compList.size(); i++) {
+    if (Math.sqrt(Math.pow(x-compList.get(i).getX(),2)+Math.pow(y-compList.get(i).getY(),2)) < 60)
+    return compList.get(i);
   }
-  return compList.get(pos);
+  return null;
 }
 
 public Component get(int pos) {
@@ -155,14 +147,6 @@ public Component get(int pos) {
 public void setAllFollow() {
   for (int i = 0; i < compList.size(); i++) {
   compList.get(i).prepFollowList();
-  }
-  public ArrayList<Object> dataReturn() {
-    ArrayList<Object> result = new ArrayList<Object>;
-    result.add(this.REQ);
-    result.add(this.VEQ);
-    result.add(this.PEQ);
-    result.add(this.IEQ);
-    result.add(this.compList);
   }
 }
 }

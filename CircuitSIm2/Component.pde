@@ -73,7 +73,7 @@ public class Component{
   }
 
   public String toString() {
-    return "R: "+resistance+"  I: "+current+"  V: "+voltage+"  P: "+power+ "  X: "+x+"  Y: "+y+ "  REQsub: "+REQsub;
+    return "R_"+resistance+" I_"+current+" V_"+voltage+" P_"+power+" X_"+x+" Y_"+y;
   }
 
   //general set methods

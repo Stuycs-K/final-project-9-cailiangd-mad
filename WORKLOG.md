@@ -49,11 +49,13 @@ Worked on undo button. Got undo button working but the UI is terrible. Didn't ha
 Started working on the RREF algorithm and the more advanced UI. Mainly working on logistics so far.
 
 ### 6/6/2023
-Made additional UI improvements and asked the CS dojo for recommendations and help.
+Went back to original algorithm and started working on how the start junction, end junction, and resistors set interact to set their currents.
 
 ### 6/7/2023
+Made additional UI improvements and asked the CS dojo for recommendations and help. Made the simulation show resistances for resistor in a clearer way.
 
-Worked on UI, made tweaks to make it better
+### 6/9/2023
+Worked on UI, made tweaks to make it better. Started working on two new features allowing the user to save a txt file representing the current simulation position and then pull up a new file. Also started exploring options involving audio.
 
 ## Dylan Ma
 

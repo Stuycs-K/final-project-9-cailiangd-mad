@@ -1,6 +1,5 @@
-import processing.dxf.*;
-import java.time.*;
-private PrintWriter output;
+import processing.sound.*;
+PrintWriter output;
 private int battery = -550;
 private final int resistor = 15;
 private final int startJunction = 1;
@@ -8,30 +7,34 @@ private final int endJunction = 0;
 
 Circuit mainC;
 Component prev;
-boolean undo, debug;
-int compType, alternative, decimal;
+int compType, alternative, decimal, signal, SoundTimer; //demical = number of digits left of decimal place, signal = save result signal
 double level = 120;
 double level2 = 100;
-boolean tab;
-double typing;
+boolean tab, mute;
+double typing, experimental;
 boolean isEditMode = true;
 PFont font;
-  
+SoundFile res, start, end, open;
+Pulse pulse;
 void setup() {
-  size(1300,800);
-  //fullScreen();
+  cursor(CROSS);
+  fullScreen();
   font = loadFont("CenturyGothic-72.vlw");
   textFont(font);
   battery = -width/2+50;
   mainC = new Circuit();
   prev = mainC.get(0);
+  res = new SoundFile(this,"Xylophone.hardrubber.ff.F4.stereo.aif");
+  start = new SoundFile(this,"Xylophone.hardrubber.ff.D6.stereo.aif");
+  end = new SoundFile(this,"Xylophone.hardrubber.ff.G7.stereo.aif");
+  open = new SoundFile(this,"Marimba.yarn.ff.D3.stereo.aif");
+  pulse = new Pulse(this);
 }
 
 void draw() {
   screen();
   generateConnections();
   generateNodes();
-  dataExtract();
   circlePrev();
   rectMode(CORNER);
   dataDisplay();
@@ -41,25 +44,22 @@ void draw() {
    level2 = 10.0*prev.resistance();
   slider(width/2+300,height-120,level2,"Resistance: ");
   }
-  newInput();
+  copiedSignal();
 }
 
 void keyPressed() {
-  if (key == 'd') {
-    debug = !debug;
+    if (key == ' ') {
+    mainC.undo();
+  }
+    if (key == 'c') {
+      compType = (compType+1)%3;
   }
   if (key == 'e') {
-    isEditMode = !isEditMode;
-  }
-  if (key == 'c') {
-      compType = (compType+1)%3;
+      EditModeChange();
   }
   if (key == 'r') {
     isEditMode = true;
     setup();
-  }
-  if (key == ' ') {
-    mainC.undo();
   }
     if(key == TAB) {
       tab = true;
@@ -67,7 +67,8 @@ void keyPressed() {
     if (key == 'a') {
       alternative = (alternative + 1) % 3;
     }
-    if ((key+"").matches("[0-9]")) {
+    if (alternative > 0 && (key+"").matches("[0-9]")) {
+      noCursor();
       if (decimal == 0) {
         typing = typing*10.0 + Double.parseDouble(key+"");
       }
@@ -76,17 +77,18 @@ void keyPressed() {
         decimal++;
       }
     }
-    if (key == '.') {
+    if (alternative > 0 && alternative < 3 && key == '.') {
       decimal++;
     }
-    if (key == '\n') {
+    if (alternative > 0 && key == '\n') {
+      cursor(CROSS);
       if (alternative == 1) {
         mainC.setVEQ(typing);
         typing = 0.0;
         decimal = 0;
       }
-        else {
-          if (alternative == 2 && prev.type() == resistor) {
+        else if (alternative == 2) {
+          if (prev.type() == resistor) {
         prev.setRes(typing);
         typing = 0.0;
         decimal = 0;
@@ -94,15 +96,25 @@ void keyPressed() {
     else alternative = 0;
         }
 }
-    if (key == 's') {
-          LocalDateTime myObj = LocalDateTime.now();
-      output = createWriter(myObj.toString()+".txt");
-      output.print(mainC.dataReturn());
+    if (key == 's' && signal == 0) {
+      output = createWriter(year()+"-"+month()+"-"+day()+"-"+hour()+"-"+minute()+"-"+second()+".txt");
+      output.print(dataReturn());
+        output.flush(); // Writes the remaining data to the file
+  output.close(); // Finishes the file
+  signal = 120;
+    }
+    if (key == 'g') {
+      selectInput("Select a file to process:", "fileRead");
+    }
+    if (key == 'm') {
+      mute = !mute;
     }
 }
 
 void mouseClicked() {
+  if (mouseX > 70 && mouseX < 170 && mouseY > 0 && mouseY < 80) {
    EditModeChange();
+  }
   if (isEditMode) {
    Editing();
   }
@@ -124,10 +136,10 @@ void mouseDragged() {
     if (level2 > 285) {
       level2 = 285;
     }
-    prev.setRes(level2 / 10); 
+    prev.setRes(level2 / 10);
   }
   }
-  
+
   void keyReleased() {
     if(key == TAB) {
       tab = false;
