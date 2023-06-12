@@ -5,7 +5,7 @@ Group Members: Dylan Ma and David Cai Liang
 
 Group Name: Dangerous Direct Current
 ## Overview
-We've created a circuit simulator that returns the total charge of the circuit as well as that of individual components; you are allowed to add and remove components.
+We've created a circuit simulator that returns the total resistance, curcuit, voltage, and power of the circuit as well as that of individual components where you can have a parallel circuit within a series circuit within a parallel circuit and so on using resistors, junctions, and batteries. You can change the battery voltage, individual resistor reistance, and the relationships of all the components.
 ## Instructions
 #Mouse
 4 On Screen Buttons From Left to Right

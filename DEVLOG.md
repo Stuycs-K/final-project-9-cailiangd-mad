@@ -22,4 +22,8 @@
 4. Very large numbers being directly inputted into the the circuit voltage and individual resistor resistance tend to malfunction with the numbers not being registered accurately.
 5. The system that prevents you from making bad connections such as connecting two components to a resistor sometimes fails and when you put the program in run mode, an error might occur. This system also might crash the program once in a while.
 ##Content Resources
-1. www.falstad.com/circuit/
+1. https://www.falstad.com/circuit/
+2. https://phet.colorado.edu/en/simulations/circuit-construction-kit-dc
+The bottom two are just inspiration more than anything.
+3. https://www.youtube.com/watch?v=yvlFrzIsrhY
+4. https://electronics.stackexchange.com/questions/182022/is-sound-produced-by-varying-current-or-voltage

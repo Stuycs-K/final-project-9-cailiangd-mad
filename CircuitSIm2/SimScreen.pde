@@ -94,13 +94,16 @@ void dataDisplay() {
       //sound affects
       if (!mute) {
         pulse.set((float)mainC.getVEQ()*10, 0.1, 0, -0.5);
-       if (SoundTimer % (int) mainC.getREQ() == 0) {
+       if (SoundTimer % (int) mainC.getREQ()*10 == 0) {
          pulse.play();
        }
-       if (SoundTimer % (int) mainC.getREQ() == (int) mainC.getREQ()/2) {
+       if (SoundTimer % (int) mainC.getREQ()*10 == (int) mainC.getREQ()*5) {
          pulse.stop();
        }
        SoundTimer++;
+      }
+      else {
+        pulse.stop();
       }
     textSize(40);
     if (prev == mainC.get(0)) {
